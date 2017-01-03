@@ -12,7 +12,20 @@
 */
 
 Route::get('/', function () {
-    //return view('welcome');
+    return view('welcome');
+});
+Route::get('create','UserCtrl@create_dua');
+Route::get('/backend', function() {
+ 
+    if (Gate::check('access.backend')) {
+        return view('backend');
+    }
+ 
+    return abort(403);
+ 
 });
 
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

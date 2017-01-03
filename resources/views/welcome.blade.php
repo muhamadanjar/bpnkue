@@ -91,5 +91,8 @@
                 </div>
             </div>
         </div>
+        @can('access.backend')
+            <a href="/backend">Go to backend</a>
+        @endcan
     </body>
 </html>
