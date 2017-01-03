@@ -44,6 +44,37 @@ class ExcelCtrl extends Controller{
         return json_encode($dataArr);
     }
 
+    public function getImportExcel2007($value='')
+    {
+        $objReader = new PHPExcel_Reader_Excel2007();
+        $objReader->setReadDataOnly(true);
+        $objPHPExcel = $objReader->load( dirname(__FILE__) . '/excel.xls' );
+
+        $rowIterator = $objPHPExcel->getActiveSheet()->getRowIterator();
+
+        $array_data = array();
+        foreach($rowIterator as $row){
+            $cellIterator = $row->getCellIterator();
+            $cellIterator->setIterateOnlyExistingCells(false); // Loop all cells, even if it is not set
+            if(1 == $row->getRowIndex ()) continue;//skip first row
+            $rowIndex = $row->getRowIndex ();
+            $array_data[$rowIndex] = array('A'=>'', 'B'=>'','C'=>'','D'=>'');
+            
+            foreach ($cellIterator as $cell) {
+                if('A' == $cell->getColumn()){
+                    $array_data[$rowIndex][$cell->getColumn()] = $cell->getCalculatedValue();
+                } else if('B' == $cell->getColumn()){
+                    $array_data[$rowIndex][$cell->getColumn()] = $cell->getCalculatedValue();
+                } else if('C' == $cell->getColumn()){
+                    $array_data[$rowIndex][$cell->getColumn()] = PHPExcel_Style_NumberFormat::toFormattedString($cell->getCalculatedValue(), 'YYYY-MM-DD');
+                } else if('D' == $cell->getColumn()){
+                    $array_data[$rowIndex][$cell->getColumn()] = $cell->getCalculatedValue();
+                }
+            }
+        }
+        print_r($array_data);
+    }
+
     function getSheets() {
         $fileName = public_path("excel.xlsx");
         try {
