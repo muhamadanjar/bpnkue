@@ -27,5 +27,8 @@ Route::get('/backend', function() {
 
 
 Auth::routes();
+Route::get('excel','ExcelCtrl@getIndex');
+Route::get('excel/import','ExcelCtrl@postImportExcel');
+Route::get('excel/sheets','ExcelCtrl@getSheets');
 
 Route::get('/home', 'HomeController@index');
