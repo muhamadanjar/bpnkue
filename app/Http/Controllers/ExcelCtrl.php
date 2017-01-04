@@ -30,12 +30,11 @@ class ExcelCtrl extends Controller{
             $highestColumn      = $worksheet->getHighestColumn(); // e.g 'F'
             $highestColumnIndex = \PHPExcel_Cell::columnIndexFromString($highestColumn);
             $rowbaru = 0;
-            for ($row = 5; $row <= $highestRow; ++ $row) {
+            for ($row = 1; $row <= $highestRow; ++ $row) {
                 for ($col = 0; $col < $highestColumnIndex; ++ $col) {
                     $cell = $worksheet->getCellByColumnAndRow($col, $row);
                     $val = $cell->getCalculatedValue(); //$cell->getValue();
                     $dataArr[$row][$col] = $val;
-                    
                 }
                 $rowbaru++;
             }
@@ -44,19 +43,23 @@ class ExcelCtrl extends Controller{
         return json_encode($dataArr);
     }
 
-    public function getImportExcel2007($value='')
-    {
-        $objReader = new PHPExcel_Reader_Excel2007();
+    public function getImportExcel2007($value=''){
+        $objReader = new \PHPExcel_Reader_Excel2007();
         $objReader->setReadDataOnly(true);
-        $objPHPExcel = $objReader->load( dirname(__FILE__) . '/excel.xls' );
+        $objPHPExcel = $objReader->load(   public_path().'\excel.xlsx' );
 
-        $rowIterator = $objPHPExcel->getActiveSheet()->getRowIterator();
+        $rowIterator = $objPHPExcel->setActiveSheetIndex(0)->getRowIterator();
 
         $array_data = array();
         foreach($rowIterator as $row){
             $cellIterator = $row->getCellIterator();
             $cellIterator->setIterateOnlyExistingCells(false); // Loop all cells, even if it is not set
             if(1 == $row->getRowIndex ()) continue;//skip first row
+            if(2 == $row->getRowIndex ()) continue;//skip first row
+            if(3 == $row->getRowIndex ()) continue;//skip first row
+            if(4 == $row->getRowIndex ()) continue;//skip first row
+            
+            
             $rowIndex = $row->getRowIndex ();
             $array_data[$rowIndex] = array('A'=>'', 'B'=>'','C'=>'','D'=>'');
             
@@ -66,13 +69,15 @@ class ExcelCtrl extends Controller{
                 } else if('B' == $cell->getColumn()){
                     $array_data[$rowIndex][$cell->getColumn()] = $cell->getCalculatedValue();
                 } else if('C' == $cell->getColumn()){
-                    $array_data[$rowIndex][$cell->getColumn()] = PHPExcel_Style_NumberFormat::toFormattedString($cell->getCalculatedValue(), 'YYYY-MM-DD');
+                    $array_data[$rowIndex][$cell->getColumn()] = \PHPExcel_Style_NumberFormat::toFormattedString($cell->getCalculatedValue(), 'YYYY-MM-DD');
                 } else if('D' == $cell->getColumn()){
+                    $array_data[$rowIndex][$cell->getColumn()] = $cell->getCalculatedValue();
+                }else{
                     $array_data[$rowIndex][$cell->getColumn()] = $cell->getCalculatedValue();
                 }
             }
         }
-        print_r($array_data);
+        return $array_data;
     }
 
     function getSheets() {
@@ -82,6 +87,7 @@ class ExcelCtrl extends Controller{
             $objReader = \PHPExcel_IOFactory::createReader($fileType);
             $objPHPExcel = $objReader->load($fileName);
             $sheets = [];
+            //dd($objPHPExcel->getAllSheets());
             foreach ($objPHPExcel->getAllSheets() as $sheet) {
                 $sheets[$sheet->getTitle()] = $sheet->toArray();
             }
@@ -92,9 +98,51 @@ class ExcelCtrl extends Controller{
         }
     }
 
-    public function postQuery($dataArr){
+    public function QueryBagianSatu($dataArr){
         foreach($dataArr as $val){
-            $query = $db->query("INSERT INTO employees SET fname = '" . $db->escape($val['1']) . "', lname = '" . $db->escape($val['2']) . "', email = '" . $db->escape($val['3']) . "', phone = '" . $db->escape($val['4']) . "', company = '" . $db->escape($val['5']) . "'");
+        
+            \DB::table('kuesioner_bagian_satu')->insert([
+                [
+                    'nama_input' => $val['A'], 
+                    'nomor_kuesioner' => $val['C'],
+                    'nomor_bsn' => $val['D'],
+                    'nama_surveyor' => $val['E'],
+                    'tgl_survey' => date('Y-m-d'),
+                    'propinsi' => $val['G'],
+                    'i_1' => $val['H'],
+                    'i_2' => $val['I'],
+                    'i_3' => $val['J'],
+                    'i_4' => $val['K'],
+                    'i_5' => $val['L'],
+                    'i_6' => $val['M'],
+                    'i_7' => $val['N'],
+                    'i_8' => $val['O'],
+                    'i_9' => $val['P'],
+                    'i_10' => $val['Q'],
+                    'i_10_a' => $val['R'],
+                    'i_10_b' => $val['S'],
+                    'i_11' => $val['Z'],
+                    'i_11_a' => $val['AA'],
+                    'i_12' => $val['AB'],
+                    'i_12_a' => $val['AC'],
+                    'i_13' => $val['AD'],
+                    'i_13_a' => $val['AE'],
+                    'i_14' => $val['AF'],
+                    'i_15' => $val['AG'],
+                    'i_16' => $val['AH'],
+                    'jenis_umk' => $val['AI'],
+                    
+                ],
+                
+            ]);
         }
     }
+
+    public function postQueryBagianSatu($value='')
+    {
+       $data = $this->getImportExcel2007();
+       $this->QueryBagianSatu($data);
+    }
+
+    
 }

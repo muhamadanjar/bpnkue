@@ -80,10 +80,10 @@ class KuesionerUmk extends Migration
             $table->string('sudah_mengajukan_sertifikasi_sni',10);
             $table->string('sudah_mengajukan_sertifikasi_ket')->nullable();
             $table->string('kendala_mengajukan_sertifikasi',10);
-            $table->string('kendala_mengajukan_sertifikasi')->nullable();
+            $table->string('kendala_mengajukan_sertifikasi_ket')->nullable();
 
             $table->string('nilai_tambah_mendapatkan_sertifikasi',10);
-            $table->string('nilai_tambah_mendapatkan_sertifikasi')->nullable();
+            $table->string('nilai_tambah_mendapatkan_sertifikasi_ket')->nullable();
 
             $table->string('masukan_bsn');
 

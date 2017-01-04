@@ -28,7 +28,8 @@ Route::get('/backend', function() {
 
 Auth::routes();
 Route::get('excel','ExcelCtrl@getIndex');
-Route::get('excel/import','ExcelCtrl@postImportExcel');
+Route::get('excel/import','ExcelCtrl@postQueryBagianSatu');
 Route::get('excel/sheets','ExcelCtrl@getSheets');
+Route::get('excel/2007','ExcelCtrl@getImportExcel2007');
 
 Route::get('/home', 'HomeController@index');
