@@ -57,10 +57,6 @@ class KuesionerBagianTiga extends Migration
             $table->string('iii_11_f')->nullable()->comment('');
             $table->string('iii_11_f_a')->nullable()->comment('');
             
-            
-            
-            
-
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ class KuesionerBagianSatuRepos extends Migration
     public function up()
     {
          Schema::create('kuesioner_bagian_satu_repos', function (Blueprint $table) {
-            $table->increments('id')->nullable();
+            $table->increments('id');
             $table->string('nama_input')->nullable();
             $table->string('kode')->nullable();
             $table->string('nomor_kuesioner')->nullable();

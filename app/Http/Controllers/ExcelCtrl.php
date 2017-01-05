@@ -118,7 +118,7 @@ class ExcelCtrl extends Controller{
                         'nomor_kuesioner' => $val['C'],
                         'nomor_bsn' => $val['D'],
                         'nama_surveyor' => $val['E'],
-                        'tgl_survey' => date('Y-m-d'),
+                        'tgl_survey' => date('Y-m-d',strtotime($val['E'])),
                         'propinsi' => $val['G'],
                         'i_1' => $val['H'],
                         'i_2' => $val['I'],
