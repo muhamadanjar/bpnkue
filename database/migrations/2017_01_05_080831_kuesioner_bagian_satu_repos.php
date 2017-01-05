@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class KuesionerBagianSatu extends Migration
+class KuesionerBagianSatuRepos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class KuesionerBagianSatu extends Migration
      */
     public function up()
     {
-        Schema::create('kuesioner_bagian_satu', function (Blueprint $table) {
-            $table->increments('id');
+         Schema::create('kuesioner_bagian_satu_repos', function (Blueprint $table) {
+            $table->increments('id')->nullable();
             $table->string('nama_input')->nullable();
             $table->string('kode')->nullable();
             $table->string('nomor_kuesioner')->nullable();
@@ -22,13 +22,13 @@ class KuesionerBagianSatu extends Migration
             $table->string('nama_surveyor')->nullable();
             $table->date('tgl_survey')->nullable();
             $table->string('propinsi')->nullable();
-            $table->string('i_1')->nullable()->comment('Nama UMKM');
-            $table->string('i_2')->nullable()->comment('Nama Pemilik');
-            $table->string('i_3')->nullable()->comment('Alamat Perusahaan');
-            $table->string('i_4')->nullable()->comment('No HP/Telepon');
-            $table->string('i_5')->nullable()->comment('Alamat E-mail');
-            $table->string('i_6')->nullable()->comment('Alamat Website');
-            $table->string('i_7')->nullable()->comment('Jumlah Karyawan');
+            $table->string('i_1')->comment('Nama UMKM')->nullable();
+            $table->string('i_2')->comment('Nama Pemilik')->nullable();
+            $table->string('i_3')->comment('Alamat Perusahaan')->nullable();
+            $table->string('i_4')->comment('No HP/Telepon')->nullable();
+            $table->string('i_5')->comment('Alamat E-mail')->nullable();
+            $table->string('i_6')->comment('Alamat Website')->nullable();
+            $table->string('i_7')->comment('Jumlah Karyawan')->nullable();
             $table->string('i_8')->nullable()->comment('Dalam melakukan proses usahanya, sudah dilakukan pembagian pekerjaan untuk masing-masing karyawan (Seperti bagian administrasi, produksi, pemasaran, dll) ');
             $table->string('i_9')->nullable()->comment('Apakah UMKM sudah mempunyai legalitas usaha');
             $table->string('i_10')->nullable()->comment('Apabila jabawan butir b sudah, legalitas yang dimiliki berupa');
@@ -55,6 +55,6 @@ class KuesionerBagianSatu extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kuesioner_bagian_satu');
+        Schema::dropIfExists('kuesioner_bagian_satu_repos');
     }
 }
