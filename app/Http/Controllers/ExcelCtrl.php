@@ -158,6 +158,127 @@ class ExcelCtrl extends Controller{
         
     }
 
+    public function QueryBagianDua($dataArr){
+        try {
+
+            foreach($dataArr as $val){
+                \DB::table('kuesioner_bagian_satu_repos')->insert([
+                    [
+                        'nomor_kuesioner' => $val['A'],
+                        'nomor_bsn' => $val['B'],
+                        'nama_surveyor' => $val['C'],
+                        'tgl_survey' => date('Y-m-d',strtotime($val['D'])),
+                        'propinsi' => $val['E'],
+
+                        'ii_1' => $val['F'],
+                        'ii_1_a' => $val['G'],
+                        'ii_2' => $val['H'],
+                        'ii_2_a' => $val['I'],
+                        'ii_3' => $val['J'],
+                        'ii_3_a' => $val['K'],
+                        'ii_3_b' => $val['L'],
+                        'ii_3_c' => $val['M'],
+                        'ii_3_d' => $val['N'],
+                        'ii_3_e' => $val['O'],
+                        'ii_3_e_a' => $val['P'],
+                        'ii_4' => $val['Q'],
+                        'ii_5' => $val['R'],
+                        'ii_6' => $val['S'],
+                        'ii_6_a' => $val['T'],
+                        'ii_7_a' => $val['U'],
+                        'ii_7_b' => $val['V'],
+                        'ii_7_c' => $val['W'],
+                        'ii_7_d' => $val['X'],
+                        'ii_7_d_a' => $val['Z'],
+                        'ii_7_e_a' => $val['Z'],
+                        
+                        'ii_7_e_b' => $val['AA'],
+                        'ii_8' => $val['AB'],
+                        'ii_8_a' => $val['AC'],
+                        'ii_8_b' => $val['AD'],
+                        'ii_8_c' => $val['AE'],
+                        'ii_9' => $val['AF'],
+                        'ii_9_a' => $val['AG'],
+                        
+                    ],
+                    
+                ]);
+            }
+
+        
+        } catch (Exception $e) {
+            \DB::rollback();
+            $array['info'] = false;
+            throw $e;
+        }
+    }
+
+    public function QueryBagianTiga($dataArr){
+        $array = array('info'=>false);
+        try{
+            foreach($dataArr as $val){
+                \DB::table('kuesioner_bagian_tiga')->insert([
+                    [
+                        'nomor_kuesioner' => $val['A'],
+                        'nomor_bsn' => $val['B'],
+                        'nama_surveyor' => $val['C'],
+                        'tgl_survey' => date('Y-m-d',strtotime($val['D'])),
+                        'propinsi' => $val['E'],
+
+                        'iii_1' => $val['F'],
+                        'iii_2_a' => $val['G'],
+                        'iii_2_b' => $val['H'],
+                        'iii_2_c' => $val['I'],
+                        'iii_2_c_a' => $val['J'],
+                        'iii_2_d' => $val['K'],
+                        'iii_2_d_a' => $val['L'],
+                        'iii_2_e' => $val['M'],
+                        'iii_2_e_a' => $val['N'],
+                        'iii_3' => $val['O'],
+                        'iii_4' => $val['P'],
+                        'iii_5_a' => $val['Q'],
+                        'iii_5_b' => $val['R'],
+                        'iii_5_c' => $val['S'],
+                        'iii_5_c_a' => $val['T'],
+                        'iii_5_d' => $val['U'],
+                        'iii_5_d_a' => $val['V'],
+                        'iii_6' => $val['W'],
+                        'iii_7' => $val['X'],
+                        'iii_8' => $val['Y'],
+                        'iii_8_a' => $val['Z'],
+                        'iii_8_b' => $val['AA'],
+                        'iii_8_c' => $val['AB'],
+                        'iii_8_d' => $val['AC'],
+                        'iii_8_d_a' => $val['AD'],
+                        'iii_9' => $val['AE'],
+                        'iii_9_a' => $val['AF'],
+                        'iii_10_a' => $val['AG'],
+                        'iii_10_b' => $val['AH'],
+                        'iii_10_c' => $val['AI'],
+                        'iii_10_d' => $val['AJ'],
+                        'iii_10_d_a' => $val['AK'],
+                        'iii_11_a' => $val['AL'],
+                        'iii_11_b' => $val['AM'],
+                        'iii_11_c' => $val['AN'],
+                        'iii_11_d' => $val['AO'],
+                        'iii_11_e' => $val['AP'],
+                        'iii_11_f' => $val['AQ'],
+                        'iii_11_f_a' => $val['AR'],
+                    ],
+                    
+                ]);
+            }
+            $array['info'] = true;
+        }catch(Exception $e){
+            \DB::rollback();
+            $array['info'] = false;
+            throw $e;
+        }
+
+        return json_encode($array);
+        
+    }
+
     public function postQueryBagianSatu(Request $request){
         $fupload = $request->file('file');
         $vdir_upload ='files';
@@ -174,12 +295,25 @@ class ExcelCtrl extends Controller{
         $fupload->move($destinationPath, $fileName);
         $lokasi_file = $destinationPath.'/'.$fileName;
         $data = $this->getImportExcel2007($lokasi_file);
-       
-        $this->QueryBagianSatu($data);
-
+        if ($request->bagian == 'bagian_satu') {
+            $this->QueryBagianSatu($data);
+        }elseif ($request->bagian == 'bagian_dua') {
+            $this->QueryBagianDua($data);
+        }else{
+            $this->QueryBagianTiga($data);
+        }
+        
         \File::delete($lokasi_file);
 
         return redirect('/excel');
+    }
+
+    public function postQueryBagianDua(Request $request){
+        # code...
+    }
+
+    public function postQueryBagianTiga(Request $request){
+        # code...
     }
 
     

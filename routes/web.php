@@ -32,4 +32,9 @@ Route::post('excel/import','ExcelCtrl@postQueryBagianSatu');
 Route::get('excel/sheets','ExcelCtrl@getSheets');
 Route::get('excel/2007','ExcelCtrl@getImportExcel2007');
 
+Route::get('kuesioner','KuesionerCtrl@getIndex');
+Route::get('kuesioner/gambaranumum','KuesionerCtrl@getGambaranUmum');
+
+
+
 Route::get('/home', 'HomeController@index');

@@ -15,10 +15,18 @@ class KuesionerBagianTiga extends Migration
     {
         Schema::create('kuesioner_bagian_tiga', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('nomor_kuesioner')->nullable();
+            $table->string('nomor_bsn')->nullable();
+            $table->string('nama_surveyor')->nullable();
+            $table->date('tgl_survey')->nullable();
+            $table->string('propinsi')->nullable();
 
-            $table->string('iii_1')->nullable()->comment('');
-            $table->string('iii_2_a')->nullable()->comment('');
-            $table->string('iii_2_b')->nullable()->comment('');
+            $table->string('iii_1')->nullable()
+            ->comment('Apakah Saudara sudah pernah mendapatkan informasi mengenai Standar Nasional Indonesia (SNI)?');
+            $table->string('iii_2_a')->nullable()
+            ->comment('Jika No. 1 jawaban Saudara Sudah, dari mana Saudara mendapatkan informasi tentang SNI tersebut? Internet');
+            $table->string('iii_2_b')->nullable()
+            ->comment('Jika No. 1 jawaban Saudara Sudah, dari mana Saudara mendapatkan informasi tentang SNI tersebut? Layanan');
             $table->string('iii_2_c')->nullable()->comment('');
             $table->string('iii_2_c_a')->nullable()->comment('');
             $table->string('iii_2_d')->nullable()->comment('');
@@ -35,7 +43,8 @@ class KuesionerBagianTiga extends Migration
             $table->string('iii_5_d_a')->nullable()->comment('');
             $table->string('iii_6')->nullable()->comment('');
             $table->string('iii_7')->nullable()->comment('');
-
+            
+            $table->string('iii_8')->nullable()->comment('');
             $table->string('iii_8_a')->nullable()->comment('');
             $table->string('iii_8_b')->nullable()->comment('');
             $table->string('iii_8_c')->nullable()->comment('');

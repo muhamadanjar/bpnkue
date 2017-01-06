@@ -12,13 +12,16 @@
 
     <!-- Styles -->
     <link href="{{ url('/css/app.css')}}" rel="stylesheet">
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/datatables/css/jquery.datatables.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/fontawesome/css/font-awesome.min.css') }}">
+    
     <!-- Scripts -->
     <script>
         window.Laravel = <?php echo json_encode([
             'csrfToken' => csrf_token(),
         ]); ?>
     </script>
+    <script type="text/javascript" charset="utf8" src="{{ asset('vendor/datatables/js/jquery.js')}}"></script>
 </head>
 <body>
     <div id="app">
@@ -43,7 +46,9 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                        <li><a href="{{ url('/kuesioner') }}">Kuesioner</a></li>
                         <li><a href="{{ url('/excel') }}">Excel</a></li>
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -79,9 +84,18 @@
         </nav>
 
         @yield('content')
+        @include('vendor.modal')
     </div>
 
     <!-- Scripts -->
+    @yield('js_tambahan')
     <script src="{{ url('/js/app.js') }}"></script>
+    
+    <script type="text/javascript" charset="utf8" src="{{ asset('vendor/datatables/js/jquery.datatables.min.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script type="text/javascript" src="{{ url('bpn.js') }}"></script>
+
 </body>
 </html>

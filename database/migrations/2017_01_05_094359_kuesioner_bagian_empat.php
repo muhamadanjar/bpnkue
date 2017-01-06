@@ -15,7 +15,7 @@ class KuesionerBagianEmpat extends Migration
     {
         Schema::create('kuesioner_bagian_empat', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('iv_1')->comment('')->nullable();
+            $table->string('iv_1')->comment('Masukan untuk BSN')->nullable();
             $table->timestamps();
         });
     }
@@ -25,8 +25,7 @@ class KuesionerBagianEmpat extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down(){
         Schema::dropIfExists('kuesioner_bagian_empat');
     }
 }

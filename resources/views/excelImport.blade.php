@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
+                <div class="panel-heading">Import Kuesioner (XLSX)</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/excel/import') }}" 
                     enctype="multipart/form-data">
@@ -16,6 +16,16 @@
 
                             <div class="col-md-6">
                                 <input id="file" type="file"  name="file" required autofocus>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4">
+                                <select name="bagian" class="form-control">
+                                    <option value="bagian_satu">Bagian 1</option>
+                                    <option value="bagian_dua">Bagian 2</option>
+                                    <option value="bagian_tiga">Bagian 3</option>
+                                </select>
                             </div>
                         </div>
 
