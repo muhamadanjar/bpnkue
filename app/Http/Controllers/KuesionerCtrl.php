@@ -23,9 +23,13 @@ class KuesionerCtrl extends Controller{
    		$json_i_12 = ($i_12);
    		$i_13 = $this->getSudahMempunyaiIjinEdar();
    		$json_i_13 = ($i_13);
-
    		$pangan = $this->getProdukYangDihasilkan();
    		$json_pangan = ($pangan);
+
+         //Bagian 3
+         $iii_1 = $this->getMendapatkanSNI();
+         $json_iii_1 = ($iii_1);
+         
 
    		
    		
@@ -35,7 +39,8 @@ class KuesionerCtrl extends Controller{
    		->with('i10',$json_i_10)
    		->with('i12',$json_i_12)
    		->with('i13',$json_i_13)
-   		->with('pangan',$json_pangan);
+   		->with('pangan',$json_pangan)
+         ->with('iii_1',$json_iii_1);
    	}
 
    	//Bagian 1
@@ -65,10 +70,13 @@ class KuesionerCtrl extends Controller{
 
    		$i7_total = ($i7_1_4+$i7_5_19+$i7_20_99+$i7_lebih_100);
    		$i7_array = array($i7_1_4,$i7_5_19,$i7_20_99,$i7_lebih_100);
+         $tambah=array();
    		for ($i=0; $i < 4; $i++) { 
-   			$i7[$i]['frekuensi'] = $i7_array[$i];
-   			$i7[$i]['presentase'] = $i7_array[$i]/$i7_total;
+   			$i7['hasil'][$i]['frekuensi'] = $i7_array[$i];
+   			$i7['hasil'][$i]['presentase'] = number_format(($i7_array[$i]/$i7_total)*100,2);
+            array_push($tambah, number_format(($i7_array[$i]/$i7_total)*100,2)) ;
    		}
+         $i7['data'] = $tambah;
 
    		return $i7;
    	}
@@ -90,7 +98,7 @@ class KuesionerCtrl extends Controller{
    		$i9_array = array($i9_belum,$i9_sudah);
    		for ($i=0; $i < 2; $i++) { 
    			$i9[$i]['frekuensi'] = $i9_array[$i];
-   			$i9[$i]['presentase'] = $i9_array[$i]/$i9_total;
+   			$i9[$i]['presentase'] = number_format(($i9_array[$i]/$i9_total)*100,2);
    		}
 
    		return $i9;
@@ -118,7 +126,7 @@ class KuesionerCtrl extends Controller{
    		$i10_array = array($i10_tdp,$i10_iui,$i10_lainnya);
    		for ($i=0; $i < count($i10_array); $i++) { 
    			$i10[$i]['frekuensi'] = $i10_array[$i];
-   			$i10[$i]['presentase'] = $i10_array[$i]/$i10_total;
+   			$i10[$i]['presentase'] = number_format(($i10_array[$i]/$i10_total)*100,2);
    		}
 
    		return $i10;
@@ -143,7 +151,7 @@ class KuesionerCtrl extends Controller{
    		$i12_array = array($i12_belum,$i12_sudah);
    		for ($i=0; $i < count($i12_array); $i++) { 
    			$i12[$i]['frekuensi'] = $i12_array[$i];
-   			$i12[$i]['presentase'] = $i12_array[$i]/$i12_total;
+   			$i12[$i]['presentase'] = number_format(($i12_array[$i]/$i12_total)*100,2);
    		}
 
    		return $i12;
@@ -168,7 +176,7 @@ class KuesionerCtrl extends Controller{
    		$i13_array = array($i13_belum,$i13_sudah);
    		for ($i=0; $i < count($i13_array); $i++) { 
    			$i13[$i]['frekuensi'] = $i13_array[$i];
-   			$i13[$i]['presentase'] = $i13_array[$i]/$i13_total;
+   			$i13[$i]['presentase'] = number_format(($i13_array[$i]/$i13_total)*100,2);
    		}
 
    		return $i13;
@@ -192,7 +200,7 @@ class KuesionerCtrl extends Controller{
    		$pangan_array = array($pangan_p,$pangan_n);
    		for ($i=0; $i < count($pangan_array); $i++) { 
    			$pangan[$i]['frekuensi'] = $pangan_array[$i];
-   			$pangan[$i]['presentase'] = $pangan_array[$i]/$pangan_total;
+   			$pangan[$i]['presentase'] = number_format(($pangan_array[$i]/$pangan_total)*100,2);
    		}
 
    		return $pangan;
@@ -202,8 +210,28 @@ class KuesionerCtrl extends Controller{
 
    	//Bagian 3
 
-   	public function FunctionName($value='')
-   	{
+   	public function getMendapatkanSNI($value=''){
    		$judul = 'Apakah Saudara sudah pernah mendapatkan informasi mengenai Standar Nasional Indonesia (SNI)?';
+
+         $iii_1 = array();
+         $iii_1_belum = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_1')
+            ->where('iii_1',0)
+            ->count();
+         $iii_1_sudah = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_1')
+            ->where('iii_1', 1)
+            ->count();
+         
+   
+         $iii_1_total = ($iii_1_belum+$iii_1_sudah);
+
+         $iii_1_array = array($iii_1_belum,$iii_1_sudah);
+         for ($i=0; $i < count($iii_1_array); $i++) { 
+            $iii_1[$i]['frekuensi'] = $iii_1_array[$i];
+            $iii_1[$i]['presentase'] = number_format(($iii_1_array[$i]/$iii_1_total)*100,2);
+         }
+
+         return $iii_1;
    	}
 }

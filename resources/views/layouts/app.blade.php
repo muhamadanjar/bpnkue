@@ -8,12 +8,13 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'BPN') }}</title>
 
     <!-- Styles -->
     <link href="{{ url('/css/app.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/datatables/css/jquery.datatables.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/fontawesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css') }}">
     
     <!-- Scripts -->
     <script>
@@ -47,6 +48,16 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li><a href="{{ url('/kuesioner') }}">Kuesioner</a></li>
+                        <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    Kuesioner <span class="caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="{{ url('/kuesioner') }}">List</a></li>
+                                    <li><a href="{{ url('/kuesioner/gambaranumum') }}">Gambaran Umum</a></li>
+                                </ul>
+                        </li>
                         <li><a href="{{ url('/excel') }}">Excel</a></li>
 
                     </ul>

@@ -64,7 +64,7 @@ class ExcelCtrl extends Controller{
             $array_data[$rowIndex] = array('A'=>'', 'B'=>'','C'=>'','D'=>'');
             
             foreach ($cellIterator as $cell) {
-                if('A' == $cell->getColumn()){
+                /*if('A' == $cell->getColumn()){
                     $array_data[$rowIndex][$cell->getColumn()] = $cell->getCalculatedValue();
                 } else if('B' == $cell->getColumn()){
                     $array_data[$rowIndex][$cell->getColumn()] = $cell->getCalculatedValue();
@@ -83,7 +83,8 @@ class ExcelCtrl extends Controller{
                     $array_data[$rowIndex][$cell->getColumn()] = $my_date;
                 }else{
                     $array_data[$rowIndex][$cell->getColumn()] = $cell->getCalculatedValue();
-                }
+                }*/
+                $array_data[$rowIndex][$cell->getColumn()] = $cell->getCalculatedValue();
             }
         }
         return $array_data;
@@ -299,6 +300,8 @@ class ExcelCtrl extends Controller{
             $this->QueryBagianSatu($data);
         }elseif ($request->bagian == 'bagian_dua') {
             $this->QueryBagianDua($data);
+        }elseif ($request->bagian == 'bagian_tiga') {
+            $this->QueryBagianTiga($data);
         }else{
             $this->QueryBagianTiga($data);
         }
