@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="col-md-4">
-        	<div id="chart_jmlkaryawan"></div>
+        	<div id="chart_i7"></div>
         </div>
     </div>
 
@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="col-md-4">
-        	<div id="chart_2"></div>
+        	<div id="chart_i9"></div>
         </div>
     </div>
 
@@ -82,7 +82,7 @@
             </div>
         </div>
         <div class="col-md-4">
-        	<div id="chart_2"></div>
+        	<div id="chart_i10"></div>
         </div>
     </div>
 
@@ -110,7 +110,7 @@
             </div>
         </div>
         <div class="col-md-4">
-        	<div id="chart_2"></div>
+        	<div id="chart_i12"></div>
         </div>
     </div>
 
@@ -138,7 +138,7 @@
             </div>
         </div>
         <div class="col-md-4">
-        	<div id="chart_2"></div>
+        	<div id="chart_i13"></div>
         </div>
     </div>
 
@@ -166,7 +166,7 @@
             </div>
         </div>
         <div class="col-md-4">
-        	<div id="chart_2"></div>
+        	<div id="chart_pangan"></div>
         </div>
     </div>
 	
@@ -175,56 +175,28 @@
 
 <script type="text/javascript">
 $(function () {
-    Highcharts.chart('chart_jmlkaryawan', {
+    Highcharts.chart('chart_i9', {
         chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-        title: {
-            text: 'Browser market shares January, 2015 to May, 2015'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        	type: 'pie'
         },
         plotOptions: {
             pie: {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    }
-                }
+                    enabled: false
+                },
+                showInLegend: false
             }
         },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        title: {
+            text: 'I7'  
+        },
         series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: [{
-                name: 'Microsoft Internet Explorer',
-                y: 56.33
-            }, {
-                name: 'Chrome',
-                y: 24.03,
-                sliced: true,
-                selected: true
-            }, {
-                name: 'Firefox',
-                y: 10.38
-            }, {
-                name: 'Safari',
-                y: 4.77
-            }, {
-                name: 'Opera',
-                y: 0.91
-            }, {
-                name: 'Proprietary or Undetectable',
-                y: 0.2
-            }]
+            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]        
         }]
     });
 });
