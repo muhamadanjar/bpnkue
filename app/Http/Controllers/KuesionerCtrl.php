@@ -96,11 +96,16 @@ class KuesionerCtrl extends Controller{
    
    		$i9_total = ($i9_belum+$i9_sudah);
    		$i9_array = array($i9_belum,$i9_sudah);
+         $info = array('Sudah','Belum');
+         $tambah =array();
    		for ($i=0; $i < 2; $i++) { 
-   			$i9[$i]['frekuensi'] = $i9_array[$i];
-   			$i9[$i]['presentase'] = number_format(($i9_array[$i]/$i9_total)*100,2);
+   			$i9['hasil'][$i]['frekuensi'] = $i9_array[$i];
+   			$i9['hasil'][$i]['presentase'] = number_format(($i9_array[$i]/$i9_total)*100,2);
+            
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($i9_array[$i]/$i9_total)*100,2);
    		}
-
+         $i9['data'] = $tambah;
    		return $i9;
 
    	}
@@ -124,10 +129,13 @@ class KuesionerCtrl extends Controller{
    
    		$i10_total = ($i10_tdp+$i10_iui+$i10_lainnya);
    		$i10_array = array($i10_tdp,$i10_iui,$i10_lainnya);
+         $tambah=array();
    		for ($i=0; $i < count($i10_array); $i++) { 
-   			$i10[$i]['frekuensi'] = $i10_array[$i];
-   			$i10[$i]['presentase'] = number_format(($i10_array[$i]/$i10_total)*100,2);
+   			$i10['hasil'][$i]['frekuensi'] = $i10_array[$i];
+   			$i10['hasil'][$i]['presentase'] = number_format(($i10_array[$i]/$i10_total)*100,2);
+            array_push($tambah, number_format(($i10_array[$i]/$i10_total)*100,2)) ;
    		}
+         $i10['data'] = $tambah;
 
    		return $i10;
 

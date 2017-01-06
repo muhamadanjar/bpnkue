@@ -44,7 +44,7 @@
 							<th>Presentasi</th>
 
 						</tr>
-						@foreach($i9 as $i9_k => $i9_v)
+						@foreach($i9['hasil'] as $i9_k => $i9_v)
 						<tr>
 							<td>{{ $i9_v['frekuensi'] }}</td>
 							<td>{{ $i9_v['presentase'] }} %</td>
@@ -72,7 +72,7 @@
 							<th>Presentasi</th>
 
 						</tr>
-						@foreach($i10 as $i10_k => $i10_v)
+						@foreach($i10['hasil'] as $i10_k => $i10_v)
 						<tr>
 							<td>{{ $i10_v['frekuensi'] }}</td>
 							<td>{{ $i10_v['presentase'] }} %</td>
@@ -251,14 +251,14 @@ $(function () {
             }
         },
         xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            categories: ['Sudah','Belum']
         },
-        
+
         title: {
             text: 'I9'  
         },
         series: [{
-            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]        
+            data: <?=json_encode($i9['data'],JSON_NUMERIC_CHECK)?>        
         }],
         credits: {
             enabled:false,
