@@ -40,6 +40,7 @@ class KuesionerCtrl extends Controller{
    		->with('i12',$json_i_12)
    		->with('i13',$json_i_13)
    		->with('pangan',$json_pangan)
+
          ->with('iii_1',$json_iii_1);
    	}
 
@@ -71,12 +72,14 @@ class KuesionerCtrl extends Controller{
    		$i7_total = ($i7_1_4+$i7_5_19+$i7_20_99+$i7_lebih_100);
    		$i7_array = array($i7_1_4,$i7_5_19,$i7_20_99,$i7_lebih_100);
          $tambah=array();
+         $info = array('1-4','5-9','20-99','Lebih 100');
    		for ($i=0; $i < 4; $i++) { 
    			$i7['hasil'][$i]['frekuensi'] = $i7_array[$i];
    			$i7['hasil'][$i]['presentase'] = number_format(($i7_array[$i]/$i7_total)*100,2);
             array_push($tambah, number_format(($i7_array[$i]/$i7_total)*100,2)) ;
    		}
          $i7['data'] = $tambah;
+         $i7['kategori'] = $info;
 
    		return $i7;
    	}
@@ -106,6 +109,7 @@ class KuesionerCtrl extends Controller{
             $tambah[$i]['y'] = number_format(($i9_array[$i]/$i9_total)*100,2);
    		}
          $i9['data'] = $tambah;
+         $i9['kategori'] = $info;
    		return $i9;
 
    	}
@@ -130,12 +134,14 @@ class KuesionerCtrl extends Controller{
    		$i10_total = ($i10_tdp+$i10_iui+$i10_lainnya);
    		$i10_array = array($i10_tdp,$i10_iui,$i10_lainnya);
          $tambah=array();
+         $info = array('TDP','IUI','Lainya');
    		for ($i=0; $i < count($i10_array); $i++) { 
    			$i10['hasil'][$i]['frekuensi'] = $i10_array[$i];
    			$i10['hasil'][$i]['presentase'] = number_format(($i10_array[$i]/$i10_total)*100,2);
             array_push($tambah, number_format(($i10_array[$i]/$i10_total)*100,2)) ;
    		}
          $i10['data'] = $tambah;
+         $i10['kategori'] = $info;
 
    		return $i10;
 
@@ -157,10 +163,16 @@ class KuesionerCtrl extends Controller{
    
    		$i12_total = ($i12_belum+$i12_sudah);
    		$i12_array = array($i12_belum,$i12_sudah);
+         $tambah=array();
+         $info = array('Belum','Sudah');
    		for ($i=0; $i < count($i12_array); $i++) { 
-   			$i12[$i]['frekuensi'] = $i12_array[$i];
-   			$i12[$i]['presentase'] = number_format(($i12_array[$i]/$i12_total)*100,2);
+   			$i12['hasil'][$i]['frekuensi'] = $i12_array[$i];
+   			$i12['hasil'][$i]['presentase'] = number_format(($i12_array[$i]/$i12_total)*100,2);
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($i12_array[$i]/$i12_total)*100,2);
    		}
+         $i12['data'] = $tambah;
+         $i12['kategori'] = $info;
 
    		return $i12;
 
@@ -182,10 +194,18 @@ class KuesionerCtrl extends Controller{
    
    		$i13_total = ($i13_belum+$i13_sudah);
    		$i13_array = array($i13_belum,$i13_sudah);
+         $tambah=array();
+         $info = array('Belum','Sudah');
    		for ($i=0; $i < count($i13_array); $i++) { 
-   			$i13[$i]['frekuensi'] = $i13_array[$i];
-   			$i13[$i]['presentase'] = number_format(($i13_array[$i]/$i13_total)*100,2);
+   			$i13['hasil'][$i]['frekuensi'] = $i13_array[$i];
+   			$i13['hasil'][$i]['presentase'] = number_format(($i13_array[$i]/$i13_total)*100,2);
+            
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($i13_array[$i]/$i13_total)*100,2);
+
    		}
+         $i13['data'] = $tambah;
+         $i13['kategori'] = $info;
 
    		return $i13;
    	}
@@ -206,10 +226,17 @@ class KuesionerCtrl extends Controller{
    
    		$pangan_total = ($pangan_p+$pangan_n);
    		$pangan_array = array($pangan_p,$pangan_n);
+         $tambah=array();
+         $info = array('Pangan','Non Pangan');
    		for ($i=0; $i < count($pangan_array); $i++) { 
-   			$pangan[$i]['frekuensi'] = $pangan_array[$i];
-   			$pangan[$i]['presentase'] = number_format(($pangan_array[$i]/$pangan_total)*100,2);
+   			$pangan['hasil'][$i]['frekuensi'] = $pangan_array[$i];
+   			$pangan['hasil'][$i]['presentase'] = number_format(($pangan_array[$i]/$pangan_total)*100,2);
+            
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($pangan_array[$i]/$pangan_total)*100,2);
    		}
+         $pangan['data'] = $tambah;
+         $pangan['kategori'] = $info;
 
    		return $pangan;
 

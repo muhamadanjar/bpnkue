@@ -16,7 +16,8 @@
 						</tr>
 						@foreach($i7['hasil'] as $i7_k => $i7_v)
 						<tr>
-							<td>{{ $i7_v['frekuensi'] }}</td>
+							<td><b><i>{{ $i7['kategori'][$i7_k] }}</i></b></td>
+                            <td>{{ $i7_v['frekuensi'] }}</td>
 							<td>{{ $i7_v['presentase'] }} %</td>
                             
 
@@ -40,12 +41,14 @@
                 	<table class="table">
 						
 						<tr>
+                            <th>#</th>
 							<th>Frekuensi</th>
 							<th>Presentasi</th>
 
 						</tr>
 						@foreach($i9['hasil'] as $i9_k => $i9_v)
 						<tr>
+                            <td><b><i>{{ $i9['kategori'][$i9_k] }}</i></b></td>
 							<td>{{ $i9_v['frekuensi'] }}</td>
 							<td>{{ $i9_v['presentase'] }} %</td>
 
@@ -96,12 +99,14 @@
                 	<table class="table">
 						
 						<tr>
-							<th>Frekuensi</th>
+							<th>#</th>
+                            <th>Frekuensi</th>
 							<th>Presentasi</th>
 
 						</tr>
-						@foreach($i12 as $i12_k => $i12_v)
+						@foreach($i12['hasil'] as $i12_k => $i12_v)
 						<tr>
+                            <td><b><i>{{ $i12['kategori'][$i12_k] }}</i></b></td>
 							<td>{{ $i12_v['frekuensi'] }}</td>
 							<td>{{ $i12_v['presentase'] }} %</td>
 
@@ -124,12 +129,14 @@
                 	<table class="table">
 						
 						<tr>
-							<th>Frekuensi</th>
+							<th>#</th>
+                            <th>Frekuensi</th>
 							<th>Presentasi</th>
 
 						</tr>
-						@foreach($i13 as $i13_k => $i13_v)
+						@foreach($i13['hasil'] as $i13_k => $i13_v)
 						<tr>
+                            <td><b><i>{{ $i13['kategori'][$i13_k] }}</i></b></td>
 							<td>{{ $i13_v['frekuensi'] }}</td>
 							<td>{{ $i13_v['presentase'] }} %</td>
 
@@ -152,12 +159,14 @@
                 	<table class="table">
 						
 						<tr>
+                            <th>#</th>
 							<th>Frekuensi</th>
 							<th>Presentasi</th>
 
 						</tr>
-						@foreach($pangan as $pangan_k => $pangan_v)
+						@foreach($pangan['hasil'] as $pangan_k => $pangan_v)
 						<tr>
+                            <td><b><i>{{ $pangan['kategori'][$pangan_k] }}</i></b></td>
 							<td>{{ $pangan_v['frekuensi'] }}</td>
 							<td>{{ $pangan_v['presentase'] }} %</td>
 
@@ -265,6 +274,121 @@ $(function () {
         }
     });
 
+    Highcharts.chart('chart_i10', {
+        chart: {
+            type: 'bar'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: false
+            }
+        },
+     
+        xAxis: {
+            categories: ['TDP', 'UIU', 'Lainnya']
+        },
+        title: {
+            text: 'I10'  
+        },
+        series: [{
+            data: [<?=implode(',', $i10['data'])?>]        
+        }],
+        credits: {
+            enabled:false,
+        }
+    });
+
+    Highcharts.chart('chart_i12', {
+        chart: {
+            type: 'pie'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: false
+            }
+        },
+        xAxis: {
+            categories: ['Sudah','Belum']
+        },
+
+        title: {
+            text: 'I12'  
+        },
+        series: [{
+            data: <?=json_encode($i12['data'],JSON_NUMERIC_CHECK)?>        
+        }],
+        credits: {
+            enabled:false,
+        }
+    });
+
+    Highcharts.chart('chart_i13', {
+        chart: {
+            type: 'pie'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: false
+            }
+        },
+        xAxis: {
+            categories: ['Belum','Sudah']
+        },
+
+        title: {
+            text: 'I13'  
+        },
+        series: [{
+            data: <?=json_encode($i13['data'],JSON_NUMERIC_CHECK)?>        
+        }],
+        credits: {
+            enabled:false,
+        }
+    });
+
+    Highcharts.chart('chart_pangan', {
+        chart: {
+            type: 'pie'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: false
+            }
+        },
+        xAxis: {
+            categories: ['Pangaan','Non Pangan']
+        },
+
+        title: {
+            text: 'Pangan'  
+        },
+        series: [{
+            data: <?=json_encode($pangan['data'],JSON_NUMERIC_CHECK)?>        
+        }],
+        credits: {
+            enabled:false,
+        }
+    });
     
 });
 </script>
