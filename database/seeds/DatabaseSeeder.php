@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
         // Create a user, and give roles
         $user = App\User::create([
             'email' => 'admin@example.com',
-            'name' => 'admin',
+            'name' => 'Admin Aja',
             'password' => bcrypt('password'),
         ]);
     

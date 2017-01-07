@@ -169,7 +169,6 @@
                             <td><b><i>{{ $pangan['kategori'][$pangan_k] }}</i></b></td>
 							<td>{{ $pangan_v['frekuensi'] }}</td>
 							<td>{{ $pangan_v['presentase'] }} %</td>
-
 						</tr>
 						@endforeach
 					</table>
@@ -195,10 +194,11 @@
                             <th>Presentasi</th>
 
                         </tr>
-                        @foreach($iii_1 as $iii_1_k => $iii_1_v)
+                        @foreach($iii_1['hasil'] as $iii_1_k => $iii_1_v)
                         <tr>
+                            <td><b><i>{{ $iii_1['kategori'][$iii_1_k] }}</i></b></td>
                             <td>{{ $iii_1_v['frekuensi'] }}</td>
-                            <td>{{ $iii_1_v['presentase'] }}</td>
+                            <td>{{ $iii_1_v['presentase'] }} %</td>
 
                         </tr>
                         @endforeach
@@ -208,6 +208,266 @@
         </div>
         <div class="col-md-4">
             <div id="chart_iii_1"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Jika Sudah Mendapatkan informasi produk, dari mana mendapatkan informasi tentang SNI tersebut? </div>
+                <div class="panel-body">
+                    <table class="table">
+                        
+                        <tr>
+                            <th>Frekuensi</th>
+                            <th>Presentasi</th>
+
+                        </tr>
+                        @foreach($iii_2_a['hasil'] as $iii_2_a_k => $iii_2_a_v)
+                        <tr>
+                            <td><b><i>{{ $iii_2_a['kategori'][$iii_2_a_k] }}</i></b></td>
+                            <td>{{ $iii_2_a_v['frekuensi'] }}</td>
+                            <td>{{ $iii_2_a_v['presentase'] }} %</td>
+
+                        </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div id="chart_iii_2"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Bagaimana pemahaman Saudara terhadap SNI</div>
+                <div class="panel-body">
+                    <table class="table">
+                        
+                        <tr>
+                            <th>Frekuensi</th>
+                            <th>Presentasi</th>
+
+                        </tr>
+                        @foreach($iii_3['hasil'] as $iii_3_k => $iii_3_v)
+                        <tr>
+                            <td><b><i>{{ $iii_3['kategori'][$iii_3_k] }}</i></b></td>
+                            <td>{{ $iii_3_v['frekuensi'] }}</td>
+                            <td>{{ $iii_3_v['presentase'] }} %</td>
+
+                        </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div id="chart_iii_3"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Bagaimana pemahaman Saudara terhadap SNI</div>
+                <div class="panel-body">
+                    <table class="table">
+                        
+                        <tr>
+                            <th>Frekuensi</th>
+                            <th>Presentasi</th>
+
+                        </tr>
+                        @foreach($iii_4['hasil'] as $iii_4_k => $iii_4_v)
+                        <tr>
+                            <td><b><i>{{ $iii_4['kategori'][$iii_4_k] }}</i></b></td>
+                            <td>{{ $iii_4_v['frekuensi'] }}</td>
+                            <td>{{ $iii_4_v['presentase'] }} %</td>
+
+                        </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div id="chart_iii_4"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Bagaimana pemahaman Saudara terhadap SNI</div>
+                <div class="panel-body">
+                    <table class="table">
+                        
+                        <tr>
+                            <th>Frekuensi</th>
+                            <th>Presentasi</th>
+
+                        </tr>
+                        @foreach($iii_5['hasil'] as $iii_5_k => $iii_5_v)
+                        <tr>
+                            <td><b><i>{{ $iii_5['kategori'][$iii_5_k] }}</i></b></td>
+                            <td>{{ $iii_5_v['frekuensi'] }}</td>
+                            <td>{{ $iii_5_v['presentase'] }} %</td>
+
+                        </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div id="chart_iii_5"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Bagaimana pemahaman Saudara terhadap SNI</div>
+                <div class="panel-body">
+                    <table class="table">
+                        
+                        <tr>
+                            <th>Frekuensi</th>
+                            <th>Presentasi</th>
+
+                        </tr>
+                        @foreach($iii_6['hasil'] as $iii_6_k => $iii_6_v)
+                        <tr>
+                            <td><b><i>{{ $iii_6['kategori'][$iii_6_k] }}</i></b></td>
+                            <td>{{ $iii_6_v['frekuensi'] }}</td>
+                            <td>{{ $iii_6_v['presentase'] }} %</td>
+
+                        </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div id="chart_iii_6"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">{{$iii_7['judul']}}</div>
+                <div class="panel-body">
+                    <table class="table">
+                        
+                        <tr>
+                            <th>Frekuensi</th>
+                            <th>Presentasi</th>
+
+                        </tr>
+                        @foreach($iii_7['hasil'] as $iii_7_k => $iii_7_v)
+                        <tr>
+                            <td><b><i>{{ $iii_7['kategori'][$iii_7_k] }}</i></b></td>
+                            <td>{{ $iii_7_v['frekuensi'] }}</td>
+                            <td>{{ $iii_7_v['presentase'] }} %</td>
+
+                        </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div id="chart_iii_7"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">{{$iii_8['judul']}}</div>
+                <div class="panel-body">
+                    <table class="table">
+                        
+                        <tr>
+                            <th>Frekuensi</th>
+                            <th>Presentasi</th>
+
+                        </tr>
+                        @foreach($iii_8['hasil'] as $iii_8_k => $iii_8_v)
+                        <tr>
+                            <td><b><i>{{ $iii_8['kategori'][$iii_8_k] }}</i></b></td>
+                            <td>{{ $iii_8_v['frekuensi'] }}</td>
+                            <td>{{ $iii_8_v['presentase'] }} %</td>
+
+                        </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div id="chart_iii_8"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">{{$iii_10['judul']}}</div>
+                <div class="panel-body">
+                    <table class="table">
+                        
+                        <tr>
+                            <th>Frekuensi</th>
+                            <th>Presentasi</th>
+
+                        </tr>
+                        @foreach($iii_10['hasil'] as $iii_10_k => $iii_10_v)
+                        <tr>
+                            <td><b><i>{{ $iii_10['kategori'][$iii_10_k] }}</i></b></td>
+                            <td>{{ $iii_10_v['frekuensi'] }}</td>
+                            <td>{{ $iii_10_v['presentase'] }} %</td>
+
+                        </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div id="chart_iii_10"></div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">{{$iii_11['judul']}}</div>
+                <div class="panel-body">
+                    <table class="table">
+                        
+                        <tr>
+                            <th>Frekuensi</th>
+                            <th>Presentasi</th>
+
+                        </tr>
+                        @foreach($iii_11['hasil'] as $iii_11_k => $iii_11_v)
+                        <tr>
+                            <td><b><i>{{ $iii_11['kategori'][$iii_11_k] }}</i></b></td>
+                            <td>{{ $iii_11_v['frekuensi'] }}</td>
+                            <td>{{ $iii_11_v['presentase'] }} %</td>
+
+                        </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div id="chart_iii_11"></div>
         </div>
     </div>
 	
@@ -384,6 +644,297 @@ $(function () {
         },
         series: [{
             data: <?=json_encode($pangan['data'],JSON_NUMERIC_CHECK)?>        
+        }],
+        credits: {
+            enabled:false,
+        }
+    });
+
+    //Bagian 3
+    Highcharts.chart('chart_iii_1', {
+        chart: {
+            type: 'pie'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: false
+            }
+        },
+        xAxis: {
+            categories: ['Belum','Sudah']
+        },
+
+        title: {
+            text: 'iii_1'  
+        },
+        series: [{
+            data: <?=json_encode($iii_1['data'],JSON_NUMERIC_CHECK)?>        
+        }],
+        credits: {
+            enabled:false,
+        }
+    });
+
+    Highcharts.chart('chart_iii_2', {
+        chart: {
+            type: 'bar'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: false
+            }
+        },
+     
+        xAxis: {
+            categories: <?=json_encode($iii_2_a['kategori'])?>
+        },
+        title: {
+            text: 'III 2'  
+        },
+        series: [{
+            data: [<?=implode(',', $iii_2_a['data'])?>]        
+        }],
+        credits: {
+            enabled:false,
+        }
+    });
+
+    Highcharts.chart('chart_iii_3', {
+        chart: {
+            type: 'pie'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: false
+            }
+        },
+        xAxis: {
+            categories: <?=json_encode($iii_3['kategori'])?>
+        },
+
+        title: {
+            text: 'III 3'  
+        },
+        series: [{
+            data: <?=json_encode($iii_3['data'],JSON_NUMERIC_CHECK)?>       
+        }],
+        credits: {
+            enabled:false,
+        }
+    });
+
+    Highcharts.chart('chart_iii_4', {
+        chart: {
+            type: 'pie'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: false
+            }
+        },
+        xAxis: {
+            categories: <?=json_encode($iii_4['kategori'])?>
+        },
+
+        title: {
+            text: 'III 4'  
+        },
+        series: [{
+            data: <?=json_encode($iii_4['data'],JSON_NUMERIC_CHECK)?>       
+        }],
+        credits: {
+            enabled:false,
+        }
+    });
+
+    Highcharts.chart('chart_iii_5', {
+        chart: {
+            type: 'bar'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: false
+            }
+        },
+     
+        xAxis: {
+            categories: <?=json_encode($iii_5['kategori'])?>
+        },
+        title: {
+            text: 'III 5'  
+        },
+        series: [{
+            data: [<?=implode(',', $iii_5['data'])?>]        
+        }],
+        credits: {
+            enabled:false,
+        }
+    });
+
+    Highcharts.chart('chart_iii_6', {
+        chart: {
+            type: 'pie'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: false
+            }
+        },
+        xAxis: {
+            categories: <?=json_encode($iii_6['kategori'])?>
+        },
+
+        title: {
+            text: 'III 4'  
+        },
+        series: [{
+            data: <?=json_encode($iii_6['data'],JSON_NUMERIC_CHECK)?>       
+        }],
+        credits: {
+            enabled:false,
+        }
+    });
+
+    Highcharts.chart('chart_iii_7', {
+        chart: {
+            type: 'pie'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: false
+            }
+        },
+        xAxis: {
+            categories: <?=json_encode($iii_7['kategori'])?>
+        },
+
+        title: {
+            text: 'III 4'  
+        },
+        series: [{
+            data: <?=json_encode($iii_7['data'],JSON_NUMERIC_CHECK)?>       
+        }],
+        credits: {
+            enabled:false,
+        }
+    });
+
+    Highcharts.chart('chart_iii_8', {
+        chart: {
+            type: 'bar'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: false
+            }
+        },
+     
+        xAxis: {
+            categories: <?=json_encode($iii_8['kategori'])?>
+        },
+        title: {
+            text: 'III 8'  
+        },
+        series: [{
+            data: [<?=implode(',', $iii_8['data'])?>]        
+        }],
+        credits: {
+            enabled:false,
+        }
+    });
+
+    Highcharts.chart('chart_iii_10', {
+        chart: {
+            type: 'bar'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: false
+            }
+        },
+     
+        xAxis: {
+            categories: <?=json_encode($iii_10['kategori'])?>
+        },
+        title: {
+            text: 'III 10'  
+        },
+        series: [{
+            data: [<?=implode(',', $iii_10['data'])?>]        
+        }],
+        credits: {
+            enabled:false,
+        }
+    });
+
+    Highcharts.chart('chart_iii_11', {
+        chart: {
+            type: 'bar'
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: false
+            }
+        },
+     
+        xAxis: {
+            categories: <?=json_encode($iii_11['kategori'])?>
+        },
+        title: {
+            text: 'III 11'  
+        },
+        series: [{
+            data: [<?=implode(',', $iii_11['data'])?>]        
         }],
         credits: {
             enabled:false,

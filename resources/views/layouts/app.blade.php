@@ -100,7 +100,7 @@
 
     <!-- Scripts -->
     @yield('js_tambahan')
-    <script src="{{ url('/js/app.js') }}"></script>
+    <!--<script src="{{ url('/js/app.js') }}"></script>-->
     
     <script type="text/javascript" charset="utf8" src="{{ asset('vendor/datatables/js/jquery.datatables.min.js')}}"></script>
     <script type="text/javascript" src="{{ asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>

@@ -29,8 +29,32 @@ class KuesionerCtrl extends Controller{
          //Bagian 3
          $iii_1 = $this->getMendapatkanSNI();
          $json_iii_1 = ($iii_1);
+         $iii_2_a = $this->getMendapatkanSNIDarimanaInfoSNI();
+         $json_iii_2_a = ($iii_2_a);
+         $iii_3 = $this->getPemahamanSNI();
+         $json_iii_3 = ($iii_3);
+         $iii_4 = $this->getDokumenSNI();
+         $json_iii_4 = ($iii_4);
+         $iii_5 = $this->getPernahMendapatkanSNIDarimanaInfoSNI();
+         $json_iii_5 = ($iii_5);
+         $iii_6 = $this->getPernahMendapatkanSNIDenganMembayar();
+         $json_iii_6 = ($iii_6);
+         $iii_7 = $this->getSNIMudahDiUMKM();
+         $json_iii_7 = ($iii_7);
+         $iii_8 = $this->getMenjadiKendala();
+         $json_iii_8 = ($iii_8);
+
+         $iii_10 = $this->getKendalaPengajuanSertifikasiSNI();
+         $json_iii_10 = ($iii_10);
+
+         $iii_11 = $this->getNilaiTambahSetelahSertifikasi();
+         $json_iii_11 = ($iii_11);
+
+         
+         
          
 
+         
    		
    		
    		return view('gambaranumum')
@@ -41,7 +65,18 @@ class KuesionerCtrl extends Controller{
    		->with('i13',$json_i_13)
    		->with('pangan',$json_pangan)
 
-         ->with('iii_1',$json_iii_1);
+         ->with('iii_1',$json_iii_1)
+         ->with('iii_2_a',$json_iii_2_a)
+         ->with('iii_3',$json_iii_3)
+         ->with('iii_4',$json_iii_4)
+         ->with('iii_5',$json_iii_5)
+         ->with('iii_6',$json_iii_6)
+         ->with('iii_7',$json_iii_7)
+         ->with('iii_8',$json_iii_8)
+         ->with('iii_10',$json_iii_10)
+         ->with('iii_11',$json_iii_11)
+
+         ;
    	}
 
    	//Bagian 1
@@ -262,11 +297,378 @@ class KuesionerCtrl extends Controller{
          $iii_1_total = ($iii_1_belum+$iii_1_sudah);
 
          $iii_1_array = array($iii_1_belum,$iii_1_sudah);
+         $info = array('Belum','Sudah');
+         $tambah = array();
          for ($i=0; $i < count($iii_1_array); $i++) { 
-            $iii_1[$i]['frekuensi'] = $iii_1_array[$i];
-            $iii_1[$i]['presentase'] = number_format(($iii_1_array[$i]/$iii_1_total)*100,2);
+            $iii_1['hasil'][$i]['frekuensi'] = $iii_1_array[$i];
+            $iii_1['hasil'][$i]['presentase'] = number_format(($iii_1_array[$i]/$iii_1_total)*100,2);
+
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($iii_1_array[$i]/$iii_1_total)*100,2);
          }
+         $iii_1['data'] = $tambah;
+         $iii_1['kategori'] = $info;
 
          return $iii_1;
    	}
+
+      public function getMendapatkanSNIDarimanaInfoSNI($value=''){
+         $judul = 'Jika Sudah Mendapatkan informasi produk, dari mana mendapatkan informasi tentang SNI tersebut?  ';
+
+         $iii_2_a = array();
+         $iii_2_internet = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_2_a')
+            ->where('iii_2_a',1)
+            ->count();
+         $iii_2_layanan_bsn = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_2_b')
+            ->where('iii_2_b', 1)
+            ->count();
+         $iii_2_layanan_dinas = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_2_c')
+            ->where('iii_2_c', 1)
+            ->count();
+         $iii_2_balai = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_2_d')
+            ->where('iii_2_d', 1)
+            ->count();
+         $iii_2_lain = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_2_e')
+            ->where('iii_2_e', 1)
+            ->count();
+         
+   
+         $iii_2_a_total = ($iii_2_internet+$iii_2_layanan_bsn+$iii_2_layanan_dinas+$iii_2_balai+$iii_2_lain);
+
+         $iii_2_a_array = array($iii_2_internet,$iii_2_layanan_bsn,$iii_2_layanan_dinas,$iii_2_balai,$iii_2_lain);
+         $info = array('Internet','Layanan BSN','Dinas Setempat','Balai/Lembaga Lain','Lainnya');
+         $tambah = array();
+         for ($i=0; $i < count($iii_2_a_array); $i++) { 
+            $iii_2_a['hasil'][$i]['frekuensi'] = $iii_2_a_array[$i];
+            $iii_2_a['hasil'][$i]['presentase'] = number_format(($iii_2_a_array[$i]/$iii_2_a_total)*100,2);
+
+            array_push($tambah, number_format(($iii_2_a_array[$i]/$iii_2_a_total)*100,2)) ;
+         }
+         $iii_2_a['data'] = $tambah;
+         $iii_2_a['kategori'] = $info;
+
+         return $iii_2_a;
+      }
+
+      public function getPemahamanSNI(){
+         $judul = 'Bagaimana pemahaman Saudara terhadap SNI';
+
+         $iii_3 = array();
+         $iii_3_dipahami = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_3')
+            ->where('iii_3',1)
+            ->count();
+         $iii_3_sulitdipahami = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_3')
+            ->where('iii_3', 2)
+            ->count();
+         $iii_3_tidaktahu = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_3')
+            ->where('iii_3', 3)
+            ->where('iii_3', 0)
+            ->count();
+         
+   
+         $iii_3_total = ($iii_3_dipahami+$iii_3_sulitdipahami+$iii_3_tidaktahu);
+
+         $iii_3_array = array($iii_3_dipahami,$iii_3_sulitdipahami,$iii_3_tidaktahu);
+         $info = array('Dipahami','Sulit Dipahami','Tidak Tahu');
+         $tambah = array();
+         for ($i=0; $i < count($iii_3_array); $i++) { 
+            $iii_3['hasil'][$i]['frekuensi'] = $iii_3_array[$i];
+            $iii_3['hasil'][$i]['presentase'] = number_format(($iii_3_array[$i]/$iii_3_total)*100,2);
+
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($iii_3_array[$i]/$iii_3_total)*100,2);
+         }
+         $iii_3['data'] = $tambah;
+         $iii_3['kategori'] = $info;
+
+         return $iii_3;
+
+      }
+
+      public function getDokumenSNI($value=''){
+         $judul = 'Apakah Saudara sudah pernah mendapatkan dokumen  Standar Nasional Indonesia (SNI)?';
+
+         $iii_4 = array();
+         $iii_4_belum = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_4')
+            ->where('iii_4',0)
+            ->count();
+         $iii_4_sudah = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_4')
+            ->where('iii_4', 1)
+            ->count();
+         
+   
+         $iii_4_total = ($iii_4_belum+$iii_4_sudah);
+
+         $iii_4_array = array($iii_4_belum,$iii_4_sudah);
+         $info = array('Belum','Sudah');
+         $tambah = array();
+         for ($i=0; $i < count($iii_4_array); $i++) { 
+            $iii_4['hasil'][$i]['frekuensi'] = $iii_4_array[$i];
+            $iii_4['hasil'][$i]['presentase'] = number_format(($iii_4_array[$i]/$iii_4_total)*100,2);
+
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($iii_4_array[$i]/$iii_4_total)*100,2);
+         }
+         $iii_4['data'] = $tambah;
+         $iii_4['kategori'] = $info;
+
+         return $iii_4;
+      }
+
+      public function getPernahMendapatkanSNIDarimanaInfoSNI($value=''){
+         $judul = 'Jika sudah pernah mendapatkan dokumen SNI, dari mana mendapatkan dokumen SNI? ';
+
+         $iii_5 = array();
+         $iii_5_layanan_bsn = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_5_a')
+            ->where('iii_5_a',1)
+            ->count();
+         $iii_5_lembaga = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_5_b')
+            ->where('iii_5_b', 1)
+            ->count();
+         $iii_5_layanan_dinas = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_5_c')
+            ->where('iii_5_c', 1)
+            ->count();
+         $iii_5_lain = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_5_d')
+            ->where('iii_5_d', 1)
+            ->count();
+         
+         
+   
+         $iii_5_a_total = ($iii_5_layanan_bsn+$iii_5_lembaga+$iii_5_layanan_dinas+$iii_5_lain);
+
+         $iii_5_a_array = array($iii_5_layanan_bsn,$iii_5_lembaga,$iii_5_layanan_dinas,$iii_5_lain);
+         $info = array('Layanan BSN','Lembaga','Dinas','Lainnya');
+         $tambah = array();
+         for ($i=0; $i < count($iii_5_a_array); $i++) { 
+            $iii_5['hasil'][$i]['frekuensi'] = $iii_5_a_array[$i];
+            $iii_5['hasil'][$i]['presentase'] = number_format(($iii_5_a_array[$i]/$iii_5_a_total)*100,2);
+
+            array_push($tambah, number_format(($iii_5_a_array[$i]/$iii_5_a_total)*100,2)) ;
+         }
+         $iii_5['data'] = $tambah;
+         $iii_5['kategori'] = $info;
+
+         return $iii_5;
+      }
+
+      public function getPernahMendapatkanSNIDenganMembayar($value=''){
+         $judul = 'Jika Saudara sudah pernah mendapatkan dokumen SNI dengan membayar, menurut Saudara, harga dokumen SNI tersebut:';
+
+
+         $iii_6 = array();
+         $iii_6_mahal = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_6')
+            ->where('iii_6',1)
+            ->count();
+         $iii_6_murah = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_6')
+            ->where('iii_6', 2)
+            ->count();
+         $iii_6_biasa = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_6')
+            ->where('iii_6', 3)
+            ->count();
+         $iii_6_tidaktahu = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_6')
+            ->where('iii_6', 4)
+            ->count();
+         
+   
+         $iii_6_total = ($iii_6_mahal+$iii_6_murah+$iii_6_biasa+$iii_6_tidaktahu);
+
+         $iii_6_array = array($iii_6_mahal,$iii_6_murah,$iii_6_biasa,$iii_6_tidaktahu);
+         $info = array('Mahal','Murah','Biasa Saja','Tidak Tahu');
+         $tambah = array();
+         for ($i=0; $i < count($iii_6_array); $i++) { 
+            $iii_6['hasil'][$i]['frekuensi'] = $iii_6_array[$i];
+            $iii_6['hasil'][$i]['presentase'] = number_format(($iii_6_array[$i]/$iii_6_total)*100,2);
+
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($iii_6_array[$i]/$iii_6_total)*100,2);
+         }
+         $iii_6['data'] = $tambah;
+         $iii_6['kategori'] = $info;
+
+         return $iii_6;
+      }
+
+      public function getSNIMudahDiUMKM($value=''){
+         $judul = 'Menurut Saudara, apakah SNI mudah diterapkan di UMKM Saudara?';
+
+         $iii_7 = array();
+         $iii_7_tidak = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_7')
+            ->where('iii_7',0)
+            ->count();
+         $iii_7_ya = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_7')
+            ->where('iii_7', 1)
+            ->count();
+     
+         
+   
+         $iii_7_total = ($iii_7_tidak+$iii_7_ya);
+
+         $iii_7_array = array($iii_7_tidak,$iii_7_ya);
+         $info = array('Tidak','Ya');
+         $tambah = array();
+         for ($i=0; $i < count($iii_7_array); $i++) { 
+            $iii_7['hasil'][$i]['frekuensi'] = $iii_7_array[$i];
+            $iii_7['hasil'][$i]['presentase'] = number_format(($iii_7_array[$i]/$iii_7_total)*100,2);
+
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($iii_7_array[$i]/$iii_7_total)*100,2);
+         }
+         $iii_7['judul'] = $judul;
+         $iii_7['data'] = $tambah;
+         $iii_7['kategori'] = $info;
+
+         return $iii_7;
+
+      }
+
+      public function getMenjadiKendala($value='')
+      {
+         $judul = 'Jika tidak mudah diterapkan, apa yang menjadi kendala dalam penerapannya?';
+
+         $iii_8 = array();
+         $iii_8_rumit = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_8_a')
+            ->where('iii_8_a',1)
+            ->count();
+         $iii_8_diperlukanbiaya = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_8_b')
+            ->where('iii_8_b', 1)
+            ->count();
+         $iii_8_sdm_terbatas = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_8_c')
+            ->where('iii_8_c', 1)
+            ->count();
+         $iii_8_lain = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_8_d')
+            ->where('iii_8_d', 1)
+            ->count();
+         
+         
+   
+         $iii_8_total = ($iii_8_rumit+$iii_8_diperlukanbiaya+$iii_8_sdm_terbatas+$iii_8_lain);
+
+         $iii_8_array = array($iii_8_rumit,$iii_8_diperlukanbiaya,$iii_8_sdm_terbatas,$iii_8_lain);
+         $info = array('Rumit','Diperlukan Biaya','Kemampuan SDM terbatas','Lainnya');
+         $tambah = array();
+         for ($i=0; $i < count($iii_8_array); $i++) { 
+            $iii_8['hasil'][$i]['frekuensi'] = $iii_8_array[$i];
+            $iii_8['hasil'][$i]['presentase'] = number_format(($iii_8_array[$i]/$iii_8_total)*100,2);
+
+            array_push($tambah, number_format(($iii_8_array[$i]/$iii_8_total)*100,2)) ;
+         }
+         $iii_8['judul'] = $judul;
+         $iii_8['data'] = $tambah;
+         $iii_8['kategori'] = $info;
+
+         return $iii_8;
+      }
+
+      public function getKendalaPengajuanSertifikasiSNI($value='')
+      {
+         $judul = 'Apa kendala dalam pengajuan sertifikasi SNI?';
+
+         $iii_10 = array();
+         $iii_10_biaya = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_10_a')
+            ->where('iii_10_a',1)
+            ->count();
+         $iii_10_prosedur = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_10_b')
+            ->where('iii_10_b', 1)
+            ->count();
+         $iii_10_tidakada = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_10_c')
+            ->where('iii_10_c', 1)
+            ->count();
+         $iii_10_lain = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_10_d')
+            ->where('iii_10_d', 1)
+            ->count();
+
+         $iii_10_total = ($iii_10_biaya+$iii_10_prosedur+$iii_10_tidakada+$iii_10_lain);
+
+         $iii_10_array = array($iii_10_biaya,$iii_10_prosedur,$iii_10_tidakada,$iii_10_lain);
+         $info = array('Biaya Mahal','Prosedur Tidak Jelas','Tidak Ada Lembaga Sertifikasi','Lainnya');
+         $tambah = array();
+         for ($i=0; $i < count($iii_10_array); $i++) { 
+            $iii_10['hasil'][$i]['frekuensi'] = $iii_10_array[$i];
+            $iii_10['hasil'][$i]['presentase'] = number_format(($iii_10_array[$i]/$iii_10_total)*100,2);
+
+            array_push($tambah, number_format(($iii_10_array[$i]/$iii_10_total)*100,2)) ;
+         }
+         $iii_10['judul'] = $judul;
+         $iii_10['data'] = $tambah;
+         $iii_10['kategori'] = $info;
+
+         return $iii_10;
+      }
+
+      public function getNilaiTambahSetelahSertifikasi($value='')
+      {
+         $judul = 'Menurut Saudara, apa nilai tambah bagi UMKM Saudara setelahmendapat sertifikasi?';
+         $iii_11 = array();
+         $iii_11_omzet = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_11_a')
+            ->where('iii_11_a',1)
+            ->count();
+         $iii_11_mudah = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_11_b')
+            ->where('iii_11_b', 1)
+            ->count();
+         $iii_11_proses = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_11_c')
+            ->where('iii_11_c', 1)
+            ->count();
+         $iii_11_efesien = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_11_d')
+            ->where('iii_11_d', 1)
+            ->count();
+         $iii_11_belum = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_11_e')
+            ->where('iii_11_e', 1)
+            ->count();
+         $iii_11_lain = \DB::table('kuesioner_bagian_tiga')
+            ->select('iii_11_f')
+            ->where('iii_11_f', 1)
+            ->count();
+
+         $iii_11_total = ($iii_11_omzet+$iii_11_mudah+$iii_11_proses+$iii_11_efesien+$iii_11_belum+$iii_11_lain);
+
+         $iii_11_array = array($iii_11_omzet,$iii_11_mudah,$iii_11_proses,$iii_11_efesien,$iii_11_belum,$iii_11_lain);
+
+         $info = array('Omzet Meningkat','Mudah Dikenal','Proses Produksi Menjadi Teratur','Efisien','Belum Ada Manfaatnya','Lainnya');
+         $tambah = array();
+         for ($i=0; $i < count($iii_11_array); $i++) { 
+            $iii_11['hasil'][$i]['frekuensi'] = $iii_11_array[$i];
+            $iii_11['hasil'][$i]['presentase'] = number_format(($iii_11_array[$i]/$iii_11_total)*100,2);
+
+            array_push($tambah, number_format(($iii_11_array[$i]/$iii_11_total)*100,2)) ;
+         }
+         $iii_11['judul'] = $judul;
+         $iii_11['data'] = $tambah;
+         $iii_11['kategori'] = $info;
+
+         return $iii_11;
+      }
+       
 }
