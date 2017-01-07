@@ -306,6 +306,7 @@ class KuesionerCtrl extends Controller{
             $tambah[$i]['name'] = $info[$i];
             $tambah[$i]['y'] = number_format(($iii_1_array[$i]/$iii_1_total)*100,2);
          }
+         $iii_1['judul'] = $judul;
          $iii_1['data'] = $tambah;
          $iii_1['kategori'] = $info;
 
@@ -349,6 +350,7 @@ class KuesionerCtrl extends Controller{
 
             array_push($tambah, number_format(($iii_2_a_array[$i]/$iii_2_a_total)*100,2)) ;
          }
+         $iii_2_a['judul'] = $judul;
          $iii_2_a['data'] = $tambah;
          $iii_2_a['kategori'] = $info;
 
@@ -419,6 +421,7 @@ class KuesionerCtrl extends Controller{
             $tambah[$i]['name'] = $info[$i];
             $tambah[$i]['y'] = number_format(($iii_4_array[$i]/$iii_4_total)*100,2);
          }
+         $iii_4['judul'] = $judul;
          $iii_4['data'] = $tambah;
          $iii_4['kategori'] = $info;
 
@@ -459,6 +462,7 @@ class KuesionerCtrl extends Controller{
 
             array_push($tambah, number_format(($iii_5_a_array[$i]/$iii_5_a_total)*100,2)) ;
          }
+         $iii_5['judul'] = $judul;
          $iii_5['data'] = $tambah;
          $iii_5['kategori'] = $info;
 
@@ -500,6 +504,7 @@ class KuesionerCtrl extends Controller{
             $tambah[$i]['name'] = $info[$i];
             $tambah[$i]['y'] = number_format(($iii_6_array[$i]/$iii_6_total)*100,2);
          }
+         $iii_6['judul'] = $judul;
          $iii_6['data'] = $tambah;
          $iii_6['kategori'] = $info;
 

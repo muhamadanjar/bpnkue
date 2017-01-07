@@ -2,7 +2,8 @@
 
 @section('content')
 <div class="container">
-	<div class="row">
+
+    <div class="row">
         <div class="col-md-8">
             <div class="panel panel-default">
                 <div class="panel-heading">Jumlah Karyawan</div>
@@ -179,13 +180,17 @@
         	<div id="chart_pangan"></div>
         </div>
     </div>
+    
 
     <!--Bagian 3-->
+
+
+
 
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-primary">
-                <div class="panel-heading">Apakah Saudara sudah pernah mendapatkan informasi mengenai Standar Nasional Indonesia (SNI)?</div>
+                <div class="panel-heading">{{$iii_1['judul']}}</div>
                 <div class="panel-body">
                     <table class="table">
                         
@@ -300,7 +305,7 @@
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-primary">
-                <div class="panel-heading">Bagaimana pemahaman Saudara terhadap SNI</div>
+                <div class="panel-heading">{{$iii_5['judul']}}</div>
                 <div class="panel-body">
                     <table class="table">
                         
@@ -329,7 +334,7 @@
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-primary">
-                <div class="panel-heading">Bagaimana pemahaman Saudara terhadap SNI</div>
+                <div class="panel-heading">{{$iii_6['judul']}}</div>
                 <div class="panel-body">
                     <table class="table">
                         
@@ -470,13 +475,52 @@
             <div id="chart_iii_11"></div>
         </div>
     </div>
-	
+
 	
 </div>
 
 <script type="text/javascript">
 $(function () {
+
+    Highcharts.theme = {
+        colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', 
+                 '#FF9655', '#FFF263', '#6AF9C4'],
+        chart: {
+            backgroundColor: {
+                linearGradient: [0, 0, 500, 500],
+                stops: [
+                    [0, 'rgb(255, 255, 255)'],
+                    [1, 'rgb(240, 240, 255)']
+                ]
+            },
+        },
+        title: {
+            style: {
+                color: '#000',
+                font: 'bold 16px "Trebuchet MS", Verdana, sans-serif'
+            }
+        },
+        subtitle: {
+            style: {
+                color: '#666666',
+                font: 'bold 12px "Trebuchet MS", Verdana, sans-serif'
+            }
+        },
+
+        legend: {
+            itemStyle: {
+                font: '9pt Trebuchet MS, Verdana, sans-serif',
+                color: 'black'
+            },
+            itemHoverStyle:{
+                color: 'gray'
+            }   
+        }
+    };
+    //Highcharts.setOptions(Highcharts.theme);
     Highcharts.chart('chart_i7', {
+        colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', 
+                 '#FF9655', '#FFF263', '#6AF9C4'],
         chart: {
             type: 'bar'
         },
@@ -487,8 +531,10 @@ $(function () {
                 dataLabels: {
                     enabled: false
                 },
-                showInLegend: false
-            }
+                showInLegend: false,
+
+            },
+
         },
      
         xAxis: {
@@ -742,6 +788,8 @@ $(function () {
         chart: {
             type: 'pie'
         },
+        colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', 
+                 '#FF9655', '#FFF263', '#6AF9C4'],
         plotOptions: {
             pie: {
                 allowPointSelect: true,
@@ -800,6 +848,8 @@ $(function () {
         chart: {
             type: 'pie'
         },
+        colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', 
+                 '#FF9655', '#FFF263', '#6AF9C4'],
         plotOptions: {
             pie: {
                 allowPointSelect: true,
@@ -815,7 +865,7 @@ $(function () {
         },
 
         title: {
-            text: 'III 4'  
+            text: 'III 6'  
         },
         series: [{
             data: <?=json_encode($iii_6['data'],JSON_NUMERIC_CHECK)?>       
@@ -844,7 +894,7 @@ $(function () {
         },
 
         title: {
-            text: 'III 4'  
+            text: 'III 7'  
         },
         series: [{
             data: <?=json_encode($iii_7['data'],JSON_NUMERIC_CHECK)?>       
