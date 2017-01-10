@@ -27,6 +27,8 @@ Route::get('/backend', function() {
 
 
 Auth::routes();
+Route::get('profile','UserCtrl@getProfil');
+
 Route::get('excel','ExcelCtrl@getIndex');
 Route::post('excel/import','ExcelCtrl@postQueryBagianSatu');
 Route::get('excel/sheets','ExcelCtrl@getSheets');

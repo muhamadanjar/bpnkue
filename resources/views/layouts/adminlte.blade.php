@@ -30,6 +30,8 @@
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 
+  <link rel="stylesheet" type="text/css" href="{{ asset('vendor/datatables/css/jquery.datatables.min.css') }}">
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -37,7 +39,7 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 </head>
-<body class="hold-transition skin-red sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
 
   <header class="main-header">
@@ -318,6 +320,10 @@
 </script>
 <!-- Bootstrap 3.3.6 -->
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script type="text/javascript" charset="utf8" src="{{ asset('vendor/datatables/js/jquery.datatables.min.js')}}"></script>
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="{{ asset('adminlte/plugins/morris/morris.min.js')}}"></script>
@@ -344,8 +350,9 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('adminlte/plugins/chartjs/Chart.min.js')}}"></script>
 <script src="{{ asset('adminlte/dist/js/pages/dashboard.js')}}"></script>
-<script src="{{ asset('adminlte/dist/js/pages/dashboard2.js')}}"></script>
+
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('adminlte/dist/js/demo.js')}}"></script>
+<script src="{{ asset('bpn.js')}}"></script>
 </body>
 </html>

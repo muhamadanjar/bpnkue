@@ -38,7 +38,7 @@
 							<ul class="dropdown-menu icons-right dropdown-menu-right">
 								<li data-form="#frmKuesioner-{{ $v->id }}" data-title="Kuesioner" 
 								data-message="Kuesioner">
-									<a class = "formConfirm" href="#"><i class="icon-info"></i> Buka</a>
+									<a class="formConfirm" href="#"><i class="icon-info"></i> Buka</a>
 								</li>
 								<form method="get" 
 									action="#"
