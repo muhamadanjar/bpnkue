@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.adminlte')
 @section('content')
 
 	<div class="container">
@@ -34,10 +34,10 @@
 	            <td>
 	            	
 	            	<div class="btn-group">
-					    <button data-toggle="dropdown" class="btn btn-icon btn-success dropdown-toggle" type="button"><i class="icon-cog4"></i></button>
+					    <button data-toggle="dropdown" class="btn btn-icon btn-success dropdown-toggle" type="button"><i class="icon-cog4 caret"></i></button>
 							<ul class="dropdown-menu icons-right dropdown-menu-right">
 								<li data-form="#frmKuesioner-{{ $v->id }}" data-title="Kuesioner" 
-								data-message="Are you sure you want to hapus layer ?">
+								data-message="Kuesioner">
 									<a class = "formConfirm" href="#"><i class="icon-info"></i> Buka</a>
 								</li>
 								<form method="get" 

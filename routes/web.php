@@ -18,7 +18,7 @@ Route::get('create','UserCtrl@create_dua');
 Route::get('/backend', function() {
  
     if (Gate::check('access.backend')) {
-        return view('backend');
+        return view('excelImport');
     }
  
     return abort(403);

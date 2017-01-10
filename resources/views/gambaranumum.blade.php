@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.adminlte')
 
 @section('content')
 <div class="container">
@@ -11,6 +11,7 @@
                 	<table class="table">
 						
 						<tr>
+                            <th>#</th>
 							<th>Frekuensi</th>
 							<th>Presentasi</th>
 
@@ -72,6 +73,7 @@
                 	<table class="table">
 						
 						<tr>
+                            <th>#</th>
 							<th>Frekuensi</th>
 							<th>Presentasi</th>
 
@@ -195,6 +197,7 @@
                     <table class="table">
                         
                         <tr>
+                            <th>#</th>
                             <th>Frekuensi</th>
                             <th>Presentasi</th>
 
@@ -223,6 +226,7 @@
                     <table class="table">
                         
                         <tr>
+                            <th>#</th>
                             <th>Frekuensi</th>
                             <th>Presentasi</th>
 
@@ -252,6 +256,7 @@
                     <table class="table">
                         
                         <tr>
+                            <th>#</th>
                             <th>Frekuensi</th>
                             <th>Presentasi</th>
 
@@ -281,6 +286,7 @@
                     <table class="table">
                         
                         <tr>
+                            <th>#</th>
                             <th>Frekuensi</th>
                             <th>Presentasi</th>
 
@@ -310,6 +316,7 @@
                     <table class="table">
                         
                         <tr>
+                            <th>#</th>
                             <th>Frekuensi</th>
                             <th>Presentasi</th>
 
@@ -339,6 +346,7 @@
                     <table class="table">
                         
                         <tr>
+                            <th>#</th>
                             <th>Frekuensi</th>
                             <th>Presentasi</th>
 
@@ -368,6 +376,7 @@
                     <table class="table">
                         
                         <tr>
+                            <th>#</th>
                             <th>Frekuensi</th>
                             <th>Presentasi</th>
 
@@ -397,6 +406,7 @@
                     <table class="table">
                         
                         <tr>
+                            <th>#</th>
                             <th>Frekuensi</th>
                             <th>Presentasi</th>
 
@@ -426,6 +436,7 @@
                     <table class="table">
                         
                         <tr>
+                            <th>#</th>
                             <th>Frekuensi</th>
                             <th>Presentasi</th>
 
@@ -455,6 +466,7 @@
                     <table class="table">
                         
                         <tr>
+                            <th>#</th>
                             <th>Frekuensi</th>
                             <th>Presentasi</th>
 
