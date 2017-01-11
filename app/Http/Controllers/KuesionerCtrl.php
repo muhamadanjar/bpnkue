@@ -12,6 +12,12 @@ class KuesionerCtrl extends Controller{
    		return view('kuesioner')->with('kuesioner_satu',$kuesioner_satu)->with('kuesioner_dua',$kuesioner_dua)->with('kuesioner_tiga',$kuesioner_tiga);
    	}
 
+      public function getIndexVersiDua($value=''){
+         $kuesioner =  \DB::table('kuesioner_umk')->get();
+         return view('kuesioner')->with('kuesioner',$kuesioner);
+      }
+
+
    	public function getGambaranUmum(){
    		$i_7 = $this->getBagianSatuJmlKaryawan();
    		$json_i_7 = ($i_7);
@@ -46,15 +52,9 @@ class KuesionerCtrl extends Controller{
 
          $iii_10 = $this->getKendalaPengajuanSertifikasiSNI();
          $json_iii_10 = ($iii_10);
-
          $iii_11 = $this->getNilaiTambahSetelahSertifikasi();
          $json_iii_11 = ($iii_11);
 
-         
-         
-         
-
-         
    		
    		
    		return view('gambaranumum')
@@ -82,7 +82,7 @@ class KuesionerCtrl extends Controller{
    	//Bagian 1
 
    	public function getBagianSatuJmlKaryawan($value=''){
-   		$bagiansatu_jumlahkaryawan = 'Jumlah karyawan';
+   		$judul = 'Jumlah karyawan';
    		$i7 = array();
    		$i7_1_4 = \DB::table('kuesioner_bagian_satu_repos')
    			->select('i_7')
@@ -113,6 +113,7 @@ class KuesionerCtrl extends Controller{
    			$i7['hasil'][$i]['presentase'] = number_format(($i7_array[$i]/$i7_total)*100,2);
             array_push($tambah, number_format(($i7_array[$i]/$i7_total)*100,2)) ;
    		}
+         $i7['judul'] = $judul;
          $i7['data'] = $tambah;
          $i7['kategori'] = $info;
 
@@ -143,6 +144,7 @@ class KuesionerCtrl extends Controller{
             $tambah[$i]['name'] = $info[$i];
             $tambah[$i]['y'] = number_format(($i9_array[$i]/$i9_total)*100,2);
    		}
+         $i9['judul'] = $judul;
          $i9['data'] = $tambah;
          $i9['kategori'] = $info;
    		return $i9;
@@ -175,6 +177,7 @@ class KuesionerCtrl extends Controller{
    			$i10['hasil'][$i]['presentase'] = number_format(($i10_array[$i]/$i10_total)*100,2);
             array_push($tambah, number_format(($i10_array[$i]/$i10_total)*100,2)) ;
    		}
+         $i10['judul'] = $judul;
          $i10['data'] = $tambah;
          $i10['kategori'] = $info;
 
@@ -206,6 +209,7 @@ class KuesionerCtrl extends Controller{
             $tambah[$i]['name'] = $info[$i];
             $tambah[$i]['y'] = number_format(($i12_array[$i]/$i12_total)*100,2);
    		}
+         $i12['judul'] = $judul;
          $i12['data'] = $tambah;
          $i12['kategori'] = $info;
 
@@ -239,6 +243,7 @@ class KuesionerCtrl extends Controller{
             $tambah[$i]['y'] = number_format(($i13_array[$i]/$i13_total)*100,2);
 
    		}
+         $i13['judul'] = $judul;
          $i13['data'] = $tambah;
          $i13['kategori'] = $info;
 
@@ -270,6 +275,7 @@ class KuesionerCtrl extends Controller{
             $tambah[$i]['name'] = $info[$i];
             $tambah[$i]['y'] = number_format(($pangan_array[$i]/$pangan_total)*100,2);
    		}
+         $pangan['judul'] = $judul;
          $pangan['data'] = $tambah;
          $pangan['kategori'] = $info;
 

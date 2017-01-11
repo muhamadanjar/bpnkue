@@ -25,9 +25,23 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="{{ url('kuesioner')}}"><i class="fa fa-circle-o"></i> List Kuesioner</a></li>
+                <li><a href="{{ url('kuesioner/gambaranumum')}}"><i class="fa fa-circle-o"></i> Gambaran Umum</a></li>
               </ul>
             </li>
             <li><a href="{{ url('excel')}}"><i class="fa fa-circle-o"></i> Excel</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-share"></i> <span>Pengaturan</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('pengaturan/user') }}"><i class="fa fa-circle-o"></i> User</a></li>
+            
+            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
           </ul>
         </li>
           

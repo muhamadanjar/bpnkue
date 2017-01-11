@@ -14,83 +14,111 @@ class KuesionerUmk extends Migration
     public function up()
     {
         Schema::create('kuesioner_umk', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nama_umk');
-            $table->string('nama_pemilik');
-            $table->text('alamat_perusahaan');
-            $table->string('nohp_telp');
-            $table->string('email');
-            $table->string('alamat_website');
-            $table->string('jumlah_karyawan',10);
-            $table->string('pembagian_pekerjaan',10);
-            $table->string('umkm_legalitas',10);
-            $table->string('legalitas_dimiliki',10);
-            $table->string('legalitas_dimiliki_ket')->nullable();
-            $table->string('produk_utama_umkm');
-            $table->string('produk_utama_umkm_merk_terdaftar_kememhuk_ham',10);
-            $table->string('produk_utama_umkm_merk_terdaftar_kememhuk_ham_noreg')->nullable();
-            $table->string('ijin_edar',10);
-            $table->string('ijin_edar_berupa')->nullable();
-            $table->string('rata_volume_produk_pertahun');
-            $table->string('rata_nilai_produk_pertahun');
-            $table->string('area_pemasaran_produk')->comment('Pemasaran untuk Produk');
+            $table->string('nama_input')->nullable();
+            $table->string('kode')->nullable();
+            $table->string('nomor_kuesioner')->nullable();
+            $table->string('nomor_bsn')->nullable();
+            $table->string('nama_surveyor')->nullable();
+            $table->date('tgl_survey')->nullable();
+            $table->string('propinsi')->nullable();
+            $table->string('i_1')->nullable()->comment('Nama UMKM');
+            $table->string('i_2')->nullable()->comment('Nama Pemilik');
+            $table->string('i_3')->nullable()->comment('Alamat Perusahaan');
+            $table->string('i_4')->nullable()->comment('No HP/Telepon');
+            $table->string('i_5')->nullable()->comment('Alamat E-mail');
+            $table->string('i_6')->nullable()->comment('Alamat Website');
+            $table->string('i_7')->nullable()->comment('Jumlah Karyawan');
+            $table->string('i_8')->nullable()->comment('Dalam melakukan proses usahanya, sudah dilakukan pembagian pekerjaan untuk masing-masing karyawan (Seperti bagian administrasi, produksi, pemasaran, dll) ');
+            $table->string('i_9')->nullable()->comment('Apakah UMKM sudah mempunyai legalitas usaha');
+            $table->string('i_10')->nullable()->comment('Apabila jabawan butir b sudah, legalitas yang dimiliki berupa');
+            $table->string('i_10_a')->nullable()->comment('Nomor Registrasi TDP/IUI/Lainnya');
+            $table->string('i_10_b')->nullable()->comment('Lampiran Copy TDP/IUI/Lainnya');
+            $table->string('i_11')->nullable()->comment('Sebutkan produk yang dihasilkan oleh UMKM Saudara, dan sebutkan mana yang merupakan produk utama? ');
+            $table->string('i_11_a')->nullable()->comment('Lampiran foto Produk');
+            $table->string('i_12')->nullable()->comment('Apakah Produk yang dihasilkan sudah mempunyai Merkyang terdaftar di Kementerian Hukum dan HAM');
+            $table->string('i_12_a')->nullable()->comment('Nomor Registrasi Merk');
+            $table->string('i_13')->nullable()->comment('Apabila produk Saudara sudah mempunyai ijin edar?');
+            $table->string('i_13_a')->nullable()->comment('Keterangan lain jika sudah mempunyai ijin edar');
+            $table->string('i_14')->nullable()->comment('Berapakah rata-rata pertahun volume produksi untuk produk utama yang Saudara');
+            $table->string('i_15')->nullable()->comment('Berapakah rata-rata pertahun nilai produksi untuk produk utama yang Saudara hasilkan:');
+            $table->string('i_16')->nullable()->comment('Mohon disebutkan area pemasaran untuk produk Saudara:');
+            $table->string('jenis_umk')->nullable();
 
-            //Tingkat Implementasi SNI
+            $table->string('ii_1')->nullable()->comment('');
+            $table->string('ii_1_a')->nullable()->comment('');
+            $table->string('ii_2')->nullable()->comment('');
+            $table->string('ii_2_a')->nullable()->comment('');
+            $table->string('ii_3')->nullable()->comment('');
+            $table->string('ii_3_a')->nullable()->comment('');
+            $table->string('ii_3_b')->nullable()->comment('');
+            $table->string('ii_3_c')->nullable()->comment('');
+            $table->string('ii_3_d')->nullable()->comment('');
+            $table->string('ii_3_e')->nullable()->comment('');
+            $table->string('ii_3_e_a')->nullable()->comment('');
+            $table->string('ii_4')->nullable()->comment('');
+            $table->string('ii_5')->nullable()->comment('');
+            $table->string('ii_6')->nullable()->comment('');
+            $table->string('ii_6_a')->nullable()->comment('');
+            $table->string('ii_7_a')->nullable()->comment('');
+            $table->string('ii_7_b')->nullable()->comment('');
+            $table->string('ii_7_c')->nullable()->comment('');
+            $table->string('ii_7_d')->nullable()->comment('');
+            $table->string('ii_7_d_a')->nullable()->comment('');
+            $table->string('ii_7_e_a')->nullable()->comment('');
+            $table->string('ii_8')->nullable()->comment('');
+            $table->string('ii_8_a')->nullable()->comment('');
+            $table->string('ii_8_b')->nullable()->comment('');
+            $table->string('ii_8_c')->nullable()->comment('');
+            $table->string('ii_9')->nullable()->comment('');
+            $table->string('ii_9_a')->nullable()->comment('');
 
-            $table->string('pembeli_mensyaratkan_standar_produk',10)->comment('Pemasaran untuk Produk');
-            $table->string('pembeli_mensyaratkan_standar_produk_ket')->nullable()
-                ->comment('Pemasaran untuk Produk');
-            $table->string('umkm_menerapkan_standar_produk',10)->comment('Pemasaran untuk Produk');
-            $table->string('umkm_menerapkan_standar_produk_ket')->nullable()
-                ->comment('Pemasaran untuk Produk');
-            $table->string('umkm_menerapkan_sistem_mutu',10)->comment('Pemasaran untuk Produk');
-            $table->string('umkm_menerapkan_sistem_mutu_ket')->nullable()
-                ->comment('Pemasaran untuk Produk');
-            $table->string('umkm_mempunyai_prosedur_proses_produksi',10)->comment('Pemasaran untuk Produk');
-            $table->string('diagram_alur_proses_produksi')->nullable();
-            $table->string('produk_pengujian',10)->comment('Produk yang dihasilkan pernah dilakukan pengujian di lab');
-            $table->string('produk_pengujian_ket')->nullable()
-                ->comment('Produk yang dihasilkan pernah dilakukan pengujian di lab keterangan');
-            $table->string('sertifikasi_dimiliki',60);
-            $table->string('sertifikasi_dimiliki_tahun_penerbitan',10)->nullable();
-            $table->string('sertifikasi_dimiliki_lembaga_pernerbit',10)->nullable();
-            $table->string('umkm_mendapat_bimbingan_sni',10);
-            $table->string('umkm_mendapat_bimbingan_sni_tahun')->nullable();
-            $table->string('umkm_mendapat_bimbingan_sni_instansi')->nullable();
-            $table->string('umkm_mendapat_bimbingan_sni_bentuk_bimbingan')->nullable();
-            $table->string('bimbingan_memberikan_manfaat',10)->nullable();
-            $table->string('bimbingan_memberikan_manfaat_ket')->nullable();
 
-            //Kendala Penerapan SNI
+            $table->string('iii_1')->nullable()
+            ->comment('Apakah Saudara sudah pernah mendapatkan informasi mengenai Standar Nasional Indonesia (SNI)?');
+            $table->string('iii_2_a')->nullable()
+            ->comment('Jika No. 1 jawaban Saudara Sudah, dari mana Saudara mendapatkan informasi tentang SNI tersebut? Internet');
+            $table->string('iii_2_b')->nullable()
+            ->comment('Jika No. 1 jawaban Saudara Sudah, dari mana Saudara mendapatkan informasi tentang SNI tersebut? Layanan');
+            $table->string('iii_2_c')->nullable()->comment('');
+            $table->string('iii_2_c_a')->nullable()->comment('');
+            $table->string('iii_2_d')->nullable()->comment('');
+            $table->string('iii_2_d_a')->nullable()->comment('');
+            $table->string('iii_2_e')->nullable()->comment('');
+            $table->string('iii_2_e_a')->nullable()->comment('');
+            $table->string('iii_3')->nullable()->comment('');
+            $table->string('iii_4')->nullable()->comment('');
+            $table->string('iii_5_a')->nullable()->comment('');
+            $table->string('iii_5_b')->nullable()->comment('');
+            $table->string('iii_5_c')->nullable()->comment('');
+            $table->string('iii_5_c_a')->nullable()->comment('');
+            $table->string('iii_5_d')->nullable()->comment('');
+            $table->string('iii_5_d_a')->nullable()->comment('');
+            $table->string('iii_6')->nullable()->comment('');
+            $table->string('iii_7')->nullable()->comment('');
+            
+            $table->string('iii_8')->nullable()->comment('');
+            $table->string('iii_8_a')->nullable()->comment('');
+            $table->string('iii_8_b')->nullable()->comment('');
+            $table->string('iii_8_c')->nullable()->comment('');
+            $table->string('iii_8_d')->nullable()->comment('');
+            $table->string('iii_8_d_a')->nullable()->comment('');
+            $table->string('iii_9')->nullable()->comment('');
+            $table->string('iii_9_a')->nullable()->comment('');
+            $table->string('iii_10_a')->nullable()->comment('');
+            $table->string('iii_10_b')->nullable()->comment('');
+            $table->string('iii_10_c')->nullable()->comment('');
+            $table->string('iii_10_d')->nullable()->comment('');
+            $table->string('iii_10_d_a')->nullable()->comment('');
 
-            $table->string('mendapatkan_info_sni',10);
-            $table->string('mendapatkan_info_sni_dari',10)->nullable();
-            $table->string('mendapatkan_info_sni_dari_ket')->nullable();
+            $table->string('iii_11_a')->nullable()->comment('');
+            $table->string('iii_11_b')->nullable()->comment('');
+            $table->string('iii_11_c')->nullable()->comment('');
+            $table->string('iii_11_d')->nullable()->comment('');
+            $table->string('iii_11_e')->nullable()->comment('');
+            $table->string('iii_11_f')->nullable()->comment('');
+            $table->string('iii_11_f_a')->nullable()->comment('');
 
-            $table->string('pemahaman_sni',10);
-            $table->string('mendapatkan_dokumen_sni',10);
-            $table->string('mendapatkan_dokumen_sni_dari',10)->nullable();
-            $table->string('mendapatkan_dokumen_sni_dari_ket')->nullable();
-
-            $table->string('harga_dokumen_sni',10);
-            $table->string('sni_mudah_diterapkan_umkm',10);
-            $table->string('kendala_penerapan_sni',10);
-            $table->string('kendala_penerapan_sni_ket')->nullable();
-
-            $table->string('sudah_mengajukan_sertifikasi_sni',10);
-            $table->string('sudah_mengajukan_sertifikasi_ket')->nullable();
-            $table->string('kendala_mengajukan_sertifikasi',10);
-            $table->string('kendala_mengajukan_sertifikasi_ket')->nullable();
-
-            $table->string('nilai_tambah_mendapatkan_sertifikasi',10);
-            $table->string('nilai_tambah_mendapatkan_sertifikasi_ket')->nullable();
-
-            $table->string('masukan_bsn');
-
-            $table->string('no_bsn');
-            $table->string('diisi_oleh_nama');
-            $table->string('diisi_oleh_tgl');
-            $table->string('diisi_oleh_provinsi');
+            $table->string('iv_1')->comment('Masukan untuk BSN')->nullable();
             
             $table->timestamps();
         });

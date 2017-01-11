@@ -1,12 +1,12 @@
 @extends('layouts.adminlte')
 
 @section('content')
-<div class="container">
+
 
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-default">
-                <div class="panel-heading">Jumlah Karyawan</div>
+                <div class="panel-heading">{{$i7['judul']}}</div>
                 <div class="panel-body">
                 	<table class="table">
 						
@@ -38,7 +38,7 @@
     <div class="row">
         <div class="col-md-8">
             <div class="panel panel-default">
-                <div class="panel-heading">Apakah UMKM sudah mempunyai legalitas usaha</div>
+                <div class="panel-heading">{{$i9['judul']}}</div>
                 <div class="panel-body">
                 	<table class="table">
 						
@@ -80,6 +80,7 @@
 						</tr>
 						@foreach($i10['hasil'] as $i10_k => $i10_v)
 						<tr>
+                            <td><b><i>{{ $i10['kategori'][$i10_k] }}</i></b></td>
 							<td>{{ $i10_v['frekuensi'] }}</td>
 							<td>{{ $i10_v['presentase'] }} %</td>
 
@@ -185,8 +186,6 @@
     
 
     <!--Bagian 3-->
-
-
 
 
     <div class="row">
@@ -487,10 +486,11 @@
             <div id="chart_iii_11"></div>
         </div>
     </div>
-
 	
-</div>
 
+@endsection
+
+@section('js_tambahan')
 <script type="text/javascript">
 $(function () {
 
@@ -558,6 +558,9 @@ $(function () {
         series: [{
             data: [<?=implode(',', $i7['data'])?>]        
         }],
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+        },
         credits: {
             enabled:false,
         }
@@ -969,6 +972,9 @@ $(function () {
         series: [{
             data: [<?=implode(',', $iii_10['data'])?>]        
         }],
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+        },
         credits: {
             enabled:false,
         }
@@ -983,7 +989,8 @@ $(function () {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
-                    enabled: false
+                    enabled: false,
+
                 },
                 showInLegend: false
             }
@@ -995,6 +1002,9 @@ $(function () {
         title: {
             text: 'III 11'  
         },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+        },
         series: [{
             data: [<?=implode(',', $iii_11['data'])?>]        
         }],
@@ -1005,4 +1015,4 @@ $(function () {
     
 });
 </script>
-@stop
+@endsection
