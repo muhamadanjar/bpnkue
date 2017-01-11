@@ -104,7 +104,7 @@
     <!-- Main content -->
     <section class="content">
       @yield('content')
-      
+      @include('vendor.modal')
     </section>
     <!-- /.content -->
   </div>
@@ -348,7 +348,7 @@
 <!-- AdminLTE App -->
 <script src="{{ asset('adminlte/dist/js/app.min.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('adminlte/plugins/chartjs/Chart.min.js')}}"></script>
+
 <script src="{{ asset('adminlte/dist/js/pages/dashboard.js')}}"></script>
 
 <!-- AdminLTE for demo purposes -->
