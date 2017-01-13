@@ -42,6 +42,7 @@ class KuesionerBagianDua extends Migration
             $table->string('ii_7_d')->nullable()->comment('');
             $table->string('ii_7_d_a')->nullable()->comment('');
             $table->string('ii_7_e_a')->nullable()->comment('');
+            $table->string('ii_7_e_b')->nullable()->comment('');
             $table->string('ii_8')->nullable()->comment('');
             $table->string('ii_8_a')->nullable()->comment('');
             $table->string('ii_8_b')->nullable()->comment('');

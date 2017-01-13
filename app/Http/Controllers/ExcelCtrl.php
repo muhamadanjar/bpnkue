@@ -54,10 +54,10 @@ class ExcelCtrl extends Controller{
         foreach($rowIterator as $row){
             $cellIterator = $row->getCellIterator();
             $cellIterator->setIterateOnlyExistingCells(false); // Loop all cells, even if it is not set
-            if(1 == $row->getRowIndex ()) continue;//skip first row
-            if(2 == $row->getRowIndex ()) continue;//skip first row
-            if(3 == $row->getRowIndex ()) continue;//skip first row
-            if(4 == $row->getRowIndex ()) continue;//skip first row
+            if(1 == $row->getRowIndex()) continue;//skip first row
+            if(2 == $row->getRowIndex()) continue;//skip first row
+            if(3 == $row->getRowIndex()) continue;//skip first row
+            if(4 == $row->getRowIndex()) continue;//skip first row
             
             
             $rowIndex = $row->getRowIndex ();
@@ -280,6 +280,129 @@ class ExcelCtrl extends Controller{
         
     }
 
+    public function QueryKuesioner($dataArr){
+        $array = array('info'=>false);
+        try{
+            foreach($dataArr as $val){
+                \DB::table('kuesioner_umk')->insert([
+                    [
+                        'nama_input' => $val['A'],
+                        'kode' => $val['B'], 
+                        'nomor_kuesioner' => $val['C'],
+                        'nomor_bsn' => $val['D'],
+                        'nama_surveyor' => $val['E'],
+                        'tgl_survey' => date('Y-m-d',strtotime($val['F'])),
+                        'propinsi' => $val['G'],
+
+                        'i_1' => $val['H'],
+                        'i_2' => $val['I'],
+                        'i_3' => $val['J'],
+                        'i_4' => $val['K'],
+                        'i_5' => $val['L'],
+                        'i_6' => $val['M'],
+                        'i_7' => $val['N'],
+                        'i_8' => $val['O'],
+                        'i_9' => $val['P'],
+                        'i_10' => $val['Q'],
+                        'i_10_a' => $val['R'],
+                        'i_10_b' => $val['S'],
+                        'i_11' => $val['Z'],
+                        'i_11_a' => $val['AA'],
+                        'i_12' => $val['AB'],
+                        'i_12_a' => $val['AC'],
+                        'i_13' => $val['AD'],
+                        'i_13_a' => $val['AE'],
+                        'i_14' => $val['AF'],
+                        'i_15' => $val['AG'],
+                        'i_16' => $val['AH'],
+                        'jenis_umk' => $val['AI'],
+
+                        'ii_1' => $val['AJ'],
+                        'ii_1_a' => $val['AK'],
+                        'ii_2' => $val['AL'],
+                        'ii_2_a' => $val['AM'],
+                        'ii_3' => $val['AN'],
+                        'ii_3_a' => $val['AO'],
+                        'ii_3_b' => $val['AP'],
+                        'ii_3_c' => $val['AQ'],
+                        'ii_3_d' => $val['AR'],
+                        'ii_3_e' => $val['AS'],
+                        'ii_3_e_a' => $val['AT'],
+                        'ii_4' => $val['AU'],
+                        'ii_5' => $val['AV'],
+                        'ii_6' => $val['AW'],
+                        'ii_6_a' => $val['AX'],
+                        'ii_7_a' => $val['AY'],
+                        'ii_7_b' => $val['AZ'],
+                        'ii_7_c' => $val['BA'],
+                        'ii_7_d' => $val['BB'],
+                        'ii_7_d_a' => $val['BC'],
+                        'ii_7_e_a' => $val['BD'],
+                        'ii_7_e_b' => $val['BE'],
+                        'ii_8' => $val['BF'],
+                        'ii_8_a' => $val['BG'],
+                        'ii_8_b' => $val['BH'],
+                        'ii_8_c' => $val['BI'],
+                        'ii_9' => $val['BJ'],
+                        'ii_9_a' => $val['BK'],
+
+                        
+
+                        'iii_1' => $val['BM'],
+                        'iii_2_a' => $val['BN'],
+                        'iii_2_b' => $val['BO'],
+                        'iii_2_c' => $val['BP'],
+                        'iii_2_c_a' => $val['BQ'],
+                        'iii_2_d' => $val['BR'],
+                        'iii_2_d_a' => $val['BS'],
+                        'iii_2_e' => $val['BT'],
+                        'iii_2_e_a' => $val['BU'],
+                        'iii_3' => $val['BV'],
+                        'iii_4' => $val['BW'],
+                        'iii_5_a' => $val['BX'],
+                        'iii_5_b' => $val['BY'],
+                        'iii_5_c' => $val['BZ'],
+                        'iii_5_c_a' => $val['CA'],
+                        'iii_5_d' => $val['CB'],
+                        'iii_5_d_a' => $val['CC'],
+                        'iii_6' => $val['CD'],
+                        'iii_7' => $val['CE'],
+                        'iii_8' => $val['CF'],
+                        'iii_8_a' => $val['CG'],
+                        'iii_8_b' => $val['CH'],
+                        'iii_8_c' => $val['CI'],
+                        'iii_8_d' => $val['CJ'],
+                        'iii_8_d_a' => $val['CK'],
+                        'iii_9' => $val['CL'],
+                        'iii_9_a' => $val['CM'],
+                        'iii_10_a' => $val['CN'],
+                        'iii_10_b' => $val['CO'],
+                        'iii_10_c' => $val['CP'],
+                        'iii_10_d' => $val['CQ'],
+                        'iii_10_d_a' => $val['CR'],
+                        'iii_11_a' => $val['CS'],
+                        'iii_11_b' => $val['CT'],
+                        'iii_11_c' => $val['CU'],
+                        'iii_11_d' => $val['CV'],
+                        'iii_11_e' => $val['CW'],
+                        'iii_11_f' => $val['CX'],
+                        'iii_11_f_a' => $val['CY'],
+                        'iv_1' => $val['CZ'],
+                    ],
+                    
+                ]);
+            }
+            $array['info'] = true;
+        }catch(Exception $e){
+            \DB::rollback();
+            $array['info'] = false;
+            throw $e;
+        }
+
+        return json_encode($array);
+        
+    }
+
     public function postQueryBagianSatu(Request $request){
         $fupload = $request->file('file');
         $vdir_upload ='files';
@@ -302,21 +425,17 @@ class ExcelCtrl extends Controller{
             $this->QueryBagianDua($data);
         }elseif ($request->bagian == 'bagian_tiga') {
             $this->QueryBagianTiga($data);
-        }else{
+        }elseif ($request->bagian == 'bagian_empat') {
             $this->QueryBagianTiga($data);
+        }elseif ($request->bagian == 'full') {
+            $this->QueryKuesioner($data);
+        }else{
+            $this->QueryKuesioner($data);
         }
         
         \File::delete($lokasi_file);
 
         return redirect('/excel');
-    }
-
-    public function postQueryBagianDua(Request $request){
-        # code...
-    }
-
-    public function postQueryBagianTiga(Request $request){
-        # code...
     }
 
     

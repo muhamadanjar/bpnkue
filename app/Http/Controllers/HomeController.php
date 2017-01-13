@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\WebCtrl;
 
 class HomeController extends Controller
 {
@@ -11,9 +12,11 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Request $r)
     {
         $this->middleware('auth');
+        $this->_setting = new WebCtrl();
+        $this->_r = $r;
     }
 
     /**
@@ -23,6 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $this->_setting->getVisitor($this->_r);
         return view('master.dashboard');
     }
 }

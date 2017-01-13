@@ -33,7 +33,7 @@
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-share"></i> <span>Pengaturan</span>
+            <i class="fa fa-cogs"></i> <span>Pengaturan</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

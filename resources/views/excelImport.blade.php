@@ -25,6 +25,8 @@
                                     <option value="bagian_satu">Bagian 1</option>
                                     <option value="bagian_dua">Bagian 2</option>
                                     <option value="bagian_tiga">Bagian 3</option>
+                                    <option value="bagian_empat">Bagian 4</option>
+                                    <option value="full">Semua</option>
                                 </select>
                             </div>
                         </div>

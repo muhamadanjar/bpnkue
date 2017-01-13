@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Gate;
 
 class KuesionerCtrl extends Controller{
    	public function getIndex($value=''){
@@ -13,8 +14,13 @@ class KuesionerCtrl extends Controller{
    	}
 
       public function getIndexVersiDua($value=''){
-         $kuesioner =  \DB::table('kuesioner_umk')->get();
-         return view('kuesioner')->with('kuesioner',$kuesioner);
+         if (Gate::check('access.backend')) {
+            $kuesioner =  \DB::table('kuesioner_umk')->get();
+            return view('master.kuesionerList')->with('kuesioner',$kuesioner);
+         }else{
+            return response('Anda tidak diijinkan untuk mengakses halaman ini.', 401);
+         }
+         
       }
 
 

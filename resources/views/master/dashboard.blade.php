@@ -65,7 +65,7 @@
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{url('admin/statistik')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
           </div>
       </div>
 
@@ -270,7 +270,7 @@
                       <!-- End Contact Item -->
                       <li>
                         <a href="#">
-                          <img class="contacts-list-img" src="dist/img/user7-128x128.jpg" alt="User Image">
+                          <img class="contacts-list-img" src="{{ asset('dist/img/user7-128x128.jpg')}}" alt="User Image">
 
                           <div class="contacts-list-info">
                                 <span class="contacts-list-name">
