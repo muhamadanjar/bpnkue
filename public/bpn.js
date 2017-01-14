@@ -17,7 +17,7 @@ $.extend({
         return result;
     }
 });
-        
+/*        
 tinymce.init({
     selector: ".tinymce_rsmmm",
             theme: "modern",
@@ -29,7 +29,7 @@ tinymce.init({
         "searchreplace wordcount visualblocks visualchars insertdatetime media nonbreaking spellchecker",
         "table contextmenu directionality emoticons paste textcolor responsivefilemanager code "
     ],*/
-    relative_urls: false,
+    /*relative_urls: false,
     browser_spellcheck : true ,
     filemanager_title:"Responsive Filemanager",
     external_filemanager_path:"http://"+window.location.hostname+"/filemanager/",
@@ -42,7 +42,7 @@ tinymce.init({
     toolbar1: "undo redo | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | styleselect",
     toolbar2: "| responsivefilemanager | image | media | link unlink anchor | print preview code  | youtube | qrcode | flickr | picasa | easyColorPicker"
 });
-
+*/
 function numeralsOnly(evt) {
     evt = (evt) ? evt : event;
     var charCode = (evt.charCode) ? evt.charCode : ((evt.keyCode) ? evt.keyCode :

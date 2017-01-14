@@ -537,7 +537,7 @@ $(function () {
             type: 'bar'
         },
         plotOptions: {
-            pie: {
+            bar: {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
@@ -590,6 +590,9 @@ $(function () {
         series: [{
             data: <?=json_encode($i9['data'],JSON_NUMERIC_CHECK)?>        
         }],
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+        },
         credits: {
             enabled:false,
         }
@@ -600,7 +603,7 @@ $(function () {
             type: 'bar'
         },
         plotOptions: {
-            pie: {
+            bar: {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
@@ -619,6 +622,9 @@ $(function () {
         series: [{
             data: [<?=implode(',', $i10['data'])?>]        
         }],
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+        },
         credits: {
             enabled:false,
         }
@@ -648,6 +654,9 @@ $(function () {
         series: [{
             data: <?=json_encode($i12['data'],JSON_NUMERIC_CHECK)?>        
         }],
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+        },
         credits: {
             enabled:false,
         }
@@ -677,6 +686,9 @@ $(function () {
         series: [{
             data: <?=json_encode($i13['data'],JSON_NUMERIC_CHECK)?>        
         }],
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+        },
         credits: {
             enabled:false,
         }
@@ -706,6 +718,9 @@ $(function () {
         series: [{
             data: <?=json_encode($pangan['data'],JSON_NUMERIC_CHECK)?>        
         }],
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+        },
         credits: {
             enabled:false,
         }
@@ -736,6 +751,9 @@ $(function () {
         series: [{
             data: <?=json_encode($iii_1['data'],JSON_NUMERIC_CHECK)?>        
         }],
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+        },
         credits: {
             enabled:false,
         }
@@ -746,7 +764,7 @@ $(function () {
             type: 'bar'
         },
         plotOptions: {
-            pie: {
+            bar: {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
@@ -765,6 +783,9 @@ $(function () {
         series: [{
             data: [<?=implode(',', $iii_2_a['data'])?>]        
         }],
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+        },
         credits: {
             enabled:false,
         }
@@ -794,6 +815,9 @@ $(function () {
         series: [{
             data: <?=json_encode($iii_3['data'],JSON_NUMERIC_CHECK)?>       
         }],
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+        },
         credits: {
             enabled:false,
         }
@@ -825,6 +849,9 @@ $(function () {
         series: [{
             data: <?=json_encode($iii_4['data'],JSON_NUMERIC_CHECK)?>       
         }],
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+        },
         credits: {
             enabled:false,
         }
@@ -835,7 +862,7 @@ $(function () {
             type: 'bar'
         },
         plotOptions: {
-            pie: {
+            bar: {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
@@ -854,6 +881,9 @@ $(function () {
         series: [{
             data: [<?=implode(',', $iii_5['data'])?>]        
         }],
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+        },
         credits: {
             enabled:false,
         }
@@ -885,6 +915,9 @@ $(function () {
         series: [{
             data: <?=json_encode($iii_6['data'],JSON_NUMERIC_CHECK)?>       
         }],
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+        },
         credits: {
             enabled:false,
         }
@@ -914,6 +947,9 @@ $(function () {
         series: [{
             data: <?=json_encode($iii_7['data'],JSON_NUMERIC_CHECK)?>       
         }],
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+        },
         credits: {
             enabled:false,
         }
@@ -924,7 +960,7 @@ $(function () {
             type: 'bar'
         },
         plotOptions: {
-            pie: {
+            bar: {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
@@ -943,6 +979,9 @@ $(function () {
         series: [{
             data: [<?=implode(',', $iii_8['data'])?>]        
         }],
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+        },
         credits: {
             enabled:false,
         }
@@ -953,7 +992,7 @@ $(function () {
             type: 'bar'
         },
         plotOptions: {
-            pie: {
+            bar: {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
@@ -985,7 +1024,7 @@ $(function () {
             type: 'bar'
         },
         plotOptions: {
-            pie: {
+            bar: {
                 allowPointSelect: true,
                 cursor: 'pointer',
                 dataLabels: {
@@ -1002,12 +1041,12 @@ $(function () {
         title: {
             text: 'III 11'  
         },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
-        },
         series: [{
             data: [<?=implode(',', $iii_11['data'])?>]        
         }],
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+        },
         credits: {
             enabled:false,
         }

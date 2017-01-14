@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Gate;
 
 class KuesionerCtrl extends Controller{
+      public function __construct($value='')
+      {
+         $this->table_utama = 'kuesioner_umk';
+      }
    	public function getIndex($value=''){
    		$kuesioner_satu =  \DB::table('kuesioner_bagian_satu')->get();
    		$kuesioner_dua =  \DB::table('kuesioner_bagian_dua')->get();
@@ -90,22 +94,22 @@ class KuesionerCtrl extends Controller{
    	public function getBagianSatuJmlKaryawan($value=''){
    		$judul = 'Jumlah karyawan';
    		$i7 = array();
-   		$i7_1_4 = \DB::table('kuesioner_bagian_satu_repos')
+   		$i7_1_4 = \DB::table($this->table_utama)
    			->select('i_7')
    			->where('i_7', '>=', 1)
    			->where('i_7', '<=', 4)
    			->count();
-   		$i7_5_19 = \DB::table('kuesioner_bagian_satu_repos')
+   		$i7_5_19 = \DB::table($this->table_utama)
    			->select('i_7')
    			->where('i_7', '>=', 5)
    			->where('i_7', '<=', 19)
    			->count();
-   		$i7_20_99 = \DB::table('kuesioner_bagian_satu_repos')
+   		$i7_20_99 = \DB::table($this->table_utama)
    			->select('i_7')
    			->where('i_7', '>=', 20)
    			->where('i_7', '<=', 99)
    			->count();
-   		$i7_lebih_100 = \DB::table('kuesioner_bagian_satu_repos')
+   		$i7_lebih_100 = \DB::table($this->table_utama)
    			->select('i_7')
    			->where('i_7', '>=', 100)
    			->count();
@@ -130,18 +134,18 @@ class KuesionerCtrl extends Controller{
    		$judul = 'Apakah UMKM sudah mempunyai legalitas usaha';
 
    		$i9 = array();
-   		$i9_belum = \DB::table('kuesioner_bagian_satu_repos')
+   		$i9_belum = \DB::table($this->table_utama)
    			->select('i_9')
    			->where('i_9',0)
    			->count();
-   		$i9_sudah = \DB::table('kuesioner_bagian_satu_repos')
+   		$i9_sudah = \DB::table($this->table_utama)
    			->select('i_9')
    			->where('i_9', 1)
    			->count();
    
    		$i9_total = ($i9_belum+$i9_sudah);
    		$i9_array = array($i9_belum,$i9_sudah);
-         $info = array('Sudah','Belum');
+         $info = array('Belum','Sudah');
          $tambah =array();
    		for ($i=0; $i < 2; $i++) { 
    			$i9['hasil'][$i]['frekuensi'] = $i9_array[$i];
@@ -161,15 +165,15 @@ class KuesionerCtrl extends Controller{
    		$judul = 'Legalitas yang Dimiliki';
 
    		$i10 = array();
-   		$i10_tdp = \DB::table('kuesioner_bagian_satu_repos')
+   		$i10_tdp = \DB::table($this->table_utama)
    			->select('i_10')
    			->where('i_10',1)
    			->count();
-   		$i10_iui = \DB::table('kuesioner_bagian_satu_repos')
+   		$i10_iui = \DB::table($this->table_utama)
    			->select('i_10')
    			->where('i_10', 2)
    			->count();
-   		$i10_lainnya = \DB::table('kuesioner_bagian_satu_repos')
+   		$i10_lainnya = \DB::table($this->table_utama)
    			->select('i_10')
    			->where('i_10', 3)
    			->count();
@@ -195,11 +199,11 @@ class KuesionerCtrl extends Controller{
    		$judul = 'Apakah Produk yang dihasilkan sudah mempunyai Merk yang terdaftar di Kementerian Hukum dan HAM';
 
    		$i12 = array();
-   		$i12_belum = \DB::table('kuesioner_bagian_satu_repos')
+   		$i12_belum = \DB::table($this->table_utama)
    			->select('i_12')
    			->where('i_12',0)
    			->count();
-   		$i12_sudah = \DB::table('kuesioner_bagian_satu_repos')
+   		$i12_sudah = \DB::table($this->table_utama)
    			->select('i_12')
    			->where('i_12', 1)
    			->count();
@@ -227,11 +231,11 @@ class KuesionerCtrl extends Controller{
    		$judul = 'Apabila produk Saudara sudah mempunyai ijin edar?';
 
    		$i13 = array();
-   		$i13_belum = \DB::table('kuesioner_bagian_satu_repos')
+   		$i13_belum = \DB::table($this->table_utama)
    			->select('i_13')
    			->where('i_13',0)
    			->count();
-   		$i13_sudah = \DB::table('kuesioner_bagian_satu_repos')
+   		$i13_sudah = \DB::table($this->table_utama)
    			->select('i_13')
    			->where('i_13', 1)
    			->count();
@@ -260,11 +264,11 @@ class KuesionerCtrl extends Controller{
    		$judul = 'Jenis produk apa yang saudara hasilkan?';
 
    		$pangan = array();
-   		$pangan_p = \DB::table('kuesioner_bagian_satu_repos')
+   		$pangan_p = \DB::table($this->table_utama)
    			->select('jenis_umk')
    			->where('jenis_umk','P')
    			->count();
-   		$pangan_n = \DB::table('kuesioner_bagian_satu_repos')
+   		$pangan_n = \DB::table($this->table_utama)
    			->select('jenis_umk')
    			->where('jenis_umk', 'N')
    			->count();
@@ -296,11 +300,11 @@ class KuesionerCtrl extends Controller{
    		$judul = 'Apakah Saudara sudah pernah mendapatkan informasi mengenai Standar Nasional Indonesia (SNI)?';
 
          $iii_1 = array();
-         $iii_1_belum = \DB::table('kuesioner_bagian_tiga')
+         $iii_1_belum = \DB::table($this->table_utama)
             ->select('iii_1')
             ->where('iii_1',0)
             ->count();
-         $iii_1_sudah = \DB::table('kuesioner_bagian_tiga')
+         $iii_1_sudah = \DB::table($this->table_utama)
             ->select('iii_1')
             ->where('iii_1', 1)
             ->count();
@@ -329,23 +333,23 @@ class KuesionerCtrl extends Controller{
          $judul = 'Jika Sudah Mendapatkan informasi produk, dari mana mendapatkan informasi tentang SNI tersebut?  ';
 
          $iii_2_a = array();
-         $iii_2_internet = \DB::table('kuesioner_bagian_tiga')
+         $iii_2_internet = \DB::table($this->table_utama)
             ->select('iii_2_a')
             ->where('iii_2_a',1)
             ->count();
-         $iii_2_layanan_bsn = \DB::table('kuesioner_bagian_tiga')
+         $iii_2_layanan_bsn = \DB::table($this->table_utama)
             ->select('iii_2_b')
             ->where('iii_2_b', 1)
             ->count();
-         $iii_2_layanan_dinas = \DB::table('kuesioner_bagian_tiga')
+         $iii_2_layanan_dinas = \DB::table($this->table_utama)
             ->select('iii_2_c')
             ->where('iii_2_c', 1)
             ->count();
-         $iii_2_balai = \DB::table('kuesioner_bagian_tiga')
+         $iii_2_balai = \DB::table($this->table_utama)
             ->select('iii_2_d')
             ->where('iii_2_d', 1)
             ->count();
-         $iii_2_lain = \DB::table('kuesioner_bagian_tiga')
+         $iii_2_lain = \DB::table($this->table_utama)
             ->select('iii_2_e')
             ->where('iii_2_e', 1)
             ->count();
@@ -373,15 +377,15 @@ class KuesionerCtrl extends Controller{
          $judul = 'Bagaimana pemahaman Saudara terhadap SNI';
 
          $iii_3 = array();
-         $iii_3_dipahami = \DB::table('kuesioner_bagian_tiga')
+         $iii_3_dipahami = \DB::table($this->table_utama)
             ->select('iii_3')
             ->where('iii_3',1)
             ->count();
-         $iii_3_sulitdipahami = \DB::table('kuesioner_bagian_tiga')
+         $iii_3_sulitdipahami = \DB::table($this->table_utama)
             ->select('iii_3')
             ->where('iii_3', 2)
             ->count();
-         $iii_3_tidaktahu = \DB::table('kuesioner_bagian_tiga')
+         $iii_3_tidaktahu = \DB::table($this->table_utama)
             ->select('iii_3')
             ->where('iii_3', 3)
             ->where('iii_3', 0)
@@ -411,11 +415,11 @@ class KuesionerCtrl extends Controller{
          $judul = 'Apakah Saudara sudah pernah mendapatkan dokumen  Standar Nasional Indonesia (SNI)?';
 
          $iii_4 = array();
-         $iii_4_belum = \DB::table('kuesioner_bagian_tiga')
+         $iii_4_belum = \DB::table($this->table_utama)
             ->select('iii_4')
             ->where('iii_4',0)
             ->count();
-         $iii_4_sudah = \DB::table('kuesioner_bagian_tiga')
+         $iii_4_sudah = \DB::table($this->table_utama)
             ->select('iii_4')
             ->where('iii_4', 1)
             ->count();
@@ -444,19 +448,19 @@ class KuesionerCtrl extends Controller{
          $judul = 'Jika sudah pernah mendapatkan dokumen SNI, dari mana mendapatkan dokumen SNI? ';
 
          $iii_5 = array();
-         $iii_5_layanan_bsn = \DB::table('kuesioner_bagian_tiga')
+         $iii_5_layanan_bsn = \DB::table($this->table_utama)
             ->select('iii_5_a')
             ->where('iii_5_a',1)
             ->count();
-         $iii_5_lembaga = \DB::table('kuesioner_bagian_tiga')
+         $iii_5_lembaga = \DB::table($this->table_utama)
             ->select('iii_5_b')
             ->where('iii_5_b', 1)
             ->count();
-         $iii_5_layanan_dinas = \DB::table('kuesioner_bagian_tiga')
+         $iii_5_layanan_dinas = \DB::table($this->table_utama)
             ->select('iii_5_c')
             ->where('iii_5_c', 1)
             ->count();
-         $iii_5_lain = \DB::table('kuesioner_bagian_tiga')
+         $iii_5_lain = \DB::table($this->table_utama)
             ->select('iii_5_d')
             ->where('iii_5_d', 1)
             ->count();
@@ -486,19 +490,19 @@ class KuesionerCtrl extends Controller{
 
 
          $iii_6 = array();
-         $iii_6_mahal = \DB::table('kuesioner_bagian_tiga')
+         $iii_6_mahal = \DB::table($this->table_utama)
             ->select('iii_6')
             ->where('iii_6',1)
             ->count();
-         $iii_6_murah = \DB::table('kuesioner_bagian_tiga')
+         $iii_6_murah = \DB::table($this->table_utama)
             ->select('iii_6')
             ->where('iii_6', 2)
             ->count();
-         $iii_6_biasa = \DB::table('kuesioner_bagian_tiga')
+         $iii_6_biasa = \DB::table($this->table_utama)
             ->select('iii_6')
             ->where('iii_6', 3)
             ->count();
-         $iii_6_tidaktahu = \DB::table('kuesioner_bagian_tiga')
+         $iii_6_tidaktahu = \DB::table($this->table_utama)
             ->select('iii_6')
             ->where('iii_6', 4)
             ->count();
@@ -527,11 +531,11 @@ class KuesionerCtrl extends Controller{
          $judul = 'Menurut Saudara, apakah SNI mudah diterapkan di UMKM Saudara?';
 
          $iii_7 = array();
-         $iii_7_tidak = \DB::table('kuesioner_bagian_tiga')
+         $iii_7_tidak = \DB::table($this->table_utama)
             ->select('iii_7')
             ->where('iii_7',0)
             ->count();
-         $iii_7_ya = \DB::table('kuesioner_bagian_tiga')
+         $iii_7_ya = \DB::table($this->table_utama)
             ->select('iii_7')
             ->where('iii_7', 1)
             ->count();
@@ -563,19 +567,19 @@ class KuesionerCtrl extends Controller{
          $judul = 'Jika tidak mudah diterapkan, apa yang menjadi kendala dalam penerapannya?';
 
          $iii_8 = array();
-         $iii_8_rumit = \DB::table('kuesioner_bagian_tiga')
+         $iii_8_rumit = \DB::table($this->table_utama)
             ->select('iii_8_a')
             ->where('iii_8_a',1)
             ->count();
-         $iii_8_diperlukanbiaya = \DB::table('kuesioner_bagian_tiga')
+         $iii_8_diperlukanbiaya = \DB::table($this->table_utama)
             ->select('iii_8_b')
             ->where('iii_8_b', 1)
             ->count();
-         $iii_8_sdm_terbatas = \DB::table('kuesioner_bagian_tiga')
+         $iii_8_sdm_terbatas = \DB::table($this->table_utama)
             ->select('iii_8_c')
             ->where('iii_8_c', 1)
             ->count();
-         $iii_8_lain = \DB::table('kuesioner_bagian_tiga')
+         $iii_8_lain = \DB::table($this->table_utama)
             ->select('iii_8_d')
             ->where('iii_8_d', 1)
             ->count();
@@ -605,19 +609,19 @@ class KuesionerCtrl extends Controller{
          $judul = 'Apa kendala dalam pengajuan sertifikasi SNI?';
 
          $iii_10 = array();
-         $iii_10_biaya = \DB::table('kuesioner_bagian_tiga')
+         $iii_10_biaya = \DB::table($this->table_utama)
             ->select('iii_10_a')
             ->where('iii_10_a',1)
             ->count();
-         $iii_10_prosedur = \DB::table('kuesioner_bagian_tiga')
+         $iii_10_prosedur = \DB::table($this->table_utama)
             ->select('iii_10_b')
             ->where('iii_10_b', 1)
             ->count();
-         $iii_10_tidakada = \DB::table('kuesioner_bagian_tiga')
+         $iii_10_tidakada = \DB::table($this->table_utama)
             ->select('iii_10_c')
             ->where('iii_10_c', 1)
             ->count();
-         $iii_10_lain = \DB::table('kuesioner_bagian_tiga')
+         $iii_10_lain = \DB::table($this->table_utama)
             ->select('iii_10_d')
             ->where('iii_10_d', 1)
             ->count();
@@ -644,27 +648,27 @@ class KuesionerCtrl extends Controller{
       {
          $judul = 'Menurut Saudara, apa nilai tambah bagi UMKM Saudara setelahmendapat sertifikasi?';
          $iii_11 = array();
-         $iii_11_omzet = \DB::table('kuesioner_bagian_tiga')
+         $iii_11_omzet = \DB::table($this->table_utama)
             ->select('iii_11_a')
             ->where('iii_11_a',1)
             ->count();
-         $iii_11_mudah = \DB::table('kuesioner_bagian_tiga')
+         $iii_11_mudah = \DB::table($this->table_utama)
             ->select('iii_11_b')
             ->where('iii_11_b', 1)
             ->count();
-         $iii_11_proses = \DB::table('kuesioner_bagian_tiga')
+         $iii_11_proses = \DB::table($this->table_utama)
             ->select('iii_11_c')
             ->where('iii_11_c', 1)
             ->count();
-         $iii_11_efesien = \DB::table('kuesioner_bagian_tiga')
+         $iii_11_efesien = \DB::table($this->table_utama)
             ->select('iii_11_d')
             ->where('iii_11_d', 1)
             ->count();
-         $iii_11_belum = \DB::table('kuesioner_bagian_tiga')
+         $iii_11_belum = \DB::table($this->table_utama)
             ->select('iii_11_e')
             ->where('iii_11_e', 1)
             ->count();
-         $iii_11_lain = \DB::table('kuesioner_bagian_tiga')
+         $iii_11_lain = \DB::table($this->table_utama)
             ->select('iii_11_f')
             ->where('iii_11_f', 1)
             ->count();

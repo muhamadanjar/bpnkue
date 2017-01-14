@@ -92,6 +92,7 @@ if( $( '#salesChart' ).length > 0 ){
   //- PIE CHART -
   //-------------
   // Get context with jQuery - using jQuery's .get() method.
+if( $( '#pieChart' ).length > 0 ){
   var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
   var pieChart = new Chart(pieChartCanvas);
   var PieData = [
@@ -164,7 +165,7 @@ if( $( '#salesChart' ).length > 0 ){
   //-----------------
   //- END PIE CHART -
   //-----------------
-
+}
   /* jVector Maps
    * ------------
    * Create a world map with markers
