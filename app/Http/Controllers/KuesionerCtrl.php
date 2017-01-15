@@ -42,6 +42,11 @@ class KuesionerCtrl extends Controller{
    		$pangan = $this->getProdukYangDihasilkan();
    		$json_pangan = ($pangan);
 
+         //Bagian 2
+         $ii_2 = $this->getUMKMSudahMenerapkanStandarProduk();
+         $json_ii_2 = ($ii_2);
+         
+
          //Bagian 3
          $iii_1 = $this->getMendapatkanSNI();
          $json_iii_1 = ($iii_1);
@@ -59,7 +64,6 @@ class KuesionerCtrl extends Controller{
          $json_iii_7 = ($iii_7);
          $iii_8 = $this->getMenjadiKendala();
          $json_iii_8 = ($iii_8);
-
          $iii_10 = $this->getKendalaPengajuanSertifikasiSNI();
          $json_iii_10 = ($iii_10);
          $iii_11 = $this->getNilaiTambahSetelahSertifikasi();
@@ -74,6 +78,9 @@ class KuesionerCtrl extends Controller{
    		->with('i12',$json_i_12)
    		->with('i13',$json_i_13)
    		->with('pangan',$json_pangan)
+
+         ->with('ii_2',$json_ii_2)
+         
 
          ->with('iii_1',$json_iii_1)
          ->with('iii_2_a',$json_iii_2_a)
@@ -293,6 +300,41 @@ class KuesionerCtrl extends Controller{
 
    	}
 
+      //Bagian 2
+
+      public function getUMKMSudahMenerapkanStandarProduk($value='')
+      {
+         $judul = 'Apakah UMKM  Saudara sudah menerapkan Standar untuk produk?';
+
+         $ii_2 = array();
+         $ii_2_belum = \DB::table($this->table_utama)
+            ->select('iii_1')
+            ->where('iii_1',0)
+            ->count();
+         $ii_2_sudah = \DB::table($this->table_utama)
+            ->select('iii_1')
+            ->where('iii_1', 1)
+            ->count();
+         
+   
+         $ii_2_total = ($ii_2_belum+$ii_2_sudah);
+
+         $ii_2_array = array($ii_2_belum,$ii_2_sudah);
+         $info = array('Belum','Sudah');
+         $tambah = array();
+         for ($i=0; $i < count($ii_2_array); $i++) { 
+            $ii_2['hasil'][$i]['frekuensi'] = $ii_2_array[$i];
+            $ii_2['hasil'][$i]['presentase'] = number_format(($ii_2_array[$i]/$ii_2_total)*100,2);
+
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($ii_2_array[$i]/$ii_2_total)*100,2);
+         }
+         $ii_2['judul'] = $judul;
+         $ii_2['data'] = $tambah;
+         $ii_2['kategori'] = $info;
+
+         return $ii_2; 
+      }
 
    	//Bagian 3
 
