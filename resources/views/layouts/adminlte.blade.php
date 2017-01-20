@@ -7,7 +7,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{asset('adminlte/plugins/bootstrap/css/bootstrap.min.css')}}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -30,7 +30,7 @@
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 
-  <link rel="stylesheet" type="text/css" href="{{ asset('vendor/datatables/css/jquery.datatables.min.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('adminlte/plugins/datatables/jquery.datatables.min.css') }}">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -319,11 +319,12 @@
   $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.6 -->
-<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script type="text/javascript" charset="utf8" src="{{ asset('vendor/datatables/js/jquery.datatables.min.js')}}"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<!--Datatables -->
+<script type="text/javascript" charset="utf8" src="{{ asset('adminlte/plugins/datatables/jquery.datatables.min.js')}}"></script>
 <!-- Morris.js charts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
 <script src="{{ asset('adminlte/plugins/morris/morris.min.js')}}"></script>

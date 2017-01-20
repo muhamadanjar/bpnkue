@@ -45,6 +45,23 @@ class KuesionerCtrl extends Controller{
          //Bagian 2
          $ii_2 = $this->getUMKMSudahMenerapkanStandarProduk();
          $json_ii_2 = ($ii_2);
+         $ii_3 = $this->getUMKMSudahMenerapkanSistemMutu();
+         $json_ii_3 = ($ii_3);
+         $ii_3_a = $this->getSistemUMKDiterapkan();
+         $json_ii_3_a = ($ii_3_a);
+         $ii_4 = $this->getSaudaraProsedurProduktif();
+         $json_ii_4 = ($ii_4);
+         $ii_6 = $this->getPernahDilakukanLab();
+         $json_ii_6 = ($ii_6);
+         $ii_7_a = $this->getMemilikiSertifikatSNI();
+         $json_ii_7_a = ($ii_7_a);
+         
+
+         
+
+         
+
+         
          
 
          //Bagian 3
@@ -80,6 +97,12 @@ class KuesionerCtrl extends Controller{
    		->with('pangan',$json_pangan)
 
          ->with('ii_2',$json_ii_2)
+         ->with('ii_3',$json_ii_3)
+         ->with('ii_3_a',$json_ii_3_a)
+         ->with('ii_4',$json_ii_4)
+         ->with('ii_6',$json_ii_6)
+         ->with('ii_7_a',$json_ii_7_a)
+         
          
 
          ->with('iii_1',$json_iii_1)
@@ -302,18 +325,17 @@ class KuesionerCtrl extends Controller{
 
       //Bagian 2
 
-      public function getUMKMSudahMenerapkanStandarProduk($value='')
-      {
+      public function getUMKMSudahMenerapkanStandarProduk($value=''){
          $judul = 'Apakah UMKM  Saudara sudah menerapkan Standar untuk produk?';
 
          $ii_2 = array();
          $ii_2_belum = \DB::table($this->table_utama)
-            ->select('iii_1')
-            ->where('iii_1',0)
+            ->select('ii_2')
+            ->where('ii_2',0)
             ->count();
          $ii_2_sudah = \DB::table($this->table_utama)
-            ->select('iii_1')
-            ->where('iii_1', 1)
+            ->select('ii_2')
+            ->where('ii_2', 1)
             ->count();
          
    
@@ -335,6 +357,184 @@ class KuesionerCtrl extends Controller{
 
          return $ii_2; 
       }
+
+      public function getUMKMSudahMenerapkanSistemMutu($value=''){
+         $judul = 'Apakah UMK  Saudara sudah menerapkan sistem mutu yang diterapkan?';
+
+         $ii_3 = array();
+         $ii_3_belum = \DB::table($this->table_utama)
+            ->select('ii_3')
+            ->where('ii_3',0)
+            ->count();
+         $ii_3_sudah = \DB::table($this->table_utama)
+            ->select('ii_3')
+            ->where('ii_3', 1)
+            ->count();
+         
+   
+         $ii_3_total = ($ii_3_belum+$ii_3_sudah);
+
+         $ii_3_array = array($ii_3_belum,$ii_3_sudah);
+         $info = array('Belum','Sudah');
+         $tambah = array();
+         for ($i=0; $i < count($ii_3_array); $i++) { 
+            $ii_3['hasil'][$i]['frekuensi'] = $ii_3_array[$i];
+            $ii_3['hasil'][$i]['presentase'] = number_format(($ii_3_array[$i]/$ii_3_total)*100,2);
+
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($ii_3_array[$i]/$ii_3_total)*100,2);
+         }
+         $ii_3['judul'] = $judul;
+         $ii_3['data'] = $tambah;
+         $ii_3['kategori'] = $info;
+
+         return $ii_3; 
+      }
+
+      public function getSistemUMKDiterapkan($value=''){
+         $judul = 'Sistem UMK yang Diterapkan';
+
+         $ii_3_a = array();
+         $ii_3_sni_9001 = \DB::table($this->table_utama)
+            ->select('ii_3_a')
+            ->where('ii_3_a',1)
+            ->count();
+         $ii_3_sistem_HACCP = \DB::table($this->table_utama)
+            ->select('ii_3_b')
+            ->where('ii_3_b', 1)
+            ->count();
+         $ii_3_tqm = \DB::table($this->table_utama)
+            ->select('iii_2_c')
+            ->where('ii_3_c', 1)
+            ->count();
+         $ii_3_sni_14k = \DB::table($this->table_utama)
+            ->select('ii_3_d')
+            ->where('ii_3_d', 1)
+            ->count();
+         $ii_3_lain = \DB::table($this->table_utama)
+            ->select('ii_3_e')
+            ->where('ii_3_e', 1)
+            ->count();
+         
+   
+         $ii_3_a_total = ($ii_3_sni_9001+$ii_3_sistem_HACCP+$ii_3_tqm+$ii_3_sni_14k+$ii_3_lain);
+
+         $ii_3_a_array = array($ii_3_sni_9001,$ii_3_sistem_HACCP,$ii_3_tqm,$ii_3_sni_14k,$ii_3_lain);
+         $info = array('Sistem Manajemen Mutu SNI ISO 9001','Sistem HACCP','Total Quality Management (TQM)','Sistem Manajemen Lingkungan SNI ISO 14000','Lainnya');
+         $tambah = array();
+         for ($i=0; $i < count($ii_3_a_array); $i++) { 
+            $ii_3_a['hasil'][$i]['frekuensi'] = $ii_3_a_array[$i];
+            $ii_3_a['hasil'][$i]['presentase'] = number_format(($ii_3_a_array[$i]/$ii_3_a_total)*100,2);
+
+            array_push($tambah, number_format(($ii_3_a_array[$i]/$ii_3_a_total)*100,2)) ;
+         }
+         $ii_3_a['judul'] = $judul;
+         $ii_3_a['data'] = $tambah;
+         $ii_3_a['kategori'] = $info;
+
+         return $ii_3_a;
+      }
+
+      public function getSaudaraProsedurProduktif($value=''){
+         $judul = 'Apakah UMK Saudara sudah mempunyai prosedur proses produksi?';
+
+         $ii_4 = array();
+         $ii_4_belum = \DB::table($this->table_utama)
+            ->select('ii_4')
+            ->where('ii_4',0)
+            ->count();
+         $ii_4_sudah = \DB::table($this->table_utama)
+            ->select('ii_4')
+            ->where('ii_4', 1)
+            ->count();
+         
+   
+         $ii_4_total = ($ii_4_belum+$ii_4_sudah);
+
+         $ii_4_array = array($ii_4_belum,$ii_4_sudah);
+         $info = array('Belum','Sudah');
+         $tambah = array();
+         for ($i=0; $i < count($ii_4_array); $i++) { 
+            $ii_4['hasil'][$i]['frekuensi'] = $ii_4_array[$i];
+            $ii_4['hasil'][$i]['presentase'] = number_format(($ii_4_array[$i]/$ii_4_total)*100,2);
+
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($ii_4_array[$i]/$ii_4_total)*100,2);
+         }
+         $ii_4['judul'] = $judul;
+         $ii_4['data'] = $tambah;
+         $ii_4['kategori'] = $info;
+
+         return $ii_4; 
+      }
+
+      public function getPernahDilakukanLab($value=''){
+         $judul = 'Apakah produk yang dihasilkan pernah dilakukan pengujian di laboratorium? ';
+
+         $ii_6 = array();
+         $ii_6_belum = \DB::table($this->table_utama)
+            ->select('ii_6')
+            ->where('ii_6',0)
+            ->count();
+         $ii_6_sudah = \DB::table($this->table_utama)
+            ->select('ii_6')
+            ->where('ii_6', 1)
+            ->count();
+         
+   
+         $ii_6_total = ($ii_6_belum+$ii_6_sudah);
+
+         $ii_6_array = array($ii_6_belum,$ii_6_sudah);
+         $info = array('Belum','Sudah');
+         $tambah = array();
+         for ($i=0; $i < count($ii_6_array); $i++) { 
+            $ii_6['hasil'][$i]['frekuensi'] = $ii_6_array[$i];
+            $ii_6['hasil'][$i]['presentase'] = number_format(($ii_6_array[$i]/$ii_6_total)*100,2);
+
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($ii_6_array[$i]/$ii_6_total)*100,2);
+         }
+         $ii_6['judul'] = $judul;
+         $ii_6['data'] = $tambah;
+         $ii_6['kategori'] = $info;
+
+         return $ii_6; 
+      }
+
+      public function getMemilikiSertifikatSNI($value=''){
+         $judul = 'Memiliki Sertifikat SNI ';
+
+         $ii_7_a = array();
+         $ii_7_a_belum = \DB::table($this->table_utama)
+            ->select('ii_7_a')
+            ->where('ii_7_a',0)
+            ->count();
+         $ii_7_a_sudah = \DB::table($this->table_utama)
+            ->select('ii_7_a')
+            ->where('ii_7_a', 1)
+            ->count();
+         
+   
+         $ii_7_a_total = ($ii_7_a_belum+$ii_7_a_sudah);
+
+         $ii_7_a_array = array($ii_7_a_belum,$ii_7_a_sudah);
+         $info = array('Belum','Sudah');
+         $tambah = array();
+         for ($i=0; $i < count($ii_7_a_array); $i++) { 
+            $ii_7_a['hasil'][$i]['frekuensi'] = $ii_7_a_array[$i];
+            $ii_7_a['hasil'][$i]['presentase'] = number_format(($ii_7_a_array[$i]/$ii_7_a_total)*100,2);
+
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($ii_7_a_array[$i]/$ii_7_a_total)*100,2);
+         }
+         $ii_7_a['judul'] = $judul;
+         $ii_7_a['data'] = $tambah;
+         $ii_7_a['kategori'] = $info;
+
+         return $ii_7_a; 
+      }
+
+      
 
    	//Bagian 3
 
