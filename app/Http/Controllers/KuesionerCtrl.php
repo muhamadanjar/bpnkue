@@ -55,6 +55,14 @@ class KuesionerCtrl extends Controller{
          $json_ii_6 = ($ii_6);
          $ii_7_a = $this->getMemilikiSertifikatSNI();
          $json_ii_7_a = ($ii_7_a);
+         $ii_7_b = $this->getMemilikiSertifikatSKP();
+         $json_ii_7_b = ($ii_7_b);
+         $ii_7_c = $this->getMemilikiSertifikatHalal();
+         $json_ii_7_c = ($ii_7_c);
+         $ii_7_d = $this->getMemilikiSertifikatLainnya();
+         $json_ii_7_d = ($ii_7_d);
+
+         
          
 
          
@@ -102,6 +110,9 @@ class KuesionerCtrl extends Controller{
          ->with('ii_4',$json_ii_4)
          ->with('ii_6',$json_ii_6)
          ->with('ii_7_a',$json_ii_7_a)
+         ->with('ii_7_b',$json_ii_7_b)
+         ->with('ii_7_c',$json_ii_7_c)
+         ->with('ii_7_d',$json_ii_7_d)
          
          
 
@@ -532,6 +543,147 @@ class KuesionerCtrl extends Controller{
          $ii_7_a['kategori'] = $info;
 
          return $ii_7_a; 
+      }
+
+      public function getMemilikiSertifikatSKP($value=''){
+         $judul = 'Memiliki Sertifikasi Sertifikat Kelayakan Pengolahan (SKP)';
+         $ii_7_b = array();
+         $ii_7_b_belum = \DB::table($this->table_utama)
+            ->select('ii_7_b')
+            ->where('ii_7_b',0)
+            ->count();
+         $ii_7_b_sudah = \DB::table($this->table_utama)
+            ->select('ii_7_b')
+            ->where('ii_7_b', 1)
+            ->count();
+         
+   
+         $ii_7_b_total = ($ii_7_b_belum+$ii_7_b_sudah);
+
+         $ii_7_b_array = array($ii_7_b_belum,$ii_7_b_sudah);
+         $info = array('Belum','Sudah');
+         $tambah = array();
+         for ($i=0; $i < count($ii_7_b_array); $i++) { 
+            $ii_7_b['hasil'][$i]['frekuensi'] = $ii_7_b_array[$i];
+            $ii_7_b['hasil'][$i]['presentase'] = number_format(($ii_7_b_array[$i]/$ii_7_b_total)*100,2);
+
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($ii_7_b_array[$i]/$ii_7_b_total)*100,2);
+         }
+         $ii_7_b['judul'] = $judul;
+         $ii_7_b['data'] = $tambah;
+         $ii_7_b['kategori'] = $info;
+
+         return $ii_7_b;
+      }
+
+      public function getMemilikiSertifikatHalal($value=''){
+         $judul = 'Memiliki Sertifikasi Halal';
+         $ii_7_c = array();
+         $ii_7_c_belum = \DB::table($this->table_utama)
+            ->select('ii_7_c')
+            ->where('ii_7_c',0)
+            ->count();
+         $ii_7_c_sudah = \DB::table($this->table_utama)
+            ->select('ii_7_c')
+            ->where('ii_7_c', 1)
+            ->count();
+         
+   
+         $ii_7_c_total = ($ii_7_c_belum+$ii_7_c_sudah);
+
+         $ii_7_c_array = array($ii_7_c_belum,$ii_7_c_sudah);
+         $info = array('Belum','Sudah');
+         $tambah = array();
+         for ($i=0; $i < count($ii_7_c_array); $i++) { 
+            $ii_7_c['hasil'][$i]['frekuensi'] = $ii_7_c_array[$i];
+            $ii_7_c['hasil'][$i]['presentase'] = number_format(($ii_7_c_array[$i]/$ii_7_c_total)*100,2);
+
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($ii_7_c_array[$i]/$ii_7_c_total)*100,2);
+         }
+         $ii_7_c['judul'] = $judul;
+         $ii_7_c['data'] = $tambah;
+         $ii_7_c['kategori'] = $info;
+
+         return $ii_7_c;
+      }
+
+      public function getMemilikiSertifikatLainnya($value=''){
+         $judul = 'Memiliki Sertifikasi Lainnya';
+         $ii_7_d = array();
+         $ii_7_d_belum = \DB::table($this->table_utama)
+            ->select('ii_7_d')
+            ->where('ii_7_d',0)
+            ->count();
+         $ii_7_d_sudah = \DB::table($this->table_utama)
+            ->select('ii_7_d')
+            ->where('ii_7_d', 1)
+            ->count();
+         
+   
+         $ii_7_d_total = ($ii_7_d_belum+$ii_7_d_sudah);
+
+         $ii_7_d_array = array($ii_7_d_belum,$ii_7_d_sudah);
+         $info = array('Belum','Sudah');
+         $tambah = array();
+         for ($i=0; $i < count($ii_7_d_array); $i++) { 
+            $ii_7_d['hasil'][$i]['frekuensi'] = $ii_7_d_array[$i];
+            $ii_7_d['hasil'][$i]['presentase'] = number_format(($ii_7_d_array[$i]/$ii_7_d_total)*100,2);
+
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($ii_7_d_array[$i]/$ii_7_d_total)*100,2);
+         }
+         $ii_7_d['judul'] = $judul;
+         $ii_7_d['data'] = $tambah;
+         $ii_7_d['kategori'] = $info;
+
+         return $ii_7_d;
+      }
+
+      public function getSertifikasiYangDimiliki($value=''){
+         $judul = 'Sertifikasi apa saja yang sudah dimiliki?';
+
+         $ss = array();
+         $ss['judul'] = $judul;
+         return $ss;
+      }
+
+      public function getUMKmendapatSNI($value=''){
+         $judul = 'Apakah UMK Saudara sudah pernah mendapat bimbingan penerapan SNI oleh instansi pemerintah atau swasta lainnya?';
+         $ii_8 = array();
+         $ii_8_belum = \DB::table($this->table_utama)
+            ->select('ii_8')
+            ->where('ii_8',0)
+            ->count();
+         $ii_8_sudah = \DB::table($this->table_utama)
+            ->select('ii_8')
+            ->where('ii_8', 1)
+            ->count();
+         
+   
+         $ii_8_total = ($ii_8_belum+$ii_8_sudah);
+
+         $ii_8_array = array($ii_8_belum,$ii_8_sudah);
+         $info = array('Belum','Sudah');
+         $tambah = array();
+         for ($i=0; $i < count($ii_8_array); $i++) { 
+            $ii_8['hasil'][$i]['frekuensi'] = $ii_8_array[$i];
+            $ii_8['hasil'][$i]['presentase'] = number_format(($ii_8_array[$i]/$ii_8_total)*100,2);
+
+            $tambah[$i]['name'] = $info[$i];
+            $tambah[$i]['y'] = number_format(($ii_8_array[$i]/$ii_8_total)*100,2);
+         }
+         $ii_8['judul'] = $judul;
+         $ii_8['data'] = $tambah;
+         $ii_8['kategori'] = $info;
+
+         return $ii_8;
+      }
+
+      public function FunctionName($value='')
+      {
+         $judul = 'Jika sudah mendapatkan bimbingan, apakah bentuk bimbingan tersebut di atas memberikan manfaat? ';
       }
 
       

@@ -73,6 +73,7 @@ class KuesionerUmk extends Migration
             $table->string('ii_8_c',100)->nullable()->comment('');
             $table->string('ii_9',1)->nullable()->comment('');
             $table->string('ii_9_a',500)->nullable()->comment('');
+            $table->string('jumlah_umk_bersertifikat',500)->nullable()->comment('');
 
 
             $table->string('iii_1',1)->nullable()

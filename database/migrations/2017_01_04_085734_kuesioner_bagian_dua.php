@@ -49,6 +49,7 @@ class KuesionerBagianDua extends Migration
             $table->string('ii_8_c')->nullable()->comment('');
             $table->string('ii_9')->nullable()->comment('');
             $table->string('ii_9_a')->nullable()->comment('');
+            $table->string('jumlah_umk_bersertifikat',500)->nullable()->comment('');
 
             $table->timestamps();
         });
