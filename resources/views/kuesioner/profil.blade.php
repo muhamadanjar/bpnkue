@@ -7,7 +7,7 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="Gambar UMKM">
 
               <h3 class="profile-username text-center">{{$profil->i_1}}</h3>
 
@@ -111,7 +111,7 @@
                 <p class="text-yellow">{{ $profil->i_11 }}</p>
 
                 <b><p>Apakah Produk yang dihasilkan sudah mempunyai Merkyang terdaftar di Kementerian Hukum dan HAM?</p></b>
-                <p class="text-yellow">{{ $profil->i_12 }}</p>
+                <p class="text-yellow">{{ $sudahbelum[$profil->i_12] }}</p>
 
                 <b><p>Apabila produk Saudara sudah mempunyai ijin edar?</p></b>
                 <p class="text-yellow">{{ $sudahbelum[$profil->i_13] }}</p>

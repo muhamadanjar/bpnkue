@@ -14,7 +14,9 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('create','UserCtrl@create_dua');
+Route::get('/home', 'HomeController@index');
+
+/*Route::get('create','UserCtrl@create_dua');
 Route::get('/backend', function() {
  
     if (Gate::check('access.backend')) {
@@ -23,8 +25,9 @@ Route::get('/backend', function() {
  
     return abort(403);
  
-});
-Route::get('/home', 'HomeController@index');
+});*/
+
+
 
 Auth::routes();
 
@@ -37,9 +40,10 @@ Route::get('excel/2007','ExcelCtrl@getImportExcel2007');
 Route::group(array('prefix'=>'kuesioner'), function(){
 	Route::get('/','KuesionerCtrl@getIndexVersiDua');
 	Route::get('/caridata','KuesionerCtrl@getCaridata');
-	Route::get('/caridataquery/{search}','KuesionerCtrl@getSearchCaridata');
+	Route::get('/caridata/query/{search}','KuesionerCtrl@getSearchCaridata');
 	Route::get('/gambaranumum','KuesionerCtrl@getGambaranUmum');
 	Route::get('/profil/{id}','KuesionerCtrl@getProfil');
+	Route::get('/custom','KuesionerCtrl@custom');
 
 });
 

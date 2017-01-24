@@ -7,7 +7,7 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
-  <link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('adminlte/plugins/bootstrap/css/bootstrap.min.css')}}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
@@ -82,7 +82,7 @@
 <!-- jQuery 2.2.3 -->
 <script src="{{ asset('adminlte/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
 <!-- iCheck -->
 <script src="{{ asset('adminlte/plugins/iCheck/icheck.min.js')}}"></script>
 <script>

@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Gate;
 use DB;
+use App\Lib\Pagging;
 
 class KuesionerCtrl extends Controller{
-      public function __construct($value='')
-      {
+      public function __construct($value=''){
          $this->table_utama = 'kuesioner_umk';
+         $this->_page = new Pagging();
       }
    	public function getIndex($value=''){
    		$kuesioner_satu =  \DB::table('kuesioner_bagian_satu')->get();
@@ -28,16 +29,57 @@ class KuesionerCtrl extends Controller{
          
       }
 
-      public function getCaridata($value=''){
-         $bagian_satu = DB::table('kuesioner_umk')
-         ->select(['id','i_1','i_2','i_3','i_4','i_5','i_6','i_7','i_8','i_9','i_10','i_10_a','i_10_b','i_11','i_11_a','i_12','i_12_a','i_13','i_13_a','i_14','i_15','i_16','iv_1'])
-         ->limit(30)
-         ->get();
-         
-         return view('kuesioner.caridata')->with('bagian_satu',$bagian_satu);
+      public function custom($value=''){
+         if(isset($_GET["page"]))
+         $page = (int)$_GET["page"];
+         else
+         $page = 1;
+
+         $setLimit = 10;
+         $pageLimit = ($page * $setLimit) - $setLimit;
+         $__page = $this->_page->displayPaginationBelow($this->table_utama,$setLimit,$page);
+         return $__page;
       }
-      public function getSearchCaridata(Request $request){
-         $profil = DB::table('kuesioner_umk')->where('i_1','LIKE',$request->cari)->get();
+
+      public function getCaridata($data=''){
+
+         if(isset($_GET["page"]))
+         $page = (int)$_GET["page"];
+         else
+         $page = 1;
+
+         $setLimit = 10;
+         $pageLimit = ($page * $setLimit) - $setLimit;
+
+         $data = isset($_GET['txtsearch']);
+         $bagian_satu = $this->getSearchCaridata($data,$setLimit,$pageLimit);
+
+         $__page =  $this->displayPaginationBelow($setLimit,$page);
+
+        
+         
+         return view('kuesioner.caridata')->with('bagian_satu',$bagian_satu)->with('page',$__page);
+      }
+      public function getSearchCaridata($search,$setLimit,$page){
+         
+         if (is_null($search)) {
+            $bagian_satu = DB::table('kuesioner_umk')
+            ->select(['id','i_1','i_2','i_3','i_4','i_5','i_6','i_7','i_8','i_9','i_10','i_10_a','i_10_b','i_11','i_11_a','i_12','i_12_a','i_13','i_13_a','i_14','i_15','i_16','iv_1'])
+            ->offset($page)
+            ->limit($setLimit)
+            ->get();
+         }else{
+            $profil = DB::table('kuesioner_umk')
+            ->offset($page)
+            ->limit($setLimit)
+            ->where( function ( $q2 ) use ( $search ) {
+               $q2->whereRaw( 'UPPER(i_1) like ?', array( '%'.$search.'%' ) );
+               $q2->orWhereRaw( 'UPPER(i_2) like ?', array( '%'.$search.'%' ) );
+               $q2->orWhereRaw( 'UPPER(i_3) like ?', array( '%'.$search.'%' ) );
+            })
+            ->get();   
+         }
+         
          return $profil;
       }
       public function getProfil($id=''){
@@ -45,6 +87,98 @@ class KuesionerCtrl extends Controller{
          $array_sudahbelum = array('Belum','Sudah');
          return view('kuesioner.profil')->withProfil($profil)->with('sudahbelum',$array_sudahbelum);
       }
+
+      function displayPaginationBelow($per_page,$page){
+         $page_url="?";
+         $query = "SELECT COUNT(*) as totalCount FROM kuesioner_umk";
+         //$rec = mysql_fetch_array(mysql_query($query));
+         $rec = DB::select(DB::raw($query));
+         $total = $rec[0]->totalCount;
+         $adjacents = "2"; 
+
+         $page = ($page == 0 ? 1 : $page);  
+         $start = ($page - 1) * $per_page;                        
+         
+         $prev = $page - 1;                     
+         $next = $page + 1;
+           $setLastpage = ceil($total/$per_page);
+         $lpm1 = $setLastpage - 1;
+         
+         $setPaginate = "";
+         if($setLastpage > 1)
+         {  
+            $setPaginate .= "<ul class='pagination pagination-sm no-margin pull-right'>";
+                       //$setPaginate .= "<li class='setPage'>Page $page of $setLastpage</li>";
+            if ($setLastpage < 7 + ($adjacents * 2))
+            {  
+               for ($counter = 1; $counter <= $setLastpage; $counter++)
+               {
+                  if ($counter == $page)
+                     $setPaginate.= "<li><a class='current_page'>$counter</a></li>";
+                  else
+                     $setPaginate.= "<li><a href='{$page_url}page=$counter'>$counter</a></li>";             
+               }
+            }
+            elseif($setLastpage > 5 + ($adjacents * 2))
+            {
+               if($page < 1 + ($adjacents * 2))    
+               {
+                  for ($counter = 1; $counter < 4 + ($adjacents * 2); $counter++)
+                  {
+                     if ($counter == $page)
+                        $setPaginate.= "<li><a class='current_page'>$counter</a></li>";
+                     else
+                        $setPaginate.= "<li><a href='{$page_url}page=$counter'>$counter</a></li>";             
+                  }
+                  $setPaginate.= "<li><a>...</a></li>";
+                  $setPaginate.= "<li><a href='{$page_url}page=$lpm1'>$lpm1</a></li>";
+                  $setPaginate.= "<li><a href='{$page_url}page=$setLastpage'>$setLastpage</a></li>";     
+               }
+               elseif($setLastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2))
+               {
+                  $setPaginate.= "<li><a href='{$page_url}page=1'>1</a></li>";
+                  $setPaginate.= "<li><a href='{$page_url}page=2'>2</a></li>";
+                  $setPaginate.= "<li class='dot'><a>...</a></li>";
+                  for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++)
+                  {
+                     if ($counter == $page)
+                        $setPaginate.= "<li><a class='current_page'>$counter</a></li>";
+                     else
+                        $setPaginate.= "<li><a href='{$page_url}page=$counter'>$counter</a></li>";             
+                  }
+                  $setPaginate.= "<li class='dot'><a>...</a></li>";
+                  $setPaginate.= "<li><a href='{$page_url}page=$lpm1'>$lpm1</a></li>";
+                  $setPaginate.= "<li><a href='{$page_url}page=$setLastpage'>$setLastpage</a></li>";     
+               }
+               else
+               {
+                  $setPaginate.= "<li><a href='{$page_url}page=1'>1</a></li>";
+                  $setPaginate.= "<li><a href='{$page_url}page=2'>2</a></li>";
+                  $setPaginate.= "<li class='dot'><a>...</a></li>";
+                  for ($counter = $setLastpage - (2 + ($adjacents * 2)); $counter <= $setLastpage; $counter++)
+                  {
+                     if ($counter == $page)
+                        $setPaginate.= "<li><a class='current_page'>$counter</a></li>";
+                     else
+                        $setPaginate.= "<li><a href='{$page_url}page=$counter'>$counter</a></li>";             
+                  }
+               }
+            }
+            
+            if ($page < $counter - 1){ 
+               $setPaginate.= "<li><a href='{$page_url}page=$next'>Next</a></li>";
+                   $setPaginate.= "<li><a href='{$page_url}page=$setLastpage'>Last</a></li>";
+            }else{
+               $setPaginate.= "<li><a class='current_page'>Next</a></li>";
+                   $setPaginate.= "<li><a class='current_page'>Last</a></li>";
+               }
+
+            $setPaginate.= "</ul>\n";     
+         }
+       
+       
+           return $setPaginate;
+      } 
 
 
    	public function getGambaranUmum(){

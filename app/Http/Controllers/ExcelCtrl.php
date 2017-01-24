@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use DB;
 class ExcelCtrl extends Controller{
 
     public function __construct($value=''){
@@ -394,6 +394,7 @@ class ExcelCtrl extends Controller{
                     
                 ]);
             }
+            DB::commit();
             $array['info'] = true;
         }catch(Exception $e){
             \DB::rollback();
