@@ -41,8 +41,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{ url('pengaturan/user') }}"><i class="fa fa-circle-o"></i> User</a></li>
-            
-            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+            <li><a href="{{ url('pengaturan/role') }}"><i class="fa fa-circle-o"></i> Level</a></li>
           </ul>
         </li>
           

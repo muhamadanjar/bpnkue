@@ -3,6 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="_token" content="{!! csrf_token() !!}"/>
   <title>{{ config('app.name') }}</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -67,7 +68,7 @@
       @if(\Auth::check())
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="{{ asset('adminlte/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+          <img src="http://placehold.it/160" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p>{{ \Auth::user()->name}}</p>

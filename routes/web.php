@@ -16,18 +16,6 @@ Route::get('/', function () {
 });
 Route::get('/home', 'HomeController@index');
 
-/*Route::get('create','UserCtrl@create_dua');
-Route::get('/backend', function() {
- 
-    if (Gate::check('access.backend')) {
-        return view('excelImport');
-    }
- 
-    return abort(403);
- 
-});*/
-
-
 
 Auth::routes();
 
@@ -43,7 +31,7 @@ Route::group(array('prefix'=>'kuesioner'), function(){
 	Route::get('/caridata/query/{search}','KuesionerCtrl@getSearchCaridata');
 	Route::get('/gambaranumum','KuesionerCtrl@getGambaranUmum');
 	Route::get('/profil/{id}','KuesionerCtrl@getProfil');
-	Route::get('/custom','KuesionerCtrl@custom');
+	Route::get('/custom','HomeController@getJumlahKuesioner');
 
 });
 
@@ -59,6 +47,9 @@ Route::group(array('prefix'=>'pengaturan'), function(){
 	Route::get('user/edit/{$id}','UserCtrl@getUbah');
 	Route::get('user/hapus/{$id}','UserCtrl@postHapus');
 	Route::get('user/aktif/{$id}','UserCtrl@getAktifnonaktif');
+
+	Route::get('role','RoleCtrl@getIndex');
+
 });
 
 Route::group(array('prefix'=>'api'), function(){

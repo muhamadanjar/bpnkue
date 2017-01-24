@@ -197,13 +197,13 @@
         @if(\Auth::check())
         <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="{{ asset('dist/img/user2-160x160.jpg')}}" class="user-image" alt="User Image">
+              <img src="http://placehold.it/160" class="user-image" alt="User Image">
               <span class="hidden-xs">{{ \Auth::user()->name }}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="http://placehold.it/160" class="img-circle" alt="User Image">
 
                 <p>
                   {{\Auth::user()->name}} - Web Developer
@@ -231,7 +231,10 @@
                   <a href="{{url('profile')}}" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="{{url('logout')}}" class="btn btn-default btn-flat">Sign out</a>
+                  <form method="post" action="{{ url('logout') }}">
+                    {{ csrf_field() }}
+                    <button class="btn btn-default btn-flat">Keluar</button>
+                  </form>
                 </div>
               </li>
             </ul>
@@ -245,6 +248,6 @@
         </li>
         @endif
     <!-- Control Sidebar Toggle Button -->
-        <li><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>
+        <!--<li><a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a></li>-->
     </ul>
 </div>

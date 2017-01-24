@@ -2,6 +2,27 @@ $.ajaxSetup({
     headers: { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
 });
 (function($, window, document){}(jQuery, window, document));
+
+$(function() {
+/* # Data tables
+================================================== */
+    //===== Setting Datatable defaults =====//
+
+    $.extend( $.fn.dataTable.defaults, {
+        autoWidth: false,
+        pagingType: 'full_numbers',
+        dom: '<"datatable-header"fl><"datatable-scroll"t><"datatable-footer"ip>',
+        language: {
+            search: '<span>Filter:</span> _INPUT_',
+            lengthMenu: '<span>Show:</span> _MENU_',
+            paginate: { 'first': 'First', 'last': 'Last', 'next': '>', 'previous': '<' }
+        }
+    });
+
+});
+
+    
+
 $.extend({
     getValues: function(url) {
         var result = null;

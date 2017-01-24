@@ -16,6 +16,19 @@
   <link rel="stylesheet" href="{{ asset('adminlte/dist/css/AdminLTE.min.css')}}">
   <!-- iCheck -->
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/iCheck/square/blue.css')}}">
+  <style type="text/css">
+    html { 
+      background: url({{ url('images/bg.jpg') }}) no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+
+    .login-page, .register-page {
+        background: none;
+    }
+  </style>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -27,7 +40,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>BSN</b></a>
+    <a href="#"><b>Database UMK</b> BSN</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
@@ -62,17 +75,17 @@
       </div>
     </form>
 
-    <div class="social-auth-links text-center">
+    <!--<div class="social-auth-links text-center">
       <p>- OR -</p>
       <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Login dengan
         Facebook</a>
       <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Login dengan
         Google+</a>
-    </div>
+    </div>-->
     <!-- /.social-auth-links -->
 
     <a href="#">Lupa Password</a><br>
-    <a href="{{ url('register')}}" class="text-center">Daftar a user baru</a>
+    <!--<a href="{{ url('register')}}" class="text-center">Daftar a user baru</a>-->
 
   </div>
   <!-- /.login-box-body -->

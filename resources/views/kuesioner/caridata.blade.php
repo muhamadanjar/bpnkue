@@ -40,9 +40,9 @@
 	                  <td><a href="{{ url('kuesioner/profil',array($value->id)) }}" class="btn btn-sm btn-default btn-block"><i class="fa fa-info"></i> {{$value->id}}</a></td>
 	                  <td>{{$value->i_1}}</td>
 	                  <td>{{$value->i_2}}</td>
-	                  <td>{{$value->i_3}}</td>
-	                  <td>{{$value->i_4}}.</td>
-	                  <td>{{$value->i_7}}.</td>
+	                  <td>{{$value->i_3}}.</td>
+	                  <td>{{$value->i_4}}</td>
+	                  <td>{{$value->i_7}} Orang</td>
 	                </tr>
 	                @endforeach
 	                
