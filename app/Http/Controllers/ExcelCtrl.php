@@ -282,6 +282,7 @@ class ExcelCtrl extends Controller{
 
     public function QueryKuesioner($dataArr){
         $array = array('info'=>false);
+        \DB::beginTransaction();
         try{
             foreach($dataArr as $val){
                 \DB::table('kuesioner_umk')->insert([
@@ -306,6 +307,7 @@ class ExcelCtrl extends Controller{
                         'i_10' => trim($val['Q']),
                         'i_10_a' => $val['R'],
                         'i_10_b' => $val['S'],
+
                         'i_11' => $val['Z'],
                         'i_11_a' => $val['AA'],
                         'i_12' => $val['AB'],
@@ -345,8 +347,7 @@ class ExcelCtrl extends Controller{
                         'ii_8_c' => $val['BI'],
                         'ii_9' => $val['BJ'],
                         'ii_9_a' => $val['BK'],
-
-                        
+                        'jumlah_umk_bersertifikat' => $val['BL'],
 
                         'iii_1' => $val['BM'],
                         'iii_2_a' => $val['BN'],
@@ -387,6 +388,7 @@ class ExcelCtrl extends Controller{
                         'iii_11_e' => $val['CW'],
                         'iii_11_f' => $val['CX'],
                         'iii_11_f_a' => $val['CY'],
+
                         'iv_1' => $val['CZ'],
                     ],
                     

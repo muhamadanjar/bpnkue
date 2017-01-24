@@ -68,7 +68,7 @@ class KuesionerUmk extends Migration
             $table->string('ii_7_e_a',200)->nullable()->comment('');
             $table->string('ii_7_e_b',200)->nullable()->comment('');
             $table->string('ii_8',1)->nullable()->comment('');
-            $table->string('ii_8_a',4)->nullable()->comment('');
+            $table->string('ii_8_a',20)->nullable()->comment('');
             $table->string('ii_8_b',120)->nullable()->comment('');
             $table->string('ii_8_c',100)->nullable()->comment('');
             $table->string('ii_9',1)->nullable()->comment('');

@@ -36,10 +36,14 @@ Route::get('excel/2007','ExcelCtrl@getImportExcel2007');
 
 Route::group(array('prefix'=>'kuesioner'), function(){
 	Route::get('/','KuesionerCtrl@getIndexVersiDua');
+	Route::get('/caridata','KuesionerCtrl@getCaridata');
+	Route::get('/caridataquery/{search}','KuesionerCtrl@getSearchCaridata');
 	Route::get('/gambaranumum','KuesionerCtrl@getGambaranUmum');
+	Route::get('/profil/{id}','KuesionerCtrl@getProfil');
+
 });
 
-Route::get('profile','UserCtrl@getProfil');
+//Route::get('profile','UserCtrl@getProfil');
 
 Route::group(array('prefix'=>'admin'), function(){
 	Route::get('statistik','WebCtrl@getStatistiklist');

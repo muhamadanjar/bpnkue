@@ -4,15 +4,13 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Lib\AHelper;
-class AppServiceProvider extends ServiceProvider
-{
+class AppServiceProvider extends ServiceProvider{
     /**
      * Bootstrap any application services.
      *
      * @return void
      */
-    public function boot()
-    {
+    public function boot(){
         //
     }
 
@@ -21,8 +19,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
-    {
+    public function register(){
         $this->app['ahelperclass'] = $this->app->share(function($app){
             return new AHelper;
         });

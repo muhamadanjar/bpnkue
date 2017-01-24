@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Gate;
+use DB;
 
 class KuesionerCtrl extends Controller{
       public function __construct($value='')
@@ -25,6 +26,24 @@ class KuesionerCtrl extends Controller{
             return response('Anda tidak diijinkan untuk mengakses halaman ini.', 401);
          }
          
+      }
+
+      public function getCaridata($value=''){
+         $bagian_satu = DB::table('kuesioner_umk')
+         ->select(['id','i_1','i_2','i_3','i_4','i_5','i_6','i_7','i_8','i_9','i_10','i_10_a','i_10_b','i_11','i_11_a','i_12','i_12_a','i_13','i_13_a','i_14','i_15','i_16','iv_1'])
+         ->limit(30)
+         ->get();
+         
+         return view('kuesioner.caridata')->with('bagian_satu',$bagian_satu);
+      }
+      public function getSearchCaridata(Request $request){
+         $profil = DB::table('kuesioner_umk')->where('i_1','LIKE',$request->cari)->get();
+         return $profil;
+      }
+      public function getProfil($id=''){
+         $profil = DB::table('kuesioner_umk')->orderBy('id')->where('id',$id)->first();
+         $array_sudahbelum = array('Belum','Sudah');
+         return view('kuesioner.profil')->withProfil($profil)->with('sudahbelum',$array_sudahbelum);
       }
 
 
@@ -65,12 +84,6 @@ class KuesionerCtrl extends Controller{
          
          
 
-         
-
-         
-
-         
-         
 
          //Bagian 3
          $iii_1 = $this->getMendapatkanSNI();
@@ -167,7 +180,6 @@ class KuesionerCtrl extends Controller{
          $i7['judul'] = $judul;
          $i7['data'] = $tambah;
          $i7['kategori'] = $info;
-
    		return $i7;
    	}
 
