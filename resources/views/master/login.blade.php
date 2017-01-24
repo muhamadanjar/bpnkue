@@ -25,8 +25,34 @@
       background-size: cover;
     }
 
+    #trans{
+      
+      margin: auto;
+      width: 100%;
+      padding: 10px;
+    }
+    #trans img{
+      position: absolute;
+      top: 70%;
+      left: 35%;
+      width: 70%;
+      height: 60%;
+      margin-top: -250px; /* Half the height */
+      margin-left: -250px;
+      opacity: 0.5;
+      filter: alpha(opacity=50); /* For IE8 and earlier */
+    }
+
+
     .login-page, .register-page {
         background: none;
+    }
+
+    .img-logo {
+        margin: 0 auto;
+        width: 150px;
+        padding: 3px;
+        
     }
   </style>
 
@@ -38,14 +64,19 @@
   <![endif]-->
 </head>
 <body class="hold-transition login-page">
+<div id="trans">
+  <img src="{{ asset('images/bg_trans.png') }}">
+</div>
 <div class="login-box">
   <div class="login-logo">
     <a href="#"><b>Database UMK</b> BSN</a>
+    <img class="img-logo img-responsive " src="{{ asset('images/logo.png')}}" alt="User profile picture" data-pin-nopin="true">
   </div>
-  <!-- /.login-logo -->
+  
+
   <div class="login-box-body">
     <p class="login-box-msg">Masukan untuk membuka sesi baru</p>
-
+    
     <form method="post" action="{{ url('/login') }}">
       {{ csrf_field() }}
       <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
