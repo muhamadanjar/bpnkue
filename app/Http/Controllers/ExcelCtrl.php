@@ -7,6 +7,7 @@ use DB;
 class ExcelCtrl extends Controller{
 
     public function __construct($value=''){
+        $this->middleware('auth');
         $this->excel =  new \PHPExcel();
     }
     public function getIndex($value=''){

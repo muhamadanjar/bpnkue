@@ -31,15 +31,55 @@
 	<div class="container-fluid">
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
+			<div class="box box-default">
 				
-				<div class="panel-heading">
-					<h6 class="panel-title"><i class="icon-user"></i> Daftar User</h6>
-					<a href="{{ url('admin/user/tambah') }}" class="pull-right btn btn-xs btn-primary">
-						<i class="icon-plus-circle2"></i> Tambah</a>
+				<div class="box-header with-border">
+					<h6 class="box-title"><i class="icon-user"></i> Daftar User</h6>
+					<a href="{{ url('pengaturan/user/tambah') }}" class="pull-right btn btn-sm btn-primary">
+						<i class="fa fa-plus"></i> Tambah</a>
 				</div>
-				<div class="panel-body">
-					<table class="table table-bordered">
+				<div class="box-body no-padding">
+		            <a class="btn btn-app">
+		                <i class="fa fa-edit"></i> Edit
+		            </a>
+		            <a class="btn btn-app">
+		                <i class="fa fa-play"></i> Play
+		            </a>
+		            <a class="btn btn-app">
+		                <i class="fa fa-repeat"></i> Repeat
+		            </a>
+		            <a class="btn btn-app">
+		                <i class="fa fa-pause"></i> Pause
+		            </a>
+		            <a class="btn btn-app">
+		                <i class="fa fa-save"></i> Save
+		            </a>
+		            <a class="btn btn-app">
+		                <span class="badge bg-yellow">3</span>
+		                <i class="fa fa-bullhorn"></i> Notifications
+		            </a>
+		            <a class="btn btn-app">
+		                <span class="badge bg-green">300</span>
+		                <i class="fa fa-barcode"></i> Products
+		            </a>
+		            <a class="btn btn-app">
+		                <span class="badge bg-purple">891</span>
+		                <i class="fa fa-users"></i> Users
+		            </a>
+		            <a class="btn btn-app">
+		                <span class="badge bg-teal">67</span>
+		                <i class="fa fa-inbox"></i> Orders
+		            </a>
+		            <a class="btn btn-app">
+		                <span class="badge bg-aqua">12</span>
+		                <i class="fa fa-envelope"></i> Inbox
+		            </a>
+		            <a class="btn btn-app">
+		                <span class="badge bg-red">531</span>
+		                <i class="fa fa-heart-o"></i> Likes
+		            </a>
+		            
+					<table class="table table-hover table-bordered">
 						<tr>
 							<th>Username</th>
 							<th>Email</th>
@@ -48,7 +88,9 @@
 						</tr>
 						
 						@foreach($users as $key => $v)
-                        <?php $class_active = ($v->isactive==0) ? 'btn-warning':'' ?>
+                        <?php $class_active = ($v->isactive==0) ? 'btn-danger':'' ?>
+                        <?php $fa_active = ($v->isactive==0) ? 'fa-circle':'fa-circle-o' ?>
+
 						<tr>
 							<td>{{ $v->username }}</td>
 							<td>{{ $v->email }}</td>
@@ -57,11 +99,11 @@
 								<div class="btn-group">
 					                <button data-toggle="dropdown" class="btn {{ $class_active }} btn-icon dropdown-toggle" type="button"><i class="icon-cog4"></i><span class="caret"></span></button>
 									<ul class="dropdown-menu icons-right dropdown-menu-right">
-										<li><a href="{{ url('admin/user/ubah', ['id' => $v->id]) }}"><i class="icon-quill2"></i> Ubah</a></li>
+										<li><a href="{{ url('admin/user/ubah', ['id' => $v->id]) }}"><i class="fa fa-edit"></i> Ubah</a></li>
 										<li data-form="#frm-{{$v->id}}" 
 											data-title="Hapus {{ $v->id }}" 
 											data-message="Apa anda yakin menghapus {{ $v->username }} ?">
-											<a class= "formConfirm" href="#"><i class="fa fa-bell"></i> Hapus</a>
+											<a class= "formConfirm" href="#"><i class="fa fa-trash"></i> Hapus</a>
 										</li>
 										<form action="{{ url('admin/user/hapus', array($v->id) ) }}" method="post" style="display:none" id="frm-{{$v->id}}">
 											<input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -69,7 +111,7 @@
                                         <li data-form="#frmaktif-{{$v->id}}" 
 											data-title="Aktif {{ $v->id }}" 
 											data-message="Apa anda yakin mengaktifkan/menonaktifkan {{ $v->username }} ?">
-											<a class= "formConfirm" href="#"><i class="fa fa-bell"></i> Aktif / Non Aktif</a>
+											<a class= "formConfirm" href="#"><i class="fa {{$fa_active}}"></i> Aktif / Non Aktif</a>
 										</li>
 										<form action="{{ url('admin/user/aktifnonaktif', array($v->id) ) }}" method="get" style="display:none" id="frmaktif-{{$v->id}}"></form>					
 									</ul>
@@ -79,8 +121,12 @@
 						@endforeach
 					</table>
                     
-                    *) Kuning = Non AKtif || Abu abu = Aktif
+                    
 				</div>
+				<div class="box-footer clearfix">
+					*) Kuning = Non AKtif || Abu abu = Aktif
+	              	{!! $page !!}
+	            </div>
 			</div>
 		</div>
 	</div>

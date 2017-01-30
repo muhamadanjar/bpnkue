@@ -18,6 +18,11 @@ Route::get('/home', 'HomeController@index');
 
 
 Auth::routes();
+Route::group(array('prefix'=>'admin'), function(){
+	Route::get('login','AuthCtrl@showLoginForm');
+	Route::post('login','AuthCtrl@login');
+	Route::get('logout','AuthCtrl@logout');
+});
 
 Route::get('excel','ExcelCtrl@getIndex');
 Route::post('excel/import','ExcelCtrl@postQueryBagianSatu');
@@ -31,11 +36,11 @@ Route::group(array('prefix'=>'kuesioner'), function(){
 	Route::get('/caridata/query/{search}','KuesionerCtrl@getSearchCaridata');
 	Route::get('/gambaranumum','KuesionerCtrl@getGambaranUmum');
 	Route::get('/profil/{id}','KuesionerCtrl@getProfil');
-	Route::get('/custom','HomeController@getJumlahKuesioner');
+	Route::get('/custom','KuesionerCtrl@custom');
 
 });
 
-//Route::get('profile','UserCtrl@getProfil');
+Route::get('profile','UserCtrl@getProfil');
 
 Route::group(array('prefix'=>'admin'), function(){
 	Route::get('statistik','WebCtrl@getStatistiklist');

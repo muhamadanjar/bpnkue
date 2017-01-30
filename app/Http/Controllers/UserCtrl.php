@@ -1,11 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-
+ 
 use Illuminate\Http\Request;
 use App\User;
+use App\Role;
+use App\Permission;
+use App\Lib\Pagging;
 class UserCtrl extends Controller
 {
+    public function __construct($value=''){
+        $this->middleware('auth');
+        $this->_page = new Pagging();
+    }
     public function create()
     {
         $this->authorize('create.user');
@@ -24,13 +31,37 @@ class UserCtrl extends Controller
     }
 
     public function getIndex(){
+        if(isset($_GET["page"]))
+        $page = (int)$_GET["page"];
+        else
+        $page = 1;
+
+        $setLimit = 10;
+        $pageLimit = ($page * $setLimit) - $setLimit;
+        if(isset($_GET['txtsearch']))
+        $data = $_GET['txtsearch'];
+        else
+        $data = '';
+
+        $item = new User;
+        $table_name = $item->getTable();
+        
+        $_page =  $this->_page->displayPaginationBelow($table_name,$setLimit,$page);
+
         $user = User::get();
-        return view('master.userList')->withUsers($user);
+        return view('master.userList')
+            ->withPage($_page)
+            ->withUsers($user);
     }
 
     
     public function getTambah(){
-        return view('master.userAddEdit')->withStatus('add');
+        $role = Role::get();
+        $permission = Permission::get();
+        return view('master.userAddEdit')
+        ->withRole($role)
+        ->withPermission($permission)
+        ->withStatus('add');
     }
 
     public function postAddEdit(Request $request){
@@ -60,7 +91,7 @@ class UserCtrl extends Controller
                     //$this->ahelper->UploadFile($request->file('image'),'images/users',$fileName);
                     $user->image = $fileName;
                 }
-            $user->level = $request->level;
+            //$user->level = $request->level;
             }
             
             $user->username = $request->username;

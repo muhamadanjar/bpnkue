@@ -9,6 +9,7 @@ use App\Lib\Pagging;
 
 class KuesionerCtrl extends Controller{
       public function __construct($value=''){
+         $this->middleware('auth');
          $this->table_utama = 'kuesioner_umk';
          $this->_page = new Pagging();
       }
@@ -30,19 +31,13 @@ class KuesionerCtrl extends Controller{
       }
 
       public function custom($value=''){
-         if(isset($_GET["page"]))
-         $page = (int)$_GET["page"];
-         else
-         $page = 1;
-
-         $setLimit = 10;
-         $pageLimit = ($page * $setLimit) - $setLimit;
-         $__page = $this->_page->displayPaginationBelow($this->table_utama,$setLimit,$page);
-         return $__page;
+         
+         return DB::table('users')->toSql();
       }
 
       public function getCaridata($data=''){
-
+         //$data = $_GET['txtsearch'];
+         
          if(isset($_GET["page"]))
          $page = (int)$_GET["page"];
          else
@@ -51,7 +46,14 @@ class KuesionerCtrl extends Controller{
          $setLimit = 10;
          $pageLimit = ($page * $setLimit) - $setLimit;
 
-         $data = isset($_GET['txtsearch']);
+
+         if(!isset($_GET['txtsearch'])){
+            $_GET['txtsearch'] = '';
+         }
+         $data = $_GET['txtsearch'];
+         //$data = (isset($_GET['txtsearch']) ? '' : '' ;
+         
+
          $bagian_satu = $this->getSearchCaridata($data,$setLimit,$pageLimit);
 
          $__page =  $this->displayPaginationBelow($setLimit,$page);
@@ -60,25 +62,41 @@ class KuesionerCtrl extends Controller{
          
          return view('kuesioner.caridata')->with('bagian_satu',$bagian_satu)->with('page',$__page);
       }
-      public function getSearchCaridata($search,$setLimit,$page){
-         
-         if (is_null($search)) {
-            $bagian_satu = DB::table('kuesioner_umk')
-            ->select(['id','i_1','i_2','i_3','i_4','i_5','i_6','i_7','i_8','i_9','i_10','i_10_a','i_10_b','i_11','i_11_a','i_12','i_12_a','i_13','i_13_a','i_14','i_15','i_16','iv_1'])
-            ->offset($page)
-            ->limit($setLimit)
-            ->get();
+      public function getSearchCaridata($search ='',$setLimit,$page){
+         $sql_kue = '';
+         if (is_null($search) || empty($search)) {
+            
+            $sql_raw = 'SELECT * FROM kuesioner_umk';
+            $sql_raw_full = $sql_raw;
+            $sql_raw_full_with_limit = $sql_raw_full.' LIMIT '.$page.','.$setLimit;
+            
+            
+            $bagian_satu_with_limit = DB::select(DB::raw($sql_raw_full_with_limit));
+            
+            session(['sql' => $sql_raw]);
+
+            $profil = $bagian_satu_with_limit;
          }else{
-            $profil = DB::table('kuesioner_umk')
-            ->offset($page)
-            ->limit($setLimit)
-            ->where( function ( $q2 ) use ( $search ) {
-               $q2->whereRaw( 'UPPER(i_1) like ?', array( '%'.$search.'%' ) );
-               $q2->orWhereRaw( 'UPPER(i_2) like ?', array( '%'.$search.'%' ) );
-               $q2->orWhereRaw( 'UPPER(i_3) like ?', array( '%'.$search.'%' ) );
-            })
-            ->get();   
+            $sql_raw = 'SELECT * FROM kuesioner_umk';
+            $where_raw = 'UPPER(i_1) LIKE '.'"%'.$search.'%"';
+            $where_raw2 = 'OR UPPER(i_2) LIKE '.'"%'.$search.'%"';
+            $where_raw3 = 'OR UPPER(i_3) LIKE '.'"%'.$search.'%"';
+            $sql_raw_full = $sql_raw.' WHERE '.$where_raw.' '.$where_raw2.' '.$where_raw3;
+            $sql_raw_full_with_limit = $sql_raw_full.' LIMIT '.$page.','.$setLimit;
+
+            $bagian_satu = DB::select(DB::raw($sql_raw_full));
+            $bagian_satu_with_limit = DB::select(DB::raw($sql_raw_full_with_limit));
+            session(['sql' => $sql_raw_full]);
+            
+            $profil = $bagian_satu_with_limit;
+ 
          }
+         
+         $str_query = "SELECT COUNT(*) as totalCount FROM(".session('sql').") AS jumlah_per_halaman";
+         
+         session(['str_query' => $str_query]);
+         $jumlah_record = DB::select(DB::raw($str_query));
+         session(['jumlah_record' => $jumlah_record[0]->totalCount]);
          
          return $profil;
       }
@@ -90,7 +108,8 @@ class KuesionerCtrl extends Controller{
 
       function displayPaginationBelow($per_page,$page){
          $page_url="?";
-         $query = "SELECT COUNT(*) as totalCount FROM kuesioner_umk";
+         //$query = "SELECT COUNT(*) AS totalCount FROM kuesioner_umk";
+         $query = session('str_query');
          //$rec = mysql_fetch_array(mysql_query($query));
          $rec = DB::select(DB::raw($query));
          $total = $rec[0]->totalCount;
@@ -166,11 +185,11 @@ class KuesionerCtrl extends Controller{
             }
             
             if ($page < $counter - 1){ 
-               $setPaginate.= "<li><a href='{$page_url}page=$next'>Next</a></li>";
-                   $setPaginate.= "<li><a href='{$page_url}page=$setLastpage'>Last</a></li>";
+               $setPaginate.= "<li><a href='{$page_url}page=$next'>></a></li>";
+                   $setPaginate.= "<li><a href='{$page_url}page=$setLastpage'>Akhir</a></li>";
             }else{
-               $setPaginate.= "<li><a class='current_page'>Next</a></li>";
-                   $setPaginate.= "<li><a class='current_page'>Last</a></li>";
+               $setPaginate.= "<li><a class='current_page'>></a></li>";
+                   $setPaginate.= "<li><a class='current_page'>Akhir</a></li>";
                }
 
             $setPaginate.= "</ul>\n";     

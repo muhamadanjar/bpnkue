@@ -3,9 +3,10 @@ namespace App\Lib;
 use DB;
 class Pagging{
 
-    function displayPaginationBelow($per_page,$page){
+   function displayPaginationBelow($table='',$per_page,$page){
          $page_url="?";
-         $query = "SELECT COUNT(*) as totalCount FROM kuesioner_umk";
+         $query = "SELECT COUNT(*) as totalCount FROM {$table}";
+         //dd($query);
          //$rec = mysql_fetch_array(mysql_query($query));
          $rec = DB::select(DB::raw($query));
          $total = $rec[0]->totalCount;
@@ -29,7 +30,7 @@ class Pagging{
                for ($counter = 1; $counter <= $setLastpage; $counter++)
                {
                   if ($counter == $page)
-                     $setPaginate.= "<li><a class='current_page'>$counter</a></li>";
+                     $setPaginate.= "<li><a class='current_page active'>$counter</a></li>";
                   else
                      $setPaginate.= "<li><a href='{$page_url}page=$counter'>$counter</a></li>";             
                }
@@ -41,7 +42,7 @@ class Pagging{
                   for ($counter = 1; $counter < 4 + ($adjacents * 2); $counter++)
                   {
                      if ($counter == $page)
-                        $setPaginate.= "<li><a class='current_page'>$counter</a></li>";
+                        $setPaginate.= "<li><a class='current_page active'>$counter</a></li>";
                      else
                         $setPaginate.= "<li><a href='{$page_url}page=$counter'>$counter</a></li>";             
                   }
@@ -57,7 +58,7 @@ class Pagging{
                   for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++)
                   {
                      if ($counter == $page)
-                        $setPaginate.= "<li><a class='current_page'>$counter</a></li>";
+                        $setPaginate.= "<li><a class='current_page active'>$counter</a></li>";
                      else
                         $setPaginate.= "<li><a href='{$page_url}page=$counter'>$counter</a></li>";             
                   }
@@ -73,7 +74,7 @@ class Pagging{
                   for ($counter = $setLastpage - (2 + ($adjacents * 2)); $counter <= $setLastpage; $counter++)
                   {
                      if ($counter == $page)
-                        $setPaginate.= "<li><a class='current_page'>$counter</a></li>";
+                        $setPaginate.= "<li><a class='current_page active'>$counter</a></li>";
                      else
                         $setPaginate.= "<li><a href='{$page_url}page=$counter'>$counter</a></li>";             
                   }
@@ -84,8 +85,8 @@ class Pagging{
                $setPaginate.= "<li><a href='{$page_url}page=$next'>Next</a></li>";
                    $setPaginate.= "<li><a href='{$page_url}page=$setLastpage'>Last</a></li>";
             }else{
-               $setPaginate.= "<li><a class='current_page'>Next</a></li>";
-                   $setPaginate.= "<li><a class='current_page'>Last</a></li>";
+               $setPaginate.= "<li><a class='current_page active'>Next</a></li>";
+                   $setPaginate.= "<li><a class='current_page active'>Last</a></li>";
                }
 
             $setPaginate.= "</ul>\n";     
@@ -93,5 +94,5 @@ class Pagging{
        
        
            return $setPaginate;
-    }
+   }
 } 

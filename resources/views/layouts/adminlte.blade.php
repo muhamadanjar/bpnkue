@@ -18,6 +18,10 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{ asset('adminlte/dist/css/skins/_all-skins.min.css')}}">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="{{ asset('adminlte/plugins/iCheck/all.css')}}">
+  <!-- Bootstrap Color Picker -->
+  <link rel="stylesheet" href="{{ asset('adminlte/plugins/colorpicker/bootstrap-colorpicker.min.css')}}">
   <!-- iCheck -->
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/iCheck/flat/blue.css')}}">
   <!-- Morris chart -->
@@ -343,16 +347,21 @@
 <script src="{{ asset('adminlte/plugins/datepicker/bootstrap-datepicker.js')}}"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="{{ asset('adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js')}}"></script>
+<!-- bootstrap color picker -->
+<script src="{{ asset('adminlte/plugins/colorpicker/bootstrap-colorpicker.min.js')}}"></script>
 <!-- Slimscroll -->
 <script src="{{ asset('adminlte/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
 <!-- FastClick -->
 <script src="{{ asset('adminlte/plugins/fastclick/fastclick.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('adminlte/dist/js/app.min.js')}}"></script>
+<!-- iCheck 1.0.1 -->
+<script src="{{ asset('adminlte/plugins/iCheck/icheck.min.js')}}"></script>
 <!-- ChartJS 1.0.1 -->
 <script src="{{ asset('adminlte/plugins/chartjs/Chart.min.js')}}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('adminlte/dist/js/pages/dashboard2.js')}}"></script>
+
 
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('adminlte/dist/js/demo.js')}}"></script>

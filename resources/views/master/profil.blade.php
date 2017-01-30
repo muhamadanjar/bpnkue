@@ -7,13 +7,13 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+              <img class="profile-user-img img-responsive img-circle" src="http://placehold.it/128" alt="User profile picture">
 
-              <h3 class="profile-username text-center">Nina Mcintire</h3>
+              <h3 class="profile-username text-center">{{ \Auth::user()->name }}</h3>
 
               <p class="text-muted text-center">Software Engineer</p>
 
-              <ul class="list-group list-group-unbordered">
+              <!--<ul class="list-group list-group-unbordered">
                 <li class="list-group-item">
                   <b>Followers</b> <a class="pull-right">1,322</a>
                 </li>
@@ -23,9 +23,9 @@
                 <li class="list-group-item">
                   <b>Friends</b> <a class="pull-right">13,287</a>
                 </li>
-              </ul>
+              </ul>-->
 
-              <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+              <!--<a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>-->
             </div>
             <!-- /.box-body -->
           </div>
@@ -38,17 +38,21 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <strong><i class="fa fa-book margin-r-5"></i> Education</strong>
-
+              <strong><i class="fa fa-book margin-r-5"></i> Email</strong>
               <p class="text-muted">
-                B.S. in Computer Science from the University of Tennessee at Knoxville
+                {{ \Auth::user()->name }}
               </p>
+              <hr>
 
+              <strong><i class="fa fa-book margin-r-5"></i> ttl</strong>
+              <p class="text-muted">
+                {{\Auth::user()->ttl}}
+              </p>
               <hr>
 
               <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
 
-              <p class="text-muted">Malibu, California</p>
+              <p class="text-muted">{{\Auth::user()->alamat}}</p>
 
               <hr>
 
@@ -353,4 +357,5 @@
         </div>
         <!-- /.col -->
     </div>
+
 @stop

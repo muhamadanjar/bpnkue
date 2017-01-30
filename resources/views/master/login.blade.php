@@ -77,10 +77,10 @@
   <div class="login-box-body">
     <p class="login-box-msg">Masukan untuk membuka sesi baru</p>
     
-    <form method="post" action="{{ url('/login') }}">
+    <form method="post" action="{{ url('/admin/login') }}">
       {{ csrf_field() }}
       <div class="form-group has-feedback {{ $errors->has('email') ? ' has-error' : '' }}">
-        <input type="email" name="email" class="form-control" placeholder="Email" value="{{ old('email') }}" required autofocus>
+        <input type="text" name="username" class="form-control" placeholder="Username" value="{{ old('username') }}" required autofocus>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
         
       </div>
