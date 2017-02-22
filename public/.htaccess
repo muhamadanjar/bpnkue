@@ -7,7 +7,9 @@ php_value max_input_time 5000
 
 #Header add Access-Control-Allow-Origin "http://localhost"
 
+
 <IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
     #Header set Access-Control-Allow-Origin: *
     #Header set Access-Control-Request-Headers: "Access-Control-Request-Headers" ":" #field-name
 </IfModule>

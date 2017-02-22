@@ -89,16 +89,19 @@ Route::group(array('prefix'=>'api'), function(){
 
 	Route::post('jjfungsi/insert',[
 		'nocsrf' => true,
+		'middleware' => 'cors',
 		'as'=>'jjpan.jjfungsi.insert',
 		'uses'=>'WebAppsCtrl@postJaringanFungsi'
 	]);
-	Route::get('jjfungsi/edit/{id}',[
+	Route::post('jjfungsi/edit/{id}',[
 		'nocsrf' => true,
+		'middleware' => 'cors',
 		'as'=>'jjpan.jjfungsi.edit',
 		'uses'=>'WebAppsCtrl@postUpdateJaringanFungsi'
 	]);
 	Route::get('jjfungsi/delete/{id}',[
 		'nocsrf' => true,
+		'middleware' => 'cors',
 		'as'=>'jjpan.jjfungsi.hapus',
 		'uses'=>'WebAppsCtrl@postDeleteJaringanFungsi'
 	]);

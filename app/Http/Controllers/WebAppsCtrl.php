@@ -111,5 +111,28 @@ class WebAppsCtrl extends Controller {
         //return Response::json($status);
         
     }
+    public function postUpdateJaringanFungsi($id){
+        $postdata = file_get_contents("php://input");
+       
+        if (isset($postdata)) {
+            $r = json_decode($postdata);
+            $status = JalanFungsi::find($id);
+            $status->kode_ruas = $r->kode_ruas;
+            $status->nama = $r->nama;
+            $status->panjang = $r->panjang;
+            $status->lebar = $r->lebar;
+            $status->status = $r->status;
+            $status->keterangan = $r->keterangan;
+            $status->save();
+        }
+        
+        
+    }
+
+    public function postDeleteJaringanFungsi($id){
+        $fungsi = JalanFungsi::find($id);
+        $fungsi->delete();
+        
+    }
     
 }
