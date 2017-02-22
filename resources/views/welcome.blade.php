@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>BSN</title>
+        <title>JJAPP</title>
         <link rel="icon" type="icon" href="{{ asset('images/LogoBSN.jpg') }}">
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
@@ -79,10 +79,10 @@
 
             <div class="content">
                 <div>
-                    <a href="{{ url('/excel') }}"><img src="{{ asset('images/LogoBSN.jpg')}}" class="img-responsive" width="50%"></a>
+                    <a href="{{ url('/excel') }}"><img src="{{ asset('images/logo.png')}}" class="img img-responsive" width="30%"></a>
                 </div>
                 <div class="title m-b-md">
-                    BSN (Badan Standardisasi Nasional)
+                    Jaringan Jalan Pandeglang
                 </div>
 
                 

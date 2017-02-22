@@ -7,7 +7,7 @@
           <!-- Profile Image -->
           <div class="box box-primary">
             <div class="box-body box-profile">
-              <img class="profile-user-img img-responsive img-circle" src="../../dist/img/user4-128x128.jpg" alt="Gambar UMKM">
+              <img class="profile-user-img img-responsive img-circle" src="http://placehold.it/128" alt="Gambar UMKM">
 
               <h3 class="profile-username text-center">{{$profil->i_1}}</h3>
 

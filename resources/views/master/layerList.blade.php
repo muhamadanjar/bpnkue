@@ -1,4 +1,4 @@
-@extends('template.londinium')
+@extends('layouts.adminlte')
 @section('page-header')
 	<div class="page-header">
 		<div class="page-title">
@@ -18,7 +18,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 			 	<h6 class="panel-title"><i class="icon-file"></i> Layer - layer</h6>
-				<a href="{{ url('admin/layer') }}">
+				<a href="{{ url('layers/tambah') }}">
 					<button class="pull-right btn btn-xs btn-primary" type="button">
 						<i class="icon-plus-circle2"></i> Tambah
 					</button>
@@ -47,20 +47,20 @@
 				                        <div class="btn-group">
 					                        <button data-toggle="dropdown" class="btn btn-icon btn-success dropdown-toggle" type="button"><i class="icon-cog4"></i></button>
 												<ul class="dropdown-menu icons-right dropdown-menu-right">
-													<li><a href="{{ url('admin/layer/ubah', array($p->id_layer)) }}"><i class="icon-quill2"></i> Ubah</a></li>
+													<li><a href="{{ url('layers/ubah', array($p->id_layer)) }}"><i class="icon-quill2"></i> Ubah</a></li>
 
 													<li data-form="#frmDelete-{{ $p->id_layer }}" data-title="Delete Layer" data-message="Are you sure you want to hapus layer ?">
 															<a class = "formConfirm" href="#"><i class="icon-delete"></i> Hapus</a>
 													</li>
 														<form method="get" 
-														action="{{ url('admin/layer/hapus/'.$p->id_layer) }}"
+														action="{{ url('layers/hapus/'.$p->id_layer) }}"
 														style="display:none" 
 														id="frmDelete-{{$p->id_layer}}">
 															
 														</form>
 
 													<li class="divider"></li>
-					                                <li><a href="{{ url('admin/layer/layerinfo',array($p->id_layer)) }}">
+					                                <li><a href="{{ url('layers/layerinfo',array($p->id_layer)) }}">
 					                                    <i class="fa fa-bars"></i> Setting PopUp</a>
 					                                </li>
 					                                <li class="{{$disabled}}" 

@@ -9,7 +9,8 @@ class Pagging{
          //dd($query);
          //$rec = mysql_fetch_array(mysql_query($query));
          $rec = DB::select(DB::raw($query));
-         $total = $rec[0]->totalCount;
+         
+         $total = $rec[0]->totalcount;
          $adjacents = "2"; 
 
          $page = ($page == 0 ? 1 : $page);  
@@ -24,7 +25,7 @@ class Pagging{
          if($setLastpage > 1)
          {  
             $setPaginate .= "<ul class='pagination pagination-sm no-margin pull-right'>";
-                       //$setPaginate .= "<li class='setPage'>Page $page of $setLastpage</li>";
+            //$setPaginate .= "<li class='setPage'>Page $page of $setLastpage</li>";
             if ($setLastpage < 7 + ($adjacents * 2))
             {  
                for ($counter = 1; $counter <= $setLastpage; $counter++)

@@ -4,6 +4,14 @@ php_value post_max_size 50M
 php_value max_execution_time 5000
 php_value max_input_time 5000
 #php_value memory_limit 250M
+
+#Header add Access-Control-Allow-Origin "http://localhost"
+
+<IfModule mod_headers.c>
+    #Header set Access-Control-Allow-Origin: *
+    #Header set Access-Control-Request-Headers: "Access-Control-Request-Headers" ":" #field-name
+</IfModule>
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews

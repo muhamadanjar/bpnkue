@@ -1,5 +1,5 @@
 @extends('layouts.adminlte')
-
+@section('title','Kuesioner &rsaquo; Cari data')
 @section('content')
 	
 	<div class="row">

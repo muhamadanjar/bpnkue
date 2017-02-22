@@ -133,7 +133,7 @@ class KuesionerCtrl extends Controller{
                for ($counter = 1; $counter <= $setLastpage; $counter++)
                {
                   if ($counter == $page)
-                     $setPaginate.= "<li><a class='current_page'>$counter</a></li>";
+                     $setPaginate.= "<li><a class='current_page active'>$counter</a></li>";
                   else
                      $setPaginate.= "<li><a href='{$page_url}page=$counter'>$counter</a></li>";             
                }
@@ -145,7 +145,7 @@ class KuesionerCtrl extends Controller{
                   for ($counter = 1; $counter < 4 + ($adjacents * 2); $counter++)
                   {
                      if ($counter == $page)
-                        $setPaginate.= "<li><a class='current_page'>$counter</a></li>";
+                        $setPaginate.= "<li><a class='current_page active'>$counter</a></li>";
                      else
                         $setPaginate.= "<li><a href='{$page_url}page=$counter'>$counter</a></li>";             
                   }
@@ -161,7 +161,7 @@ class KuesionerCtrl extends Controller{
                   for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++)
                   {
                      if ($counter == $page)
-                        $setPaginate.= "<li><a class='current_page'>$counter</a></li>";
+                        $setPaginate.= "<li><a class='current_page active'>$counter</a></li>";
                      else
                         $setPaginate.= "<li><a href='{$page_url}page=$counter'>$counter</a></li>";             
                   }
@@ -177,7 +177,7 @@ class KuesionerCtrl extends Controller{
                   for ($counter = $setLastpage - (2 + ($adjacents * 2)); $counter <= $setLastpage; $counter++)
                   {
                      if ($counter == $page)
-                        $setPaginate.= "<li><a class='current_page'>$counter</a></li>";
+                        $setPaginate.= "<li><a class='current_page active'>$counter</a></li>";
                      else
                         $setPaginate.= "<li><a href='{$page_url}page=$counter'>$counter</a></li>";             
                   }

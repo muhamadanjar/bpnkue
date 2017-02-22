@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 class AuthCtrl extends Controller{
 	use RedirectsUsers, ThrottlesLogins;
+    public $redirectTo = 'map';
 	public function __construct($value=''){
         //$this->redirect = new RedirectsUsers();
         //$this->ThrottlesLogins = new ThrottlesLogins();
@@ -127,7 +128,7 @@ class AuthCtrl extends Controller{
         return redirect()->back()
             ->withInput($request->only($this->username(), 'remember'))
             ->withErrors([
-                $this->username() => Lang::get('auth.failed'),
+                $this->username() => \Lang::get('auth.failed'),
             ]);
     }
 

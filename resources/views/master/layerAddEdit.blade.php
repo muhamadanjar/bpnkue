@@ -1,4 +1,4 @@
-@extends('template.londinium')
+@extends('layouts.adminlte')
 @section('content')
 	<?php
 		if ($aksi == 'edit') {
@@ -23,7 +23,7 @@
 			$jsonfield = '';
 		}
 	?>
-    <form action="{{ url('admin/layer/tambah') }}" method="post" >
+    <form action="{{ url('layers/addedit') }}" method="post" >
 	    <div class="panel panel-default">
 		
 			<div class="panel-heading">
@@ -128,7 +128,6 @@
                         </div>
                     </div>
                     <div class="col-md-12">
-
                         <div class="form-group">
                             <label for="layername" class="col-md-2 control-label-kiri">Layer Mode</label>
                             <div class="col-md-8">
@@ -142,10 +141,17 @@
                     </div>
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label class="col-md-2 control-label-kiri">Hak Akses</label>
-                            <div class="col-md-3">
-                                {!! $level !!}
-                            </div>
+                            <label for="role" class="col-md-2 control-label-kiri">Role</label>
+                            @forelse ($role as $role)
+                            <div class="col-md-2">
+                                <label>
+                                    <input type="checkbox" name="role[]" value="{{ $role->name }}"/>
+                                    {{ $role->name }} 
+                                </label>
+                            </div>        
+                            @empty
+                                <p>No Roles</p>
+                            @endforelse   
                         </div>
                     </div>
                     
@@ -177,4 +183,3 @@
 	
 
 
-@stop

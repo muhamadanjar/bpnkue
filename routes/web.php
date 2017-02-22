@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    //return view('welcome');
+    return redirect('admin/login');
 });
 Route::get('/home', 'HomeController@index');
 
@@ -29,14 +30,23 @@ Route::post('excel/import','ExcelCtrl@postQueryBagianSatu');
 Route::get('excel/sheets','ExcelCtrl@getSheets');
 Route::get('excel/2007','ExcelCtrl@getImportExcel2007');
 
-
-Route::group(array('prefix'=>'kuesioner'), function(){
-	Route::get('/','KuesionerCtrl@getIndexVersiDua');
-	Route::get('/caridata','KuesionerCtrl@getCaridata');
-	Route::get('/caridata/query/{search}','KuesionerCtrl@getSearchCaridata');
-	Route::get('/gambaranumum','KuesionerCtrl@getGambaranUmum');
-	Route::get('/profil/{id}','KuesionerCtrl@getProfil');
-	Route::get('/custom','KuesionerCtrl@custom');
+Route::group(array('prefix'=>'map'), function(){
+	Route::get('/','MapCtrl@getIndex');
+});
+Route::group(array('prefix'=>'layers'), function(){
+	Route::get('/','LayerCtrl@getIndex');
+	Route::get('/tambah','LayerCtrl@getTambah');
+	Route::post('/addedit','LayerCtrl@postTambah');
+	Route::get('/ubah/{id}','LayerCtrl@getUbah');
+	Route::get('/hapus/{id}','LayerCtrl@getHapus');
+	Route::get('/custom','LayerCtrl@custom');
+	Route::get('/layerinfo/{id}','LayerCtrl@getLayerinfo');
+	Route::get('/layerinfopopup/{id}/{idx}/{layern}','LayerCtrl@getLayerinfopopup');
+	Route::post('/layerinfopopup/{id}/{idx}/{layern}','LayerCtrl@postLayerinfopopup');
+	Route::get('/layeresrihapus/{id}','LayerCtrl@getLayeresrihapus');
+	
+	
+	
 
 });
 
@@ -58,5 +68,39 @@ Route::group(array('prefix'=>'pengaturan'), function(){
 });
 
 Route::group(array('prefix'=>'api'), function(){
+	Route::get('fasilitas',['middleware' => 'cors','uses' => 'WebAppsCtrl@getFasilitas']);
+	Route::get('poi',['middleware' => 'cors','uses' => 'WebAppsCtrl@getPoiPandeglang']);
+	Route::get('searchfasilitas/{key}',['middleware' => 'cors','uses' => 'WebAppsCtrl@getSearchFasilitas']);
+	
+	Route::get('map/getmarker',['middleware' => 'cors',function (){
+		return \DB::table('fasilitas')->get();
+	}]);
 
+	//Login
+	Route::post('login','WebAppsCtrl@login');
+
+	//Jaringan Jalan Fungsi
+	Route::get('jjfungsi',[
+		'nocsrf' => true,
+		'middleware' => 'cors',
+		'as'=>'jjpan.jjfungsi',
+		'uses'=>'WebAppsCtrl@getJaringanFungsi'
+	]);
+
+	Route::post('jjfungsi/insert',[
+		'nocsrf' => true,
+		'as'=>'jjpan.jjfungsi.insert',
+		'uses'=>'WebAppsCtrl@postJaringanFungsi'
+	]);
+	Route::get('jjfungsi/edit/{id}',[
+		'nocsrf' => true,
+		'as'=>'jjpan.jjfungsi.edit',
+		'uses'=>'WebAppsCtrl@postUpdateJaringanFungsi'
+	]);
+	Route::get('jjfungsi/delete/{id}',[
+		'nocsrf' => true,
+		'as'=>'jjpan.jjfungsi.hapus',
+		'uses'=>'WebAppsCtrl@postDeleteJaringanFungsi'
+	]);
+	
 });

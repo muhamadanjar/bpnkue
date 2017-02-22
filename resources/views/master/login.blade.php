@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/iCheck/square/blue.css')}}">
   <style type="text/css">
     html { 
-      background: url({{ url('images/bg.jpg') }}) no-repeat center center fixed;
+      background: url({{ url('images/bg.png') }}) no-repeat center center fixed;
       -webkit-background-size: cover;
       -moz-background-size: cover;
       -o-background-size: cover;
@@ -43,6 +43,30 @@
       filter: alpha(opacity=50); /* For IE8 and earlier */
     }
 
+    .login-box-body, .register-box-body {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-top: 0;
+      color: #666;
+      
+    }
+
+    .login-box-body .title{
+      color: #fff;
+      font-size: 20px;
+      margin: 0;
+      text-align: center;
+      padding: 0 20px 20px 20px;
+      opacity: 1;
+    }
+
+    .login-box-body label{
+      color: #fff;
+      font-size: 14px;
+    }
+
+
+
 
     .login-page, .register-page {
         background: none;
@@ -64,18 +88,15 @@
   <![endif]-->
 </head>
 <body class="hold-transition login-page">
-<div id="trans">
-  <img src="{{ asset('images/bg_trans.png') }}">
-</div>
+
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>Database UMK</b> BSN</a>
-    <img class="img-logo img-responsive " src="{{ asset('images/logo.png')}}" alt="User profile picture" data-pin-nopin="true">
+    <img class="img-logo img-responsive" width="50%" src="{{ asset('images/header_login.png')}}" alt="User profile picture" data-pin-nopin="true">
   </div>
   
-
   <div class="login-box-body">
-    <p class="login-box-msg">Masukan untuk membuka sesi baru</p>
+    <p class="login-box-msg"></p>
+    <div class="title">SIMJALA Kabupaten Pandeglang</div>
     
     <form method="post" action="{{ url('/admin/login') }}">
       {{ csrf_field() }}
@@ -94,13 +115,13 @@
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox" name="remember"> Remember Me
+              <input type="checkbox" name="remember"> Ingat saya
             </label>
           </div>
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Masuk</button>
         </div>
         <!-- /.col -->
       </div>

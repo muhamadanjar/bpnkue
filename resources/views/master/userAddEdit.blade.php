@@ -7,9 +7,9 @@
 		<div class="col-md-8">
 			<div class="box box-default">
 				<div class="box-header with-border">
-					<h6 class="box-title"><i class="icon-user"></i> Tambah User</h6>
-					<a href="{{ url('admin/user') }}" class="pull-right btn btn-xs btn-primary">
-						<i class="icon-back"></i> Kembali</a>
+					<h6 class="box-title"><i class="fa fa-user"></i> Tambah User</h6>
+					<a href="{{ url('pengaturan/user') }}" class="pull-right btn btn-sm btn-primary">
+						<i class="fa fa-mail-reply"></i> Kembali</a>
 				
 				</div>
 				<div class="box-body">
@@ -97,7 +97,7 @@
 		            	@foreach($role as $k => $v)
 		                <div>
 		                	<label>
-			                  	<input type="radio" class="minimal" value="{{$v->name}}">
+			                  	<input type="radio" class="minimal" name="role" value="{{$v->name}}">
 			                  	{{$v->name}}
 			                </label>
 		                </div>
@@ -119,7 +119,7 @@
 		            @foreach($permission as $k => $v)
 		            <div>
 		                <label>
-		                  	<input type="checkbox" class="minimal" value="{{$v->name}}">
+		                  	<input type="checkbox" class="minimal" name="permission[]" value="{{$v->name}}">
 		                  	{{$v->name}}
 		                </label>
 		            </div>

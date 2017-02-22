@@ -28,10 +28,10 @@ class HomeController extends Controller
     public function index(){
         $this->_setting->getVisitor($this->_r);
         $jumlah = array();
-        $jumlah_kue = $this->getJumlahKuesioner();
+        
         $jumlah_user = $this->getJumlahUser();
         $jumlah_visit = $this->getJumlahVisitor();
-        $jumlah['kuesioner'] = $jumlah_kue;
+        
         $jumlah['user'] = $jumlah_user;
         $jumlah['visit'] = $jumlah_visit;
         return view('master.dashboard')
@@ -42,7 +42,7 @@ class HomeController extends Controller
         $query = "SELECT COUNT(*) as totalCount FROM kuesioner_umk";
         
         $rec = DB::select(DB::raw($query));
-        $total = $rec[0]->totalCount;
+        $total = $rec[0]->totalcount;
         return $total;
     }
 
@@ -50,7 +50,7 @@ class HomeController extends Controller
         $query = "SELECT COUNT(*) as totalCount FROM users";
         
         $rec = DB::select(DB::raw($query));
-        $total = $rec[0]->totalCount;
+        $total = $rec[0]->totalcount;
         return $total;
     }
 
@@ -58,7 +58,7 @@ class HomeController extends Controller
         $query = "SELECT COUNT(*) as totalCount FROM statistik_web";
         
         $rec = DB::select(DB::raw($query));
-        $total = $rec[0]->totalCount;
+        $total = $rec[0]->totalcount;
         return $total;
     }
 }

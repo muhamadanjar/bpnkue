@@ -18,15 +18,13 @@
           <ul class="treeview-menu">
             
             <li>
-              <a href="#"><i class="fa fa-circle-o"></i> Kuesioner
+              <a href="#"><i class="fa fa-circle-o"></i> Layer
                 <span class="pull-right-container">
                   <i class="fa fa-angle-left pull-right"></i>
                 </span>
               </a>
               <ul class="treeview-menu">
-                <li><a href="{{ url('kuesioner')}}"><i class="fa fa-circle-o"></i> List Kuesioner</a></li>
-                <li><a href="{{ url('kuesioner/gambaranumum')}}"><i class="fa fa-circle-o"></i> Gambaran Umum</a></li>
-                <li><a href="{{ url('kuesioner/caridata')}}"><i class="fa fa-circle-o"></i> Cari Data</a></li>
+                <li><a href="{{ url('layers')}}"><i class="fa fa-circle-o"></i> List Layer</a></li>
               </ul>
             </li>
             <li><a href="{{ url('excel')}}"><i class="fa fa-circle-o"></i> Excel</a></li>
