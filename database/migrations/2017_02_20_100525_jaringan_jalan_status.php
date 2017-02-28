@@ -19,7 +19,6 @@ class JaringanJalanStatus extends Migration
             $table->string('nama');
             $table->string('lebar');
             $table->string('panjang_ruas');
-            $table->string('keterangan');
             $table->string('nama_ruas');
             $table->string('no_ruas');
             $table->string('kecamatan');
@@ -35,6 +34,8 @@ class JaringanJalanStatus extends Migration
             $table->string('drainase');
             $table->string('kondisi_drainase');
             $table->string('panjang');
+            $table->string('keterangan');
+            $table->text('shape_line');
             $table->timestamps();
         });
     }

@@ -95,6 +95,7 @@ class WebAppsCtrl extends Controller {
         }else {
             echo "Not called properly with username parameter!";
         }*/
+        $data = array();
         if (isset($postdata)) {
             $r = json_decode($postdata);
             $status = new JalanFungsi();
@@ -105,6 +106,10 @@ class WebAppsCtrl extends Controller {
             $status->status = $r->status;
             $status->keterangan = $r->keterangan;
             $status->save();
+            
+            $data_array['result'] = "success";
+            array_push($data,$data_array);
+            return json_encode($data);
         }
         
         //$status = JalanFungsi::all();
@@ -113,7 +118,7 @@ class WebAppsCtrl extends Controller {
     }
     public function postUpdateJaringanFungsi($id){
         $postdata = file_get_contents("php://input");
-       
+        $data = array();
         if (isset($postdata)) {
             $r = json_decode($postdata);
             $status = JalanFungsi::find($id);
@@ -124,14 +129,35 @@ class WebAppsCtrl extends Controller {
             $status->status = $r->status;
             $status->keterangan = $r->keterangan;
             $status->save();
+            $data_array['result'] = "success";
+            array_push($data,$data_array);
+            return json_encode($data);
         }
         
         
     }
 
+    public function postUpdateJaringanFungsiMap($id){
+        $postdata = file_get_contents("php://input");
+        $data = array();
+        if (isset($postdata)) {
+            $r = json_decode($postdata);
+            $status = JalanFungsi::find($id);
+            $status->shape_line = $r->shapeline;
+            $status->save();
+            $data_array['result'] = "success";
+            array_push($data,$data_array);
+            return json_encode($data);
+        }
+    }
+
     public function postDeleteJaringanFungsi($id){
+        $data = array();
         $fungsi = JalanFungsi::find($id);
         $fungsi->delete();
+        $data_array['result'] = "success";
+        array_push($data,$data_array);
+        return json_encode($data);
         
     }
     

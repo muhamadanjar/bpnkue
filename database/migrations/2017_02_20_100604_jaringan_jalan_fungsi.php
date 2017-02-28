@@ -21,6 +21,7 @@ class JaringanJalanFungsi extends Migration
             $table->string('lebar');
             $table->string('status');
             $table->string('keterangan');
+            $table->text('shape_line')->nullable();
             $table->timestamps();
         });
     }

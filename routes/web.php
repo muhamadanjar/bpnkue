@@ -105,5 +105,12 @@ Route::group(array('prefix'=>'api'), function(){
 		'as'=>'jjpan.jjfungsi.hapus',
 		'uses'=>'WebAppsCtrl@postDeleteJaringanFungsi'
 	]);
+
+	Route::post('jjfungsi/editmap/{id}',[
+		'nocsrf' => true,
+		'middleware' => 'cors',
+		'as'=>'jjpan.jjfungsi.editmap',
+		'uses'=>'WebAppsCtrl@postUpdateJaringanFungsiMap'
+	]);
 	
 });
