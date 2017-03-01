@@ -14,6 +14,13 @@ require('laravel-elixir-vue-2');
  */
 
 elixir((mix) => {
+	//scripts == Combine scripts
     mix.sass('app.scss')
-       .webpack('app.js');
+    	.sass('map.scss')
+       	.webpack('app.js')
+       	//.webpack('map-editor.js');
+    	.scripts(
+	    	['map-editor.js'],
+	    	'public/map-editor.js'
+		);
 });

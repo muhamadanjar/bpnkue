@@ -32,6 +32,7 @@ Route::get('excel/2007','ExcelCtrl@getImportExcel2007');
 
 Route::group(array('prefix'=>'map'), function(){
 	Route::get('/','MapCtrl@getIndex');
+	Route::get('google','WebAppsCtrl@showMap');
 });
 Route::group(array('prefix'=>'layers'), function(){
 	Route::get('/','LayerCtrl@getIndex');
@@ -54,6 +55,15 @@ Route::get('profile','UserCtrl@getProfil');
 
 Route::group(array('prefix'=>'admin'), function(){
 	Route::get('statistik','WebCtrl@getStatistiklist');
+	Route::get('jalan/fungsi','JalanFungsiCtrl@getIndex');
+	Route::get('jalan/fungsi/add','JalanFungsiCtrl@getTambahFungsi');
+	Route::get('jalan/fungsi/{id}/edit','JalanFungsiCtrl@getEditFungsi');
+	Route::post('jalan/fungsi/{id}/delete','JalanFungsiCtrl@postDelete');
+	Route::post('jalan/fungsi/post','JalanFungsiCtrl@postJalanFungsi');
+	Route::get('jalan/fungsi/{id}/editmap','JalanFungsiCtrl@viewMap');
+
+
+	
 });
 Route::group(array('prefix'=>'pengaturan'), function(){
 	Route::get('user','UserCtrl@getIndex');
@@ -65,7 +75,11 @@ Route::group(array('prefix'=>'pengaturan'), function(){
 
 	Route::get('role','RoleCtrl@getIndex');
 
+
+
 });
+
+
 
 Route::group(array('prefix'=>'api'), function(){
 	Route::get('fasilitas',['middleware' => 'cors','uses' => 'WebAppsCtrl@getFasilitas']);
@@ -111,6 +125,13 @@ Route::group(array('prefix'=>'api'), function(){
 		'middleware' => 'cors',
 		'as'=>'jjpan.jjfungsi.editmap',
 		'uses'=>'WebAppsCtrl@postUpdateJaringanFungsiMap'
+	]);
+
+	Route::get('jjstatus',[
+		'nocsrf' => true,
+		'middleware' => 'cors',
+		'as'=>'jjpan.jjstatus',
+		'uses'=>'WebAppsCtrl@getJaringanStatus'
 	]);
 	
 });
