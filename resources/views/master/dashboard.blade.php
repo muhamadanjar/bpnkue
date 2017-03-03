@@ -1,14 +1,16 @@
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAyGT-CSg1nb0YBLihgn8vk9zfbbkk-f1c&libraries=drawing&callback=load" async defer></script>
+
 @extends('layouts.adminlte')
 
 @section('adminlte-contentheader')
-      <h1>
-        Dashboard
-        <small>Control panel</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="{{ url('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-      </ol>
+  <h1>
+      Dashboard
+      <small>Control panel</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li><a href="{{ url('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Dashboard</li>
+  </ol>
 @endsection
 
 @section('content')
@@ -56,6 +58,25 @@
           </div>
       </div>
 
+      <div class="col-lg-3 col-xs-6">
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <h3>{{$total['visit']}}</h3>
+
+              <p>Jalan</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-pie-graph"></i>
+            </div>
+            <a href="{{url('admin/statistik')}}" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+          </div>
+      </div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div id="map_dashboard"></div>
+    </div>
   </div>
   <!--<div class="row">
       <section class="col-md-8">

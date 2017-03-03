@@ -30,26 +30,30 @@
                     <i class="caret"></i>&nbsp;
 					        </button>
       						<ul class="dropdown-menu icons-right dropdown-menu-right">
-      							<li><a href="#">Mulai Edit</a></li>
-                    <li class="disabled"><a href="#">Berhenti Edit</a></li>
+      							<li id="li_start"><a href="#" onclick="start()">Mulai Edit</a></li>
+                    <li id="li_stop" class="disabled" onclick="stop()"><a href="#">Berhenti Edit</a></li>
                     <li><a href="#" onclick="javascript:setMarkers()">Set Marker</a></li>
       		          <li class="divider"></li>
       		          <li><a href="#" onclick="clearMarkers()">Hilangkan</a></li>
-                    <li class="disabled"><a href="#">Simpan</a></li>
+                    <li id="li_simpan" class="disabled"><a href="#" id="save">Simpan</a></li>
     					    </ul>
 				      </div>
-		          <textarea id="points" class="form-control"></textarea>
+              <textarea name="points" id="points" class="form-control">{{ $shape_line }}</textarea> 
+              <input type="hidden" name="id" id="id" value="{{ $jalan->id }}">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="row">
                 <div class="col-md-12">
                   <table class="table table-hover">
-                    <tbody>
-                    <tr>
+                    <thead>
+                      <tr>
                       <th>Lat</th>
                       <th>Lng</th>
                     </tr>
+                    </thead>
+                    <tbody>
                     <tr>
-                      <th>Lat</th>
-                      <th>Lng</th>
+                      <td>Lat</td>
+                      <td>Lng</td>
                     </tr>
                     </tbody>
                   </table>
@@ -65,12 +69,32 @@
         </div>
         <!-- /.box-footer-->
     </div>
+@endsection
+@section('js_tambahan')
 
-
+<script type="text/javascript">
+  (function($, window, document){
 
     
+    $('#save').click(function(e){
+      var shape_line = $('#points');
+      var formData = {
+          id: $('#id').val(),
+          shape_line: JSON.stringify(polylineStore),
+          //'_token': $('input[name=_token]').val(),
+      };
+      xhr_post('/admin/jalan/fungsi/mappost',formData)
+                
+    });
+    
+  }(jQuery, window, document));
+</script>
 
-@stop
+@endsection
+    
+
+
+
 
 
 

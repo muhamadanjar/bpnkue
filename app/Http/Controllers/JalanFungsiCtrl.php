@@ -15,16 +15,21 @@ class JalanFungsiCtrl extends Controller{
 	}
 
 	public function getTambahFungsi(){
-		return view('jalan.fungsiAdd');
+		$aksi = session('aksi', 'add');
+		return view('jalan.fungsiAddEdit')->with('aksi',$aksi);
 	}
 
-	public function getEditFungsi($id=''){
+	public function getEditFungsi($id){
 		$jalan = JalanFungsi::find($id);
-		return view('jalan.fungsiEdit')->with('jalan',$jalan);
+		if ($jalan === null) {
+			return 'Data tidak ditemukan';
+		}
+		$aksi = session('aksi', 'edit');
+		return view('jalan.fungsiAddEdit')->with('jalan',$jalan)->with('aksi',$aksi);
 	}
 
-	public function postJalanFungsi(Request $request){
-		$editnew = ($request->id == null) ? new JalanFungsi() : JalanFungsi::find($request->id);
+	public function postJalanFungsi(Request $r){
+		$editnew = ($r->id == null) ? new JalanFungsi() : JalanFungsi::find($r->id);
 		$jalan = $editnew;
 		$jalan->kode_ruas = $r->kode_ruas;
         $jalan->nama = $r->nama;
@@ -37,6 +42,27 @@ class JalanFungsiCtrl extends Controller{
         return redirect('admin/jalan/fungsi');
 	}
 
+	public function postJalanFungsiShape(Request $r){
+		$data = array();
+        try {
+        	$jalan = JalanFungsi::find($r->id);
+		
+	        $jalan->shape_line = $r->shape_line;
+	        $jalan->save();
+
+	        $data_array['result'] = "success";
+	        $data_array['jalan'] = $jalan;
+	        
+        } catch (Exception $e) {
+        	$data_array['result'] = "success";
+        	$data_array['e'] = $e;
+        }
+
+        array_push($data,$data_array);
+	    return json_encode($data);
+        
+	}
+
 	public function postDelete($id=''){
 		$jalan = JalanFungsi::find($id);
 		$jalan->delete();
@@ -46,6 +72,21 @@ class JalanFungsiCtrl extends Controller{
 
 	public function viewMap($id){
 		$jalan = JalanFungsi::find($id);
-		return view('jalan.FungsiMap')->with('jalan',$jalan);
+		$shape_line = $this->getShape_Line($id);
+		return view('jalan.FungsiMap')->with('jalan',$jalan)->with('shape_line',$shape_line);
+	}
+
+	public function getShape_Line($id){
+		$jalan = JalanFungsi::find($id);
+
+		$shape_line = $jalan->shape_line;
+		$json = (json_decode($shape_line));
+		$txt="";
+		for ($i = 0; $i < count($json); $i++) {
+	        $txt .= $json[$i]->lat.",".$json[$i]->lng.",\n";
+	        
+	    }
+
+	    return $txt;
 	}
 }

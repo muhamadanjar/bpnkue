@@ -23,6 +23,20 @@ Route::group(array('prefix'=>'admin'), function(){
 	Route::get('login','AuthCtrl@showLoginForm');
 	Route::post('login','AuthCtrl@login');
 	Route::get('logout','AuthCtrl@logout');
+
+	Route::get('statistik','WebCtrl@getStatistiklist');
+
+	//Jalan Fungsi
+	Route::get('jalan/fungsi','JalanFungsiCtrl@getIndex');
+	Route::get('jalan/fungsi/add','JalanFungsiCtrl@getTambahFungsi');
+	Route::get('jalan/fungsi/{id}/edit','JalanFungsiCtrl@getEditFungsi');
+	Route::delete('jalan/fungsi/{id}/delete','JalanFungsiCtrl@postDelete');
+	Route::post('jalan/fungsi/post','JalanFungsiCtrl@postJalanFungsi');
+	Route::get('jalan/fungsi/{id}/editmap','JalanFungsiCtrl@viewMap');
+	Route::post('jalan/fungsi/mappost','JalanFungsiCtrl@postJalanFungsiShape');
+
+	Route::get('shape_line/{id}','JalanFungsiCtrl@getShape_Line');
+	
 });
 
 Route::get('excel','ExcelCtrl@getIndex');
@@ -45,26 +59,10 @@ Route::group(array('prefix'=>'layers'), function(){
 	Route::get('/layerinfopopup/{id}/{idx}/{layern}','LayerCtrl@getLayerinfopopup');
 	Route::post('/layerinfopopup/{id}/{idx}/{layern}','LayerCtrl@postLayerinfopopup');
 	Route::get('/layeresrihapus/{id}','LayerCtrl@getLayeresrihapus');
-	
-	
-	
-
 });
 
 Route::get('profile','UserCtrl@getProfil');
 
-Route::group(array('prefix'=>'admin'), function(){
-	Route::get('statistik','WebCtrl@getStatistiklist');
-	Route::get('jalan/fungsi','JalanFungsiCtrl@getIndex');
-	Route::get('jalan/fungsi/add','JalanFungsiCtrl@getTambahFungsi');
-	Route::get('jalan/fungsi/{id}/edit','JalanFungsiCtrl@getEditFungsi');
-	Route::post('jalan/fungsi/{id}/delete','JalanFungsiCtrl@postDelete');
-	Route::post('jalan/fungsi/post','JalanFungsiCtrl@postJalanFungsi');
-	Route::get('jalan/fungsi/{id}/editmap','JalanFungsiCtrl@viewMap');
-
-
-	
-});
 Route::group(array('prefix'=>'pengaturan'), function(){
 	Route::get('user','UserCtrl@getIndex');
 	Route::get('user/tambah','UserCtrl@getTambah');
@@ -75,12 +73,10 @@ Route::group(array('prefix'=>'pengaturan'), function(){
 
 	Route::get('role','RoleCtrl@getIndex');
 
-
-
 });
 
 
-
+//WebApps
 Route::group(array('prefix'=>'api'), function(){
 	Route::get('fasilitas',['middleware' => 'cors','uses' => 'WebAppsCtrl@getFasilitas']);
 	Route::get('poi',['middleware' => 'cors','uses' => 'WebAppsCtrl@getPoiPandeglang']);

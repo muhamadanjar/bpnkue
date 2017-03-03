@@ -33,12 +33,14 @@ class Cors
         foreach($headers as $key => $value) 
             $response->header($key, $value);
         return $response;*/
-        return $next($request)
-            ->header('Access-Control-Allow-Origin', '*')
-            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        return $next($request);
+            //->header('Access-Control-Allow-Origin', '*')
+            //->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+            //->header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization, X-Request-With,x-xsrf-token, x-csrf-token');
         /*return $next($request)
             ->header('Access-Control-Allow-Origin', '*')
             ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-            ->header('Access-Control-Allow-Headers' 'Origin, Content-Type, Accept, Authorization, X-Request-With');*/
+            ->header('Access-Control-Allow-Headers' 'Origin, Content-Type, Accept, Authorization, X-Request-With, x-xsrf-token, x-csrf-token');*/
     }
+    
 }

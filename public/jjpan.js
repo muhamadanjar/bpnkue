@@ -123,9 +123,6 @@ function rangeNumber(evt) {
         }else if($(this).val() < min){
              $(this).val(min);
         }
-        
-        
-        
     return true;
 }
 (function($, window, document){
