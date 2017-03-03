@@ -1,8 +1,9 @@
 var map;
 var markers = [];
-var polyline;
+var polyline,polylineStore = [];
 var id = "points";
 var drawingmode = false;
+var path = [];
 
 function start(){
     document.getElementById("li_start").classList.add('disabled');
@@ -18,11 +19,13 @@ function stop(){
     document.getElementById("li_stop").classList.add('disabled');
     document.getElementById("li_simpan").classList.add('disabled');
 }
+
+
 function showPolyline() {
     if (polyline) {
         polyline.setMap(null);
     }
-    var path = [];
+    path = [];
     for (var i = 0; i < markers.length; i++) {
         var latlng = markers[i].getPosition();
         path.push(latlng);
@@ -59,7 +62,7 @@ function addMarker(latlng, i) {
     var marker = new google.maps.Marker({
         map: map,
         position: latlng,
-        draggable: drawingmode,
+        draggable: true,
         icon: host+'images/maps/waterpark.png'
     });
    
@@ -120,10 +123,13 @@ function removeMarker(marker) {
 function displayMarkers() {
     var txt = document.getElementById(id);
     txt.value = "";
+    polylineStore = [];
     for (var i = 0; i < markers.length; i++) {
         var latlng = markers[i].getPosition();
         txt.value += latlng.toUrlValue() + ",\n";
         
+        polylineStore.push(latlng.toJSON());
+        console.log(polylineStore);
     }
 }
 
@@ -176,6 +182,13 @@ function initialize(canvasName) {
         }
         
     });
+
+    var txt = document.getElementById(id);
+    if (txt.value !== null) {
+        setMarkers();
+    }
+
+   
 }
 function load() {
     initialize('map_canvas');
@@ -190,6 +203,25 @@ function xhr_get(url) {
     url: url,
     type: 'get',
     dataType: 'json'
+  })
+  .pipe(function(data) {
+    return data.responseCode != 200 ?
+      $.Deferred().reject( data ) :
+      data;
+  })
+  .fail(function(data) {
+    if ( data.responseCode )
+      console.log( data.responseCode );
+  });
+}
+
+function xhr_post(url,data) {
+
+  return $.ajax({
+    url: url,
+    type: 'post',
+    dataType: 'json',
+    data: data,
   })
   .pipe(function(data) {
     return data.responseCode != 200 ?
