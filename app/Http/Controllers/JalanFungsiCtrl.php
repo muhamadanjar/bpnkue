@@ -8,6 +8,8 @@ use DB;
 class JalanFungsiCtrl extends Controller{
 	public function __construct($value=''){
 		$this->middleware('auth');
+		//get return geom to coordinate
+		//ST_X(the_geom), ST_Y(the_geom), ST_AsText(the_geom)
 	}
 
 	public function getIndex($value=''){
