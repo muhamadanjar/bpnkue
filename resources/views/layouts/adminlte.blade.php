@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 
   <link rel="stylesheet" type="text/css" href="{{ asset('adminlte/plugins/datatables/jquery.datatables.min.css') }}">
-
+  @yield('map_inc')
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -102,7 +102,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       @yield('adminlte-contentheader')
-      
+
     </section>
 
 
@@ -116,7 +116,7 @@
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     @include('master.adminlte-mainfooter')
-    
+
   </footer>
 
   <!-- Control Sidebar -->

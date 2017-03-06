@@ -24,6 +24,9 @@ class JaringanJalanFungsi extends Migration
             $table->text('shape_line')->nullable();
             $table->timestamps();
         });
+        DB::statement("SELECT AddGeometryColumn('jaringan_jalan_fungsi', 'the_geom', 4326, 'LINESTRING',2)");
+
+
     }
 
     /**

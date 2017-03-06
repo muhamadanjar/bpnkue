@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\JalanFungsi;
+use DB;
 class JalanFungsiCtrl extends Controller{
 	public function __construct($value=''){
 		$this->middleware('auth');
@@ -46,21 +47,22 @@ class JalanFungsiCtrl extends Controller{
 		$data = array();
         try {
         	$jalan = JalanFungsi::find($r->id);
-		
+					$shape = $r->postgis;
 	        $jalan->shape_line = $r->shape_line;
+					$jalan->the_geom = DB::raw("ST_GeomFromText('LINESTRING({$shape})',4326)");
 	        $jalan->save();
 
 	        $data_array['result'] = "success";
 	        $data_array['jalan'] = $jalan;
-	        
+
         } catch (Exception $e) {
-        	$data_array['result'] = "success";
+        	$data_array['result'] = "error";
         	$data_array['e'] = $e;
         }
 
-        array_push($data,$data_array);
+      array_push($data,$data_array);
 	    return json_encode($data);
-        
+
 	}
 
 	public function postDelete($id=''){
@@ -83,10 +85,23 @@ class JalanFungsiCtrl extends Controller{
 		$json = (json_decode($shape_line));
 		$txt="";
 		for ($i = 0; $i < count($json); $i++) {
-	        $txt .= $json[$i]->lat.",".$json[$i]->lng.",\n";
-	        
-	    }
+	  	$txt .= $json[$i]->lat.",".$json[$i]->lng.",\n";
+	  }
+		return $txt;
+	}
 
-	    return $txt;
+	public function getShapeLinePostgis($id){
+		$jalan = JalanFungsi::find($id);
+
+		$shape_line = $jalan->shape_line;
+		$json = (json_decode($shape_line));
+		$txt="";
+		$countjson = count($json);
+		$last_index = $countjson - 1;
+		for ($i = 0; $i < $countjson; $i++) {
+			$comma = ($i == $last_index) ? "" : ",\n" ;
+	  	$txt .= $json[$i]->lng." ".$json[$i]->lat.$comma;
+	  }
+		return $txt;
 	}
 }

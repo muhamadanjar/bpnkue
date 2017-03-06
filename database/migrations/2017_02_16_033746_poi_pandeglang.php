@@ -11,8 +11,7 @@ class PoiPandeglang extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up(){
         Schema::create('poi_pandeglang', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',60);
@@ -21,15 +20,12 @@ class PoiPandeglang extends Migration
             $table->float('y');
             $table->timestamps();
         });
+        DB::statement("SELECT AddGeometryColumn('poi_pandeglang', 'the_geom', 4326, 'POINT', 2 )");
+        //SELECT AddGeometryColumn('test_geom', 'the_geom',4326, 'POINT', 'XY');
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
+
+    public function down(){
         Schema::dropIfExists('poi_pandeglang');
     }
 }

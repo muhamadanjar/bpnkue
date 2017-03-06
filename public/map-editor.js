@@ -1,18 +1,20 @@
 var map;
-var markers = [];
-var polyline,polylineStore = [];
+var markers = [],polylineStore = [];
+var polyline,datapostgis ='';
 var id = "points";
 var drawingmode = false;
 var path = [];
+var mapMinZoom = 12;
+var mapMaxZoom = 18;
 
 function start(){
     document.getElementById("li_start").classList.add('disabled');
     document.getElementById("li_stop").classList.remove('disabled');
     document.getElementById("li_simpan").classList.remove('disabled');
-    
+
     drawingmode = true;
 }
- 
+
 function stop(){
     drawingmode = false;
     document.getElementById("li_start").classList.remove('disabled');
@@ -41,10 +43,13 @@ function showPolyline() {
 }
 
 function clearMarkers() {
+    var txt = document.getElementById(id);
+    txt.value = '';
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(null);
     }
     markers = [];
+    polylineStore = [];
     showPolyline();
 }
 
@@ -65,7 +70,7 @@ function addMarker(latlng, i) {
         draggable: true,
         icon: host+'images/maps/waterpark.png'
     });
-   
+
     /*
     google.maps.event.addListener(marker, 'click', function() {
             var infoWindow = new google.maps.InfoWindow({
@@ -77,7 +82,7 @@ function addMarker(latlng, i) {
 
     google.maps.event.addListener(marker, 'dragend', function(event) {
         if(drawingmode){
-            
+
             showPolyline();
             displayMarkers();
         }
@@ -124,19 +129,24 @@ function displayMarkers() {
     var txt = document.getElementById(id);
     txt.value = "";
     polylineStore = [];
+    datapostgis = "";
+    var countjson = markers.length;
+		var last_index = countjson - 1;
     for (var i = 0; i < markers.length; i++) {
         var latlng = markers[i].getPosition();
         txt.value += latlng.toUrlValue() + ",\n";
-        
+
+        var comma = (i == last_index) ? "" : ",\n" ;
+        datapostgis += markers[i].lng+" "+markers[i].lat+""+comma;
         polylineStore.push(latlng.toJSON());
-        console.log(polylineStore);
+        //console.log(polylineStore);
     }
 }
 
 function setMarkers() {
     var txt = document.getElementById(id);
     var lines = txt.value.split(/\n/);
-    console.log(lines);
+    //console.log(lines);
     clearMarkers();
     for (var i in lines) {
         var ps = lines[i].split(/,/);
@@ -175,12 +185,13 @@ function initialize(canvasName) {
 
 
     });
+
     google.maps.event.addListener(map, 'click', function(event) {
         if(drawingmode){
             addMarker(event.latLng);
             displayMarkers();
         }
-        
+
     });
 
     var txt = document.getElementById(id);
@@ -188,7 +199,7 @@ function initialize(canvasName) {
         setMarkers();
     }
 
-   
+
 }
 function load() {
     initialize('map_canvas');

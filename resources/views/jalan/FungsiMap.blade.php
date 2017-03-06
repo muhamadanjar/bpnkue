@@ -1,8 +1,11 @@
 <link rel="stylesheet" type="text/css" href="{{asset('css/map.css')}}">
-<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAyGT-CSg1nb0YBLihgn8vk9zfbbkk-f1c&libraries=drawing&callback=load" async defer></script>
-<script type="text/javascript" src="{{ asset('/map-editor.js') }}"></script>
 
 @extends('layouts.adminlte')
+@section('title','Edit Peta Jalan Fungsi')
+@section('map_inc')
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAyGT-CSg1nb0YBLihgn8vk9zfbbkk-f1c&libraries=drawing" async defer></script>
+<script type="text/javascript" src="{{ asset('/map-editor.js') }}"></script>
+@endsection
 @section('content')
 
     <!-- Default box -->
@@ -24,6 +27,7 @@
 		        	<div id="map_canvas"></div>
 		        </div>
 		        <div class="col-md-4">
+
 		          <div class="btn-group">
 		            	<button type="button" class="btn btn-default">Action</button>
                   <button data-toggle="dropdown" class="btn btn-default btn-flat dropdown-toggle" type="button">
@@ -32,13 +36,13 @@
       						<ul class="dropdown-menu icons-right dropdown-menu-right">
       							<li id="li_start"><a href="#" onclick="start()">Mulai Edit</a></li>
                     <li id="li_stop" class="disabled" onclick="stop()"><a href="#">Berhenti Edit</a></li>
-                    <li><a href="#" onclick="javascript:setMarkers()">Set Marker</a></li>
+                    <!--<li><a href="#" onclick="javascript:setMarkers()">Set Marker</a></li>-->
       		          <li class="divider"></li>
-      		          <li><a href="#" onclick="clearMarkers()">Hilangkan</a></li>
+      		          <li id="li_clear"><a href="#" onclick="clearMarkers()">Hilangkan</a></li>
                     <li id="li_simpan" class="disabled"><a href="#" id="save">Simpan</a></li>
     					    </ul>
 				      </div>
-              <textarea name="points" id="points" class="form-control">{{ $shape_line }}</textarea> 
+              <textarea name="points" id="points" class="form-control disabled" readonly="readonly">{{ $shape_line }}</textarea>
               <input type="hidden" name="id" id="id" value="{{ $jalan->id }}">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <div class="row">
@@ -59,7 +63,8 @@
                   </table>
                 </div>
               </div>
-		        </div>
+
+            </div>
 		      </div>
 
         </div>
@@ -75,28 +80,39 @@
 <script type="text/javascript">
   (function($, window, document){
 
-    
+    load();
     $('#save').click(function(e){
       var shape_line = $('#points');
+      //console.log(datapostgis);
+      datapostgis = "";
+      var txt = document.getElementById(id);
+
+      var lines = txt.value.split(/\n/);
+
+      for (var i in lines) {
+          var ps = lines[i].split(/,/);
+
+          if (ps.length >= 2) {
+            console.log("PS",lines[i]);
+            var countjson = ps.length;
+            var last_index = countjson - 1;
+            comma = (i == 0) ? "":",\n";
+            datapostgis += comma+ps[1]+" "+ps[0];
+
+          }
+      }
+      console.log("Postgis",datapostgis);
       var formData = {
           id: $('#id').val(),
           shape_line: JSON.stringify(polylineStore),
+          postgis: datapostgis,
           //'_token': $('input[name=_token]').val(),
       };
       xhr_post('/admin/jalan/fungsi/mappost',formData)
-                
+
     });
-    
+
   }(jQuery, window, document));
 </script>
 
 @endsection
-    
-
-
-
-
-
-
-
-
