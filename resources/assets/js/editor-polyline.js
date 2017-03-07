@@ -1,4 +1,3 @@
-var map;
 var markers = [],polylineStore = [];
 var polyline,datapostgis ='';
 var id = "points";
@@ -7,7 +6,6 @@ var path = [];
 var mapMinZoom = 12;
 var mapMaxZoom = 18;
 var google;
-//var infoWindow = new google.maps.InfoWindow({map: map});
 
 function start(){
     document.getElementById("li_start").classList.add('disabled');
@@ -161,50 +159,4 @@ function setMarkers() {
     if (markers.length > 0) {
         map.setCenter(markers[0].getPosition());
     }
-}
-
-function initialize(canvasName) {
-    map = new google.maps.Map(document.getElementById(canvasName), {
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        //center: new google.maps.LatLng(-6.3252738,106.0764884),
-        //zoom: 13,
-        mapTypeControl: false,
-        mapTypeControlOptions: {
-            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-            position: google.maps.ControlPosition.TOP_CENTER
-        },
-        zoomControl: true,
-        zoomControlOptions: {
-            position: google.maps.ControlPosition.LEFT_TOP
-        },
-        scaleControl: false,
-        streetViewControl: false,
-        streetViewControlOptions: {
-            position: google.maps.ControlPosition.LEFT_TOP
-        },
-        fullscreenControl: false
-
-
-    });
-
-    google.maps.event.addListener(map, 'click', function(event) {
-        if(drawingmode){
-            addMarker(event.latLng);
-            displayMarkers();
-        }
-
-    });
-
-    var txt = document.getElementById(id);
-    if (txt.value !== null) {
-        setMarkers();
-    }
-
-}
-
-function load() {
-    initialize('map_canvas');
-    var latlng = new google.maps.LatLng(-6.3252738,106.0764884);
-    map.setCenter(latlng);
-    map.setZoom(13);
 }

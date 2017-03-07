@@ -3,7 +3,7 @@
 @extends('layouts.adminlte')
 @section('title','Edit Peta Jalan Fungsi')
 @section('map_inc')
-<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAyGT-CSg1nb0YBLihgn8vk9zfbbkk-f1c&libraries=drawing" async defer></script>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAyGT-CSg1nb0YBLihgn8vk9zfbbkk-f1c&callback=load" async defer></script>
 <script type="text/javascript" src="{{ asset('/map-editor.js') }}"></script>
 @endsection
 @section('content')

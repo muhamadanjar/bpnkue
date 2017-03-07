@@ -1,6 +1,6 @@
 <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-       
+
         <li class="active">
           <a href="{{ url('home') }}">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -16,7 +16,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            
+
             <li>
               <a href="#"><i class="fa fa-circle-o"></i> Layer
                 <span class="pull-right-container">
@@ -42,6 +42,18 @@
         </li>
         <li class="treeview">
           <a href="#">
+            <i class="fa fa-maps"></i> <span>Peta</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('map') }}"><i class="fa fa-circle-o"></i> Esri</a></li>
+            <li><a href="{{ url('map/google') }}"><i class="fa fa-circle-o"></i> Google</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-cogs"></i> <span>Pengaturan</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -52,7 +64,4 @@
             <li><a href="{{ url('pengaturan/role') }}"><i class="fa fa-circle-o"></i> Level</a></li>
           </ul>
         </li>
-          
-        
-        
 </ul>

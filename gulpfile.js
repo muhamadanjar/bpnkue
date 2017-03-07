@@ -20,7 +20,9 @@ elixir((mix) => {
        	.webpack('app.js')
        	//.webpack('map-editor.js');
     	.scripts(
-	    	['map-editor.js'],
-	    	'public/map-editor.js'
-		);
+	    	['map-editor.js','ajax.js'],
+	    	'public/js/map/map-editor.js')
+      .scripts(
+  	    ['geolocation.js'],
+  	    'public/js/map/map.js');
 });

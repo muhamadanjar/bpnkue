@@ -1,6 +1,6 @@
-#map, #map_canvas {
+#map, #map_canvas, #mapgoogle {
   width: 100%;
-  height: 90%;
+  height: 100%;
 }
 
 .scroll-content {

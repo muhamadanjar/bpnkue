@@ -6,6 +6,8 @@ var drawingmode = false;
 var path = [];
 var mapMinZoom = 12;
 var mapMaxZoom = 18;
+var google;
+//var infoWindow = new google.maps.InfoWindow({map: map});
 
 function start(){
     document.getElementById("li_start").classList.add('disabled');
@@ -21,7 +23,6 @@ function stop(){
     document.getElementById("li_stop").classList.add('disabled');
     document.getElementById("li_simpan").classList.add('disabled');
 }
-
 
 function showPolyline() {
     if (polyline) {
@@ -135,9 +136,9 @@ function displayMarkers() {
     for (var i = 0; i < markers.length; i++) {
         var latlng = markers[i].getPosition();
         txt.value += latlng.toUrlValue() + ",\n";
-
+        /*console.log(markers[i]);
         var comma = (i == last_index) ? "" : ",\n" ;
-        datapostgis += markers[i].lng+" "+markers[i].lat+""+comma;
+        datapostgis += markers[i].lng+" "+markers[i].lat+""+comma;*/
         polylineStore.push(latlng.toJSON());
         //console.log(polylineStore);
     }
@@ -199,8 +200,8 @@ function initialize(canvasName) {
         setMarkers();
     }
 
-
 }
+
 function load() {
     initialize('map_canvas');
     var latlng = new google.maps.LatLng(-6.3252738,106.0764884);
@@ -242,6 +243,8 @@ function xhr_post(url,data) {
   .fail(function(data) {
     if ( data.responseCode )
       console.log( data.responseCode );
+  }).then(function(data){
+    window.location = '/home';
   });
 }
 
