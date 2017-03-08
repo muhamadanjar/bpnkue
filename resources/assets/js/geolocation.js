@@ -1,4 +1,11 @@
-function addYourLocationButton (map) {
+//Geolocation
+var markerGeolocation;
+var animationInterval;
+var watchpositionstatus=false;
+var positionTimer;
+var secondChild;
+
+function initGeolocation(map) {
     var controlDiv = document.createElement('div');
 
     var firstChild = document.createElement('button');

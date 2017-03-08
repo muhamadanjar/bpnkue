@@ -13,6 +13,7 @@ class VerifyCsrfToken extends BaseVerifier
      */
     protected $except = [
         'api/*',
-        'admin/jalan/fungsi/mappost'
+        'admin/jalan/fungsi/mappost',
+        'admin/jalan/status/mappost'
     ];
 }

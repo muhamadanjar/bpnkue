@@ -34,9 +34,18 @@ Route::group(array('prefix'=>'admin'), function(){
 	Route::post('jalan/fungsi/post','JalanFungsiCtrl@postJalanFungsi');
 	Route::get('jalan/fungsi/{id}/editmap','JalanFungsiCtrl@viewMap');
 	Route::post('jalan/fungsi/mappost','JalanFungsiCtrl@postJalanFungsiShape');
-
 	Route::get('shape_line/{id}','JalanFungsiCtrl@getShape_Line');
-	
+
+  //Jalan Status
+
+  Route::get('jalan/status','JalanStatusCtrl@getIndex');
+	Route::get('jalan/status/add','JalanStatusCtrl@getTambahStatus');
+	Route::get('jalan/status/{id}/edit','JalanStatusCtrl@getEditStatus');
+	Route::delete('jalan/status/{id}/delete','JalanStatusCtrl@postDelete');
+	Route::post('jalan/status/post','JalanStatusCtrl@postJalanStatus');
+	Route::get('jalan/status/{id}/editmap','JalanStatusCtrl@viewMap');
+	Route::post('jalan/status/mappost','JalanStatusCtrl@postJalanStatusShape');
+
 });
 
 Route::get('excel','ExcelCtrl@getIndex');
@@ -47,6 +56,8 @@ Route::get('excel/2007','ExcelCtrl@getImportExcel2007');
 Route::group(array('prefix'=>'map'), function(){
 	Route::get('/','MapCtrl@getIndex');
 	Route::get('google','WebAppsCtrl@showMap');
+  //Route::get('geocoder','MapCtrl@googlemap_geocoder');
+
 });
 Route::group(array('prefix'=>'layers'), function(){
 	Route::get('/','LayerCtrl@getIndex');
@@ -81,7 +92,7 @@ Route::group(array('prefix'=>'api'), function(){
 	Route::get('fasilitas',['middleware' => 'cors','uses' => 'WebAppsCtrl@getFasilitas']);
 	Route::get('poi',['middleware' => 'cors','uses' => 'WebAppsCtrl@getPoiPandeglang']);
 	Route::get('searchfasilitas/{key}',['middleware' => 'cors','uses' => 'WebAppsCtrl@getSearchFasilitas']);
-	
+
 	Route::get('map/getmarker',['middleware' => 'cors',function (){
 		return \DB::table('fasilitas')->get();
 	}]);
@@ -129,5 +140,5 @@ Route::group(array('prefix'=>'api'), function(){
 		'as'=>'jjpan.jjstatus',
 		'uses'=>'WebAppsCtrl@getJaringanStatus'
 	]);
-	
+
 });

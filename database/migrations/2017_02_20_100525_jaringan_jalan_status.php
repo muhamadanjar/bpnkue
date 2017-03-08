@@ -15,29 +15,35 @@ class JaringanJalanStatus extends Migration
     {
         Schema::create('jaringan_jalan_status', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('kode_ruas');
-            $table->string('nama');
-            $table->string('lebar');
-            $table->string('panjang_ruas');
-            $table->string('nama_ruas');
             $table->string('no_ruas');
+            $table->string('kode_ruas');
+            $table->string('nama_ruas');
             $table->string('kecamatan');
             $table->string('kelurahan');
-            $table->string('titik_pangkal');
-            $table->string('titik_akhir');
-            $table->string('kelas');
-            $table->string('fungsi');
+            $table->string('titik_pangkal')->nullable();
+            $table->string('titik_akhir')->nullable();
+            $table->string('lebar_ruas');
+            $table->string('panjang_ruas');
             $table->string('jenis_perkerasan');
             $table->integer('tahun_renovasi');
-            $table->string('kondisi');
+            $table->string('id_kondisi');
+            $table->string('jenis_permukaan_jalan')->nullable();
+
+            $table->string('kondisi_lapang')->nullable();
+            $table->string('nilai_rci')->nullable();
+
+            $table->string('kelas')->nullable();
+            $table->string('fungsi');
+            $table->string('keterangan');
             $table->string('sempadan');
+            $table->string('kondisi_sempadan');
             $table->string('drainase');
             $table->string('kondisi_drainase');
-            $table->string('panjang');
-            $table->string('keterangan');
-            $table->text('shape_line');
+            $table->text('shape_line')->nullable();
             $table->timestamps();
         });
+
+        DB::statement("SELECT AddGeometryColumn('jaringan_jalan_status', 'the_geom', 4326, 'LINESTRING',2)");
     }
 
     /**

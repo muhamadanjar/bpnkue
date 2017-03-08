@@ -26,12 +26,12 @@ class MapCtrl extends Controller {
 	}
 
 	public function LayerUser(){
-		
+
 		$layers = Layer::where('na','=','0')->orderBy('orderlayer','DESC');
-		
+
 		$sql = $layers->toSql();
 		$run_layers = $layers->get();
-		
+
 		$array = array(); $operationallayer = array();
 			foreach ($run_layers as $klyr => $layer) {
 				$optionfeature['id'] = $layer->layer;
@@ -39,8 +39,8 @@ class MapCtrl extends Controller {
 				$optionfeature['visible'] = $layer->option_visible;
 				$optionfeature['outFields'] = ['*'];
 				$optionfeature['mode'] = 1;
-			        
-			    $optiondynamic['id'] = $layer->layer;  
+
+			    $optiondynamic['id'] = $layer->layer;
 			    $optiondynamic['opacity'] = $layer->option_opacity;
 			    $optiondynamic['visible'] = $layer->option_visible;
 			    $optiondynamic['outFields'] = ['*'];
@@ -49,8 +49,8 @@ class MapCtrl extends Controller {
 			    $layerControlLayerInfos['swipe'] = true;
 			    $layerControlLayerInfos['metadataUrl'] = true;
 			    $layerControlLayerInfos['expanded'] = false;
-			    
-			    $options = ($layer->tipelayer=='dynamic' ?  $optiondynamic : $optionfeature); 
+
+			    $options = ($layer->tipelayer=='dynamic' ?  $optiondynamic : $optionfeature);
 
 			    $operationallayer_['type'] = $layer->tipelayer;
 			    $operationallayer_['url'] =  $layer->layerurl;
@@ -63,7 +63,7 @@ class MapCtrl extends Controller {
 			    $operationallayer_['roles'] = $layer->roles;
 			    array_push($operationallayer, $operationallayer_);
 			}
-		
+
 		return json_encode($operationallayer);
 
 	}
@@ -84,7 +84,7 @@ class MapCtrl extends Controller {
 			$value['key_'] = json_decode($value['key_']);
 			$value['media'] = json_decode($value['media']);
 			$arrayfieldinfo = $value['key_'];
-			
+
 			$arrayfieldinfos['title'] = $value->title;
 			if ($value['display'] == 'keyvalue') {
 				$arrayfieldinfos['fieldInfos'] = $arrayfieldinfo;
@@ -93,7 +93,7 @@ class MapCtrl extends Controller {
 			}
 			$arrayfieldinfos['showAttachments'] = $value['showattachments'];
 			$arrayfieldinfos['mediaInfos'] = $value['media'];
-			
+
 			$arraylayerid[(int)$value['layerid']] = $arrayfieldinfos;
 			if(array_key_exists($value['layername'],$arrayname)){
 				$arrayname[$value['layername']] += $arraylayerid;
@@ -124,6 +124,10 @@ class MapCtrl extends Controller {
         return $query;
 	}
 
-	
+	public function googlemap_geocoder(){
+		return view('map.geocoder');
+	}
+
+
 
 }

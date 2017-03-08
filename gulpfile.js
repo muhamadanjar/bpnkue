@@ -23,6 +23,6 @@ elixir((mix) => {
 	    	['map-editor.js','ajax.js'],
 	    	'public/js/map/map-editor.js')
       .scripts(
-  	    ['geolocation.js'],
+  	    ['geolocation.js','traffic.js'],
   	    'public/js/map/map.js');
 });

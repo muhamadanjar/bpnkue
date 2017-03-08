@@ -1,4 +1,11 @@
-function addYourLocationButton (map) {
+//Geolocation
+var markerGeolocation;
+var animationInterval;
+var watchpositionstatus=false;
+var positionTimer;
+var secondChild;
+
+function initGeolocation(map) {
     var controlDiv = document.createElement('div');
 
     var firstChild = document.createElement('button');
@@ -121,6 +128,22 @@ function setMarkerPosition(marker, position) {
 function stopWatch(){
   console.log("Stop watchPosition");
   navigator.geolocation.clearWatch(positionTimer);
+}
+
+var trafficLayerToggle = false;
+function initTraffic(map) {
+  var trafficLayer = new google.maps.TrafficLayer();
+  if (trafficLayerToggle) {
+      trafficLayer.setMap(map);
+  }
+}
+
+function changeTraffic() {
+  if (trafficLayerToggle == true) {
+    trafficLayerToggle = false
+  }else {
+    trafficLayerToggle = true;
+  }
 }
 
 //# sourceMappingURL=map.js.map
