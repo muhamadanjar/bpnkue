@@ -23,6 +23,9 @@ elixir((mix) => {
 	    	['map-editor.js','ajax.js'],
 	    	'public/js/map/map-editor.js')
       .scripts(
+  	    	['editor-polyline.js','ajax.js'],
+  	    	'public/js/map/editor-polyline.js')
+      .scripts(
   	    ['geolocation.js','traffic.js'],
   	    'public/js/map/map.js');
 });

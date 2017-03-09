@@ -3,8 +3,7 @@
 @extends('layouts.adminlte')
 @section('title','Edit Peta Jalan Fungsi')
 @section('map_inc')
-<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAyGT-CSg1nb0YBLihgn8vk9zfbbkk-f1c&callback=load" async defer></script>
-<script type="text/javascript" src="{{ asset('/js/map/map-editor.js') }}"></script>
+
 @endsection
 @section('content')
 
@@ -23,12 +22,12 @@
         <div class="box-body">
         	<div class="row">
 		        <!-- left column -->
-		        <div class="col-md-8">
+		        <div class="col-md-10">
 		        	<div id="map_canvas"></div>
 		        </div>
 		        <div class="col-md-4">
 
-		          <div class="btn-group">
+		          <div class="btn-group" id="aksi-editor">
 		            	<button type="button" class="btn btn-default">Action</button>
                   <button data-toggle="dropdown" class="btn btn-default btn-flat dropdown-toggle" type="button">
                     <i class="caret"></i>&nbsp;
@@ -42,27 +41,9 @@
                     <li id="li_simpan" class="disabled"><a href="#" id="save">Simpan</a></li>
     					    </ul>
 				      </div>
-              <textarea name="points" id="points" class="form-control disabled" readonly="readonly">{{ $shape_line }}</textarea>
+              <textarea name="points" id="points" class="form-control disabled" style="display:none" readonly="readonly">{{ $shape_line }}</textarea>
               <input type="hidden" name="id" id="id" value="{{ $jalan->id }}">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <div class="row">
-                <div class="col-md-12">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                      <th>Lat</th>
-                      <th>Lng</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td>Lat</td>
-                      <td>Lng</td>
-                    </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
 
             </div>
 		      </div>
@@ -76,11 +57,38 @@
     </div>
 @endsection
 @section('js_tambahan')
-
+<script type="text/javascript" src="{{ asset('/js/map/editor-polyline.js') }}"></script>
+<script type="text/javascript">
+var map;
+function initialize() {
+    map = new google.maps.Map(document.getElementById('map_canvas'), {
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        center: new google.maps.LatLng(-6.3252738,106.0764884),
+        zoom: 13,
+        mapTypeControl: false,
+        mapTypeControlOptions: {
+            style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+            position: google.maps.ControlPosition.TOP_CENTER
+        },
+        zoomControl: true,
+        zoomControlOptions: {
+            position: google.maps.ControlPosition.LEFT_TOP
+        },
+        scaleControl: false,
+        streetViewControl: true,
+        streetViewControlOptions: {
+            position: google.maps.ControlPosition.LEFT_TOP
+        },
+        fullscreenControl: false
+    });
+    initEditPolyline(map);
+}
+</script>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAyGT-CSg1nb0YBLihgn8vk9zfbbkk-f1c&callback=initialize" async defer></script>
 <script type="text/javascript">
   (function($, window, document){
 
-    load();
+    //load();
     $('#save').click(function(e){
       var shape_line = $('#points');
       //console.log(datapostgis);

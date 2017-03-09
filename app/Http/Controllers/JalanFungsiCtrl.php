@@ -35,14 +35,13 @@ class JalanFungsiCtrl extends Controller{
 		$editnew = ($r->id == null) ? new JalanFungsi() : JalanFungsi::find($r->id);
 		$jalan = $editnew;
 		$jalan->kode_ruas = $r->kode_ruas;
-        $jalan->nama = $r->nama;
-        $jalan->panjang = $r->panjang;
-        $jalan->lebar = $r->lebar;
-        $jalan->status = $r->status;
-        $jalan->keterangan = $r->keterangan;
-        $jalan->save();
-
-        return redirect('admin/jalan/fungsi');
+    $jalan->nama = $r->nama;
+    $jalan->panjang = $r->panjang;
+    $jalan->lebar = $r->lebar;
+    $jalan->status = $r->status;
+    $jalan->keterangan = $r->keterangan;
+    $jalan->save();
+		return redirect('admin/jalan/fungsi');
 	}
 
 	public function postJalanFungsiShape(Request $r){

@@ -56,8 +56,53 @@ function initialize() {
         },
         fullscreenControl: false
     });
+    
     initGeolocation(map);
     initTraffic(map);
+
+    //Define custom WMS layer for census output areas in WGS84
+    var censusLayer =new google.maps.ImageMapType({
+      getTileUrl:function (coord, zoom) {
+        // Compose URL for overlay tile
+
+        var s = Math.pow(2, zoom);
+        var twidth = 256;
+        var theight = 256;
+
+        //latlng bounds of the 4 corners of the google tile
+        //Note the coord passed in represents the top left hand (NW) corner of the tile.
+        var gBl = map.getProjection().fromPointToLatLng(new google.maps.Point(coord.x * twidth / s, (coord.y + 1) * theight / s)); // bottom left / SW
+        var gTr = map.getProjection().fromPointToLatLng(new google.maps.Point((coord.x + 1) * twidth / s, coord.y * theight / s)); // top right / NE
+
+        // Bounding box coords for tile in WMS pre-1.3 format (x,y)
+        var bbox = gBl.lng() + "," + gBl.lat() + "," + gTr.lng() + "," + gTr.lat();
+
+        //base WMS URL
+        var url = "http://localhost/geoserver/jjpan/wms?";
+
+        url += "&service=WMS";           //WMS service
+        url += "&version=1.1.0";         //WMS version
+        url += "&request=GetMap";        //WMS operation
+        url += "&layers=jjpan:jaringan_jalan_fungsi"; //WMS layers to draw
+        url += "&styles=";               //use default style
+        url += "&format=image/png";      //image format
+        url += "&TRANSPARENT=TRUE";      //only draw areas where we have data
+        url += "&srs=EPSG:4326";         //projection WGS84
+        url += "&bbox=" + bbox;          //set bounding box for tile
+        url += "&width=256";             //tile size used by google
+        url += "&height=256";
+        //url += "&tiled=true";
+
+        return url;                 //return WMS URL for the tile
+      }, //getTileURL
+
+      tileSize: new google.maps.Size(256, 256),
+      opacity: 0.85,
+      isPng: true
+    });
+    // add WMS layer to map
+    // google maps will end up calling the getTileURL for each tile in the map view
+    map.overlayMapTypes.push(censusLayer);
 }
 </script>
 
