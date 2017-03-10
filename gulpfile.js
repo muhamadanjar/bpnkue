@@ -19,13 +19,19 @@ elixir((mix) => {
     	.sass('map.scss')
        	.webpack('app.js')
        	//.webpack('map-editor.js');
-    	.scripts(
+    	/*.scripts(
 	    	['map-editor.js','ajax.js'],
-	    	'public/js/map/map-editor.js')
+	    	'public/js/map/map-editor.js')*/
       .scripts(
-  	    	['editor-polyline.js','ajax.js'],
+  	    	['maps/editor-polyline.js','ajax.js'],
   	    	'public/js/map/editor-polyline.js')
       .scripts(
-  	    ['geolocation.js','traffic.js'],
+          ['maps/wms.js'],
+      	  'public/js/map/wms.js')
+      .scripts(
+              ['maps/searchplaces.js'],
+          	  'public/js/map/searchplaces.js')
+      .scripts(
+  	    ['maps/geolocation.js','maps/traffic.js'],
   	    'public/js/map/map.js');
 });

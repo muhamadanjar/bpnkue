@@ -13,6 +13,7 @@
           <h3 class="box-title">Fungsi Map</h3>
 
           <div class="box-tools pull-right">
+            <span id="statussave" class="badge"></span>
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fa fa-minus"></i></button>
             <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
@@ -28,7 +29,7 @@
 		        <div class="col-md-4">
 
 		          <div class="btn-group" id="aksi-editor">
-		            	<button type="button" class="btn btn-default">Action</button>
+		            	<button type="button" class="btn btn-default">Edit</button>
                   <button data-toggle="dropdown" class="btn btn-default btn-flat dropdown-toggle" type="button">
                     <i class="caret"></i>&nbsp;
 					        </button>
@@ -37,7 +38,7 @@
                     <li id="li_stop" class="disabled" onclick="stop()"><a href="#">Berhenti Edit</a></li>
                     <!--<li><a href="#" onclick="javascript:setMarkers()">Set Marker</a></li>-->
       		          <li class="divider"></li>
-      		          <li id="li_clear"><a href="#" onclick="clearMarkers()">Hilangkan</a></li>
+      		          <li id="li_clear" class="disabled"><a href="#" onclick="clearMarkers()">Hilangkan</a></li>
                     <li id="li_simpan" class="disabled"><a href="#" id="save">Simpan</a></li>
     					    </ul>
 				      </div>
@@ -80,7 +81,10 @@ function initialize() {
         streetViewControlOptions: {
             position: google.maps.ControlPosition.LEFT_TOP
         },
-        fullscreenControl: false
+        fullscreenControl: true,
+        fullscreenControlOptions: {
+            position: google.maps.ControlPosition.TOP_RIGHT
+        },
     });
     initEditPolyline(map);
 }
@@ -118,7 +122,7 @@ function initialize() {
           postgis: datapostgis,
           //'_token': $('input[name=_token]').val(),
       };
-      xhr_post('/admin/jalan/fungsi/mappost',formData)
+      xhr_post('/admin/jalan/fungsi/mappost',formData);
 
     });
 

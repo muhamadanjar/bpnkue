@@ -122,9 +122,9 @@
 										<div class="form-group">
                         <label for="status" class="col-md-2 control-label-kiri">Jenis Permukaan Jalan</label>
 												<select name="jenis_permukaan_jalan" class="form-control">
-      		                      <option value="-">------</option>
-      		                      <option value="jalan_kab_kolektor" @if($jenis_permukaan_jalan =='jalan_kab_kolektor') selected="selected" @endif>jalan_kab_kolektor</option>
-      		                      <option value="jalan_kab_primer" @if($jenis_permukaan_jalan =='jalan_kab_primer') selected="selected" @endif>jalan_kab_primer</option>
+														<option value="-">------</option>
+      		                  <option value="pm" @if($jenis_permukaan_jalan =='pm') selected="selected" @endif>PM</option>
+      		                  <option value="lapis_tipis" @if($jenis_permukaan_jalan =='lapis_tipis') selected="selected" @endif>Lapis Tipis</option>
       		              </select>
 
                     </div>
@@ -192,7 +192,7 @@
       		        </div>
 
 
-
+									
                   <div class="col-md-12">
                     <div class="form-actions text-right">
                       <div class="col-md-11 col-md-offset-1">

@@ -9,7 +9,7 @@ var google;
 
 function initEditPolyline(map) {
   var aksieditor = document.getElementById('aksi-editor');
-  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(aksieditor);
+  map.controls[google.maps.ControlPosition.RIGHT_TOP].push(aksieditor);
   google.maps.event.addListener(map, 'click', function(event) {
       if(drawingmode){
           addMarker(event.latLng);
@@ -20,11 +20,14 @@ function initEditPolyline(map) {
   if (txt.value !== null) {
       setMarkers();
   }
+
+
 }
 
 function start(){
     document.getElementById("li_start").classList.add('disabled');
     document.getElementById("li_stop").classList.remove('disabled');
+    document.getElementById("li_clear").classList.remove('disabled');
     document.getElementById("li_simpan").classList.remove('disabled');
 
     drawingmode = true;
@@ -34,6 +37,7 @@ function stop(){
     drawingmode = false;
     document.getElementById("li_start").classList.remove('disabled');
     document.getElementById("li_stop").classList.add('disabled');
+    document.getElementById("li_clear").classList.add('disabled');
     document.getElementById("li_simpan").classList.add('disabled');
 }
 
@@ -184,12 +188,12 @@ function xhr_get(url) {
     dataType: 'json'
   })
   .pipe(function(data) {
-    return data.responseCode != 200 ?
-      $.Deferred().reject( data ) :
-      data;
+
+    return data.responseCode != 200 ? $.Deferred().reject( data ) : data;
   })
   .fail(function(data) {
     if ( data.responseCode )
+
       console.log( data.responseCode );
   });
 }
@@ -203,12 +207,20 @@ function xhr_post(url,data) {
     data: data,
   })
   .pipe(function(data) {
+    $('#statussave').html('Data berhasil disimpan');
+    setInterval(function() {
+      $('#statussave').html('');
+    }, 3000);
     return data.responseCode != 200 ?
-      $.Deferred().reject( data ) :
-      data;
+      $.Deferred().reject( data ) : data;
   })
   .fail(function(data) {
+
     if ( data.responseCode )
+      $('#statussave').html('Data berhasil tidak disimpan');
+      setInterval(function() {
+        $('#statussave').html('');
+      }, 3000);
       console.log( data.responseCode );
   }).then(function(data){
     window.location = '/home';

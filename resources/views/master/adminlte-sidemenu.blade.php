@@ -1,6 +1,5 @@
 <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-
         <li class="active">
           <a href="{{ url('home') }}">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
@@ -16,7 +15,6 @@
             </span>
           </a>
           <ul class="treeview-menu">
-
             <li>
               <a href="#"><i class="fa fa-circle-o"></i> Layer
                 <span class="pull-right-container">

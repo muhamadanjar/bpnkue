@@ -13,6 +13,7 @@
           <h3 class="box-title">Fungsi Map</h3>
 
           <div class="box-tools pull-right">
+            <span id="statussave" class="badge"></span>
             <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fa fa-minus"></i></button>
             <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
@@ -21,37 +22,32 @@
         </div>
         <div class="box-body">
         	<div class="row">
-		        <!-- left column -->
-		        <div class="col-md-10">
+		        <div class="col-md-12">
 		        	<div id="map_canvas"></div>
 		        </div>
-		        <div class="col-md-4">
-
-		          <div class="btn-group" id="aksi-editor">
-		            	<button type="button" class="btn btn-default">Action</button>
-                  <button data-toggle="dropdown" class="btn btn-default btn-flat dropdown-toggle" type="button">
-                    <i class="caret"></i>&nbsp;
-					        </button>
-      						<ul class="dropdown-menu icons-right dropdown-menu-right">
-      							<li id="li_start"><a href="#" onclick="start()">Mulai Edit</a></li>
-                    <li id="li_stop" class="disabled" onclick="stop()"><a href="#">Berhenti Edit</a></li>
-                    <!--<li><a href="#" onclick="javascript:setMarkers()">Set Marker</a></li>-->
-      		          <li class="divider"></li>
-      		          <li id="li_clear"><a href="#" onclick="clearMarkers()">Hilangkan</a></li>
-                    <li id="li_simpan" class="disabled"><a href="#" id="save">Simpan</a></li>
-    					    </ul>
-				      </div>
-              <textarea name="points" id="points" class="form-control disabled" style="display:none" readonly="readonly">{{ $shape_line }}</textarea>
-              <input type="hidden" name="id" id="id" value="{{ $jalan->id }}">
-              <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
-            </div>
 		      </div>
 
         </div>
         <!-- /.box-body -->
         <div class="box-footer">
           Footer
+          <div class="btn-group" id="aksi-editor">
+              <button type="button" class="btn btn-default">Edit</button>
+              <button data-toggle="dropdown" class="btn btn-default btn-flat dropdown-toggle" type="button">
+                <i class="caret"></i>&nbsp;
+              </button>
+              <ul class="dropdown-menu icons-right dropdown-menu-right">
+                <li id="li_start"><a href="#" onclick="start()">Mulai Edit</a></li>
+                <li id="li_stop" class="disabled" onclick="stop()"><a href="#">Berhenti Edit</a></li>
+                <!--<li><a href="#" onclick="javascript:setMarkers()">Set Marker</a></li>-->
+                <li class="divider"></li>
+                <li id="li_clear"><a href="#" onclick="clearMarkers()">Hilangkan</a></li>
+                <li id="li_simpan" class="disabled"><a href="#" id="save">Simpan</a></li>
+              </ul>
+          </div>
+          <textarea name="points" id="points" class="form-control disabled" style="display:none" readonly="readonly">{{ $shape_line }}</textarea>
+          <input type="hidden" name="id" id="id" value="{{ $jalan->id }}">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
         </div>
         <!-- /.box-footer-->
     </div>
@@ -79,7 +75,10 @@ function initialize() {
         streetViewControlOptions: {
             position: google.maps.ControlPosition.LEFT_TOP
         },
-        fullscreenControl: false
+        fullscreenControl: true,
+        fullscreenControlOptions:{
+            position: google.maps.ControlPosition.RIGHT_TOP
+        }
     });
     initEditPolyline(map);
 }
