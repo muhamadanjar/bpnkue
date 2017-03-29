@@ -83,8 +83,9 @@ trait MapGoogle{
         $data = array();
         if (isset($postdata)) {
             $r = json_decode($postdata);
+            $line = (is_object($r->shapeline) ? serialize($r->shapeline):$r->shapeline);
             $status = JalanFungsi::find($id);
-            $status->shape_line = $r->shapeline;
+            $status->shape_line = $line;
             $status->save();
             $data_array['result'] = "success";
             array_push($data,$data_array);

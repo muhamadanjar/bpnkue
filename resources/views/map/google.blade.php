@@ -4,6 +4,7 @@
 
 @endsection
 @section('content')
+<div id="mapgoogle"></div>
 <div class="box">
     <div class="box-header with-border">
           <h3 class="box-title">Peta</h3>
@@ -17,7 +18,7 @@
     <div class="box-body">
       <div class="row">
         <div class="col-md-12">
-          <div id="mapgoogle"></div>
+          
         </div>
       </div>
 

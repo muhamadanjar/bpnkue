@@ -65,9 +65,6 @@
       font-size: 14px;
     }
 
-
-
-
     .login-page, .register-page {
         background: none;
     }

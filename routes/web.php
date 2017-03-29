@@ -38,7 +38,7 @@ Route::group(array('prefix'=>'admin'), function(){
 
   //Jalan Status
 
-  Route::get('jalan/status','JalanStatusCtrl@getIndex');
+  	Route::get('jalan/status','JalanStatusCtrl@getIndex');
 	Route::get('jalan/status/add','JalanStatusCtrl@getTambahStatus');
 	Route::get('jalan/status/{id}/edit','JalanStatusCtrl@getEditStatus');
 	Route::delete('jalan/status/{id}/delete','JalanStatusCtrl@postDelete');
@@ -89,6 +89,7 @@ Route::group(array('prefix'=>'pengaturan'), function(){
 
 //WebApps
 Route::group(array('prefix'=>'api'), function(){
+	
 	Route::get('fasilitas',['middleware' => 'cors','uses' => 'WebAppsCtrl@getFasilitas']);
 	Route::get('poi',['middleware' => 'cors','uses' => 'WebAppsCtrl@getPoiPandeglang']);
 	Route::get('searchfasilitas/{key}',['middleware' => 'cors','uses' => 'WebAppsCtrl@getSearchFasilitas']);
@@ -98,7 +99,10 @@ Route::group(array('prefix'=>'api'), function(){
 	}]);
 
 	//Login
-	Route::post('login','WebAppsCtrl@login');
+	Route::get('checklogin','WebAppsCtrl@checkLogin');
+	Route::post('login','WebAppsCtrl@postLogin');
+	Route::get('logout','WebAppsCtrl@postLogout');
+	
 
 	//Jaringan Jalan Fungsi
 	Route::get('jjfungsi',[
@@ -139,6 +143,13 @@ Route::group(array('prefix'=>'api'), function(){
 		'middleware' => 'cors',
 		'as'=>'jjpan.jjstatus',
 		'uses'=>'WebAppsCtrl@getJaringanStatus'
+	]);
+
+	Route::post('fasilitas/insert',[
+		'nocsrf' => true,
+		'middleware' => 'cors',
+		'as'=>'jjpan.jjstatus',
+		'uses'=>'WebAppsCtrl@InsertPostFasilitas'
 	]);
 
 });
