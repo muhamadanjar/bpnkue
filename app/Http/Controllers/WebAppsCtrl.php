@@ -50,17 +50,20 @@ class WebAppsCtrl extends Controller {
             //}
         }
     }
-
+    //POI Irigasi
+    public function LoadPoiIrigasi(){
+        $poi = Fasilitas::orderBy('id')->get();
+        return $poi;
+    }
     //Login
     public function checkLogin(){
         $data = array();
-        if (\Auth::guard('web')->check()) {
-            $data['status'] = \Auth::guard('web')->check();
+        $data['status'] = false;
+        if (Auth::check()) {
+            $data['status'] = Auth::guard('web')->check();
             $data['data'] = Auth::user();
-        }else{
-            $data['status'] = false;
         }
-        
+       
         return $data;
     }
 
@@ -69,7 +72,7 @@ class WebAppsCtrl extends Controller {
         $r = json_decode($postdata);
         $r->token = csrf_token();
         $data = array();
-        if (\Auth::attempt(['username' => $r->username, 'password' => $r->password])) {
+        if (Auth::attempt(['username' => $r->username, 'password' => $r->password])) {
             $data['status'] = true;
             $data['data'] = Auth::user();
             $data['token'] = csrf_token();

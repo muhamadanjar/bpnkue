@@ -16,7 +16,7 @@ if(!empty($identify)){
   $lengthmedia = count($media);
   
   $encode_key = json_decode(json_encode($key_));
-  //print_r($key_);
+  
  
 }
 //print_r($key_);
@@ -65,23 +65,18 @@ $url_service = ($layers->tipelayer == 'dynamic' ? $layers->layerurl.'/'.$idx : $
 
 
               @if($lengthkey_ > 0)
-                  {{--*/ $var ='' /*--}}
                   @foreach($field->fields as $key => $a)
                   <?php $b = ($layers->tipelayer == 'dynamic' ? $a->alias : $a->name); ?>
                     @if($encode_key[$key]->fieldName == $b )
-                      {{--*/ $c = $encode_key[$key]->label /*--}}
-                      @if($encode_key[$key]->visible)
-                          {{--*/ $var = 'checked' /*--}}
-                          
-                      @endif
-
+                      <?php $c = $encode_key[$key]->label; ?>
+                    @else
+                      <?php $c = $b ?>
                     @endif
                   <tr>
-                    <td><input {{ @$var }} type="checkbox" class="checkbox" name="visible[{{ $key }}]" value="{{ $b }}" /></td>
+                    <td><input @if($encode_key[$key]->visible) checked @endif type="checkbox" class="checkbox" name="visible[{{ $key }}]" value="{{ $b }}" /></td>
                     <td>{{ $a->name }}<input type="hidden" name="name_field[]" value="{{ $b }}"></td>
                     <td><input type="text" class="form-control" name="label_field[]" value="{{ $c }}"></td>
                   </tr>
-                  {{--*/ unset($var) /*--}}
                   @endforeach
 
               @else

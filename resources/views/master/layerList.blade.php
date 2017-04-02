@@ -1,31 +1,17 @@
 @extends('layouts.adminlte')
-@section('page-header')
-	<div class="page-header">
-		<div class="page-title">
-			<h3>Layer <small>Jumlah layer yang ada</small></h3>
-		</div>
 
-		<div id="reportrange" class="range">
-			<div class="visible-xs header-element-toggle">
-				<a class="btn btn-primary btn-icon"><i class="icon-calendar"></i></a>
-			</div>
-			<div class="date-range"></div>
-			<span class="label label-danger">9</span>
-		</div>
-	</div>
-@endsection
 @section('content')
-		<div class="panel panel-default">
-			<div class="panel-heading">
-			 	<h6 class="panel-title"><i class="icon-file"></i> Layer - layer</h6>
+		<div class="box box-default">
+			<div class="box-header with-border">
+			 	<h6 class="box-title"><i class="icon-file"></i> Layer - layer</h6>
 				<a href="{{ url('layers/tambah') }}">
-					<button class="pull-right btn btn-xs btn-primary" type="button">
-						<i class="icon-plus-circle2"></i> Tambah
+					<button class="pull-right btn btn-sm btn-primary" type="button">
+						<i class="fa fa-plus-circle"></i> Tambah
 					</button>
 				</a>
 			</div>
-			
-			    <div class="datatable_">
+			<div class="box-body">
+			    <div class="datatable">
 				    <table class="table table-striped table-bordered">
 				        <thead>
 				            <tr>
@@ -45,12 +31,12 @@
 				                    <td>{{ $p->layer }}</td>
 				                    <td>
 				                        <div class="btn-group">
-					                        <button data-toggle="dropdown" class="btn btn-icon btn-success dropdown-toggle" type="button"><i class="icon-cog4"></i></button>
+					                        <button data-toggle="dropdown" class="btn btn-icon btn-success dropdown-toggle" type="button"><i class="fa fa-ellipsis-v"></i>&nbsp;</button>
 												<ul class="dropdown-menu icons-right dropdown-menu-right">
-													<li><a href="{{ url('layers/ubah', array($p->id_layer)) }}"><i class="icon-quill2"></i> Ubah</a></li>
+													<li><a href="{{ url('layers/ubah', array($p->id_layer)) }}"><i class="fa fa-edit"></i> Ubah</a></li>
 
 													<li data-form="#frmDelete-{{ $p->id_layer }}" data-title="Delete Layer" data-message="Are you sure you want to hapus layer ?">
-															<a class = "formConfirm" href="#"><i class="icon-delete"></i> Hapus</a>
+															<a class = "formConfirm" href="#"><i class="fa fa-close"></i> Hapus</a>
 													</li>
 														<form method="get" 
 														action="{{ url('layers/hapus/'.$p->id_layer) }}"
@@ -70,7 +56,7 @@
 					                                        <a class= "formConfirm" href="#"><i class="fa fa-bell" disabled></i> Hapus data Esri</a>
 					                                </li>
 					                                <form 
-					                                    action="{{ url('admin/layer/layeresrihapus', array($p->id_layer)) }}" 
+					                                    action="{{ url('/layers/layeresrihapus', array($p->id_layer)) }}" 
 					                                    method="get" 
 					                                    style="display:none" 
 					                                    id="frmCEsri-{{ $p->id_layer}}"></form>
@@ -83,5 +69,6 @@
 				        </tbody>
 				    </table>           
 			    </div>
+			</div>
 		</div>	
 @stop

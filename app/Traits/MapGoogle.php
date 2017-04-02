@@ -16,6 +16,7 @@ trait MapGoogle{
     }
 
     public function showMap(){
+        session(['route_link' => 'map']);
         return view('map.google');
     }
     //Jaringan Fungsi

@@ -12,6 +12,7 @@ class AuthCtrl extends Controller{
 	use RedirectsUsers, ThrottlesLogins;
     public $redirectTo = 'map';
 	public function __construct($value=''){
+        $this->middleware('guest', ['except' => 'logout']);
         //$this->redirect = new RedirectsUsers();
         //$this->ThrottlesLogins = new ThrottlesLogins();
     }

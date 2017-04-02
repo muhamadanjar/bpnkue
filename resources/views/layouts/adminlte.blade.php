@@ -38,6 +38,7 @@
   <link rel="stylesheet" href="{{ asset('adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')}}">
 
   <link rel="stylesheet" type="text/css" href="{{ asset('adminlte/plugins/datatables/jquery.datatables.min.css') }}">
+  <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png" sizes="16x16">
 
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -110,10 +111,14 @@
 
 
     <!-- Main content -->
+    @if(session('route_link') == 'map')
+    @yield('content')
+    @else
     <section class="content">
       @yield('content')
       @include('vendor.modal')
     </section>
+    @endif
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

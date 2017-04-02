@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 <div id="mapgoogle"></div>
-<div class="box">
+<!--<div class="box">
     <div class="box-header with-border">
           <h3 class="box-title">Peta</h3>
           <div class="box-tools pull-right">
@@ -154,7 +154,7 @@
           </div>
       </div>
     </div>
-</div>
+</div>-->
 @endsection
 @section('js_tambahan')
 <script type="text/javascript" src="{{ asset('js/map/map.js') }}"></script>

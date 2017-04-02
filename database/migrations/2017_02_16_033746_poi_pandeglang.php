@@ -17,7 +17,7 @@ class PoiPandeglang extends Migration
             $table->string('daerah_irigasi',60);
             $table->string('bendung',60)->nullable();
             $table->string('jaringan_irigasi',60)->nullable();
-            $table->string('jaringan_irigasi_bangunan',60)->nullable();
+            $table->string('jaringan_irigasi_bangunan',60)->nullable()->comment('Bagi ');
             $table->string('saluran_primer',60)->nullable();
             $table->string('drain_inlet',60)->nullable();
             $table->string('saluran_sekunder',60)->nullable();

@@ -23,6 +23,7 @@
               </a>
               <ul class="treeview-menu">
                 <li><a href="{{ url('layers')}}"><i class="fa fa-circle-o"></i> List Layer</a></li>
+                <li><a href="{{ url('layers/setting-url')}}"><i class="fa fa-circle-o"></i> Setting Layer</a></li>
               </ul>
             </li>
             <li><a href="{{ url('excel')}}"><i class="fa fa-circle-o"></i> Excel</a></li>

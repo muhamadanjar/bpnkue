@@ -27,7 +27,7 @@ function SearchControl(controlDiv,map) {
   input.style['margin-left'] = '12px';
   input.style['text-overflow'] = 'ellipsis';
   input.style['padding'] = '0 11px 0 13px';
-  input.style['width'] = '400px';
+  //input.style['width'] = '400px';
 
 
   goSearchUI.appendChild(input);

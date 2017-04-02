@@ -18,7 +18,7 @@ class JalanFungsiCtrl extends Controller{
 	}
 
 	public function getTambahFungsi(){
-		$aksi = session('aksi', 'add');
+		$aksi = session(['aksi' => 'add']);
 		return view('jalan.fungsiAddEdit')->with('aksi',$aksi);
 	}
 
@@ -27,7 +27,7 @@ class JalanFungsiCtrl extends Controller{
 		if ($jalan === null) {
 			return 'Data tidak ditemukan';
 		}
-		$aksi = session('aksi', 'edit');
+		$aksi = session(['aksi' => 'edit']);
 		return view('jalan.fungsiAddEdit')->with('jalan',$jalan)->with('aksi',$aksi);
 	}
 

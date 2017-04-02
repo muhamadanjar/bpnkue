@@ -70,6 +70,10 @@ Route::group(array('prefix'=>'layers'), function(){
 	Route::get('/layerinfopopup/{id}/{idx}/{layern}','LayerCtrl@getLayerinfopopup');
 	Route::post('/layerinfopopup/{id}/{idx}/{layern}','LayerCtrl@postLayerinfopopup');
 	Route::get('/layeresrihapus/{id}','LayerCtrl@getLayeresrihapus');
+	
+	Route::get('/setting-url','LayerCtrl@getSettingUrl');
+	Route::post('/setting-url','LayerCtrl@postSettingUrl');
+	
 });
 
 Route::get('profile','UserCtrl@getProfil');
@@ -86,7 +90,7 @@ Route::group(array('prefix'=>'pengaturan'), function(){
 
 });
 
-
+Route::get('checklogin','WebAppsCtrl@checkLogin');
 //WebApps
 Route::group(array('prefix'=>'api'), function(){
 	
@@ -151,5 +155,7 @@ Route::group(array('prefix'=>'api'), function(){
 		'as'=>'jjpan.jjstatus',
 		'uses'=>'WebAppsCtrl@InsertPostFasilitas'
 	]);
+
+	Route::get('loadpoiirigasi',['middleware' => 'cors','uses' =>'WebAppsCtrl@LoadPoiIrigasi']);
 
 });

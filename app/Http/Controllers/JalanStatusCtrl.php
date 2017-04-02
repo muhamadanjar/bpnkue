@@ -16,7 +16,8 @@ class JalanStatusCtrl extends Controller{
     }
 
     public function getTambahStatus(){
-  		$aksi = session('aksi', 'add');
+  		$aksi = session(['aksi' => 'add']);
+
   		return view('jalan.statusAddEdit')->with('aksi',$aksi);
   	}
 
@@ -25,7 +26,7 @@ class JalanStatusCtrl extends Controller{
   		if ($jalan === null) {
   			return 'Data tidak ditemukan';
   		}
-  		$aksi = session('aksi', 'edit');
+  		$aksi = session(['aksi' => 'edit']);
   		return view('jalan.statusAddEdit')->with('jalan',$jalan)->with('aksi',$aksi);
   	}
 
