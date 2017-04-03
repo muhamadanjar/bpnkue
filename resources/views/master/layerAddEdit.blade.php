@@ -108,7 +108,11 @@
                     @forelse ($role as $role)
                     <div class="checkbox">
                         <label>
+                            @if($aksi == 'edit')
                             <input type="checkbox" @if($layer->hasRole($role->name)) checked @endif class="flat-red" name="role[]" value="{{ $role->name }}"/> {{ $role->name }} 
+                            @else
+                            <input type="checkbox" class="flat-red" name="role[]" value="{{ $role->name }}"/> {{ $role->name }}
+                            @endif
                         </label>
                     </div>        
                     @empty

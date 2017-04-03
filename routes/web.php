@@ -36,7 +36,7 @@ Route::group(array('prefix'=>'admin'), function(){
 	Route::post('jalan/fungsi/mappost','JalanFungsiCtrl@postJalanFungsiShape');
 	Route::get('shape_line/{id}','JalanFungsiCtrl@getShape_Line');
 
-  //Jalan Status
+    //Jalan Status
 
   	Route::get('jalan/status','JalanStatusCtrl@getIndex');
 	Route::get('jalan/status/add','JalanStatusCtrl@getTambahStatus');
@@ -45,6 +45,13 @@ Route::group(array('prefix'=>'admin'), function(){
 	Route::post('jalan/status/post','JalanStatusCtrl@postJalanStatus');
 	Route::get('jalan/status/{id}/editmap','JalanStatusCtrl@viewMap');
 	Route::post('jalan/status/mappost','JalanStatusCtrl@postJalanStatusShape');
+
+
+	Route::get('poi','PoiCtrl@getIndex');
+	Route::get('poi/add','PoiCtrl@getTambah');
+	Route::get('poi/edit/{id}','PoiCtrl@getEdit');
+	Route::get('poi/delete/{id}','PoiCtrl@getDelete');
+	Route::get('poi/post','PoiCtrl@postPoi');
 
 });
 

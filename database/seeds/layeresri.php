@@ -28,5 +28,13 @@ class LayerEsri extends Seeder{
             'layer' => 'tematik',
             'orderlayer' => 3,
         ]);
+
+        $layer_point = Layer::create([
+            'layername' => 'POI Pandeglang',
+            'tipelayer' => 'dynamic',
+            'layerurl' => 'http://silver-pc:6080/arcgis/rest/services/PANDEGLANG/POI_Pandeglang/MapServer',
+            'layer' => 'poi',
+            'orderlayer' => 4,
+        ]);
     }
 }
