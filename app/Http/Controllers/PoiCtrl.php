@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Poi;
 class PoiCtrl extends Controller{
-	public function __construct($value=''){
+	public function __construct(){
 		$this->middleware('auth');
+		
 	}
     public function getIndex($value=''){
-    	return view('poi.poiList');
+    	session(['route_link' => 'normal']);
+    	$poi = Poi::get();
+    	return view('poi.poiList')->with('poi',$poi);
     }
 
     public function getTambah(){
@@ -38,6 +41,6 @@ class PoiCtrl extends Controller{
 		//$poi->y = $r->daerah_irigasi;
 		$poi->save();
 
-		return redirect('poi')
+		return redirect('admin/poi');
     }
 }

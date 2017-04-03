@@ -104,21 +104,20 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+    @if(session('route_link') == 'map')
+      @yield('content')
+    @else
     <section class="content-header">
       @yield('adminlte-contentheader')
 
     </section>
 
-
     <!-- Main content -->
-    @if(session('route_link') == 'map')
-    @yield('content')
-    @else
     <section class="content">
       @yield('content')
-      @include('vendor.modal')
     </section>
     @endif
+    @include('vendor.modal')
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->

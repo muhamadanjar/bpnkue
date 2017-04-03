@@ -37,11 +37,13 @@
                   <li><a href="{{ url('admin/jalan/status')}}"><i class="fa fa-circle-o"></i> Status</a></li>
                 </ul>
             </li>
+
+            <li><a href="{{url('admin/poi')}}"><i class="fa fa-circle-o"></i> Poi</a></li>
           </ul>
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-maps"></i> <span>Peta</span>
+            <i class="fa fa-map"></i> <span>Peta</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

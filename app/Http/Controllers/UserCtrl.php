@@ -31,6 +31,7 @@ class UserCtrl extends Controller
     }
 
     public function getIndex(){
+        session(['route_link' => 'normal']);
         if(isset($_GET["page"]))
         $page = (int)$_GET["page"];
         else

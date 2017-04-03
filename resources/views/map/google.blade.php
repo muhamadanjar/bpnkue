@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="{{ asset('css/map.css') }}"/>
 @extends('layouts.adminlte')
+@section('title','Peta Google')
 @section('css_tambahan')
 
 @endsection

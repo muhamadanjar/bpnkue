@@ -1,5 +1,5 @@
 @extends('layouts.adminlte')
-
+@section('title','Point of Interest')
 @section('content')
 <div class="box box-default">
 	<div class="box-header with-border">
@@ -24,7 +24,13 @@
 				</thead>
 				<tbody>
 					@foreach($poi as $key => $p)
-					
+					<tr>
+				        <th>{{$p->daerah_irigasi}}</th>
+				        <th>{{$p->bendung}}</th>
+				        <th>{{$p->jaringan_irigasi}}</th>
+				        <th>{{$p->saluran_primer}}</th>
+				        <th></th>
+				    </tr>
 					@endforeach
 				</tbody>
 			</table>           
