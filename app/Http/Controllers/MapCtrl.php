@@ -128,6 +128,10 @@ class MapCtrl extends Controller {
 		return view('map.geocoder');
 	}
 
+	public function getMapOpenlayer(){
+		return view('map.openlayers');
+	}
+
 
 
 }

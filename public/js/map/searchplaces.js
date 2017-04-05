@@ -37,7 +37,8 @@ function SearchControl(controlDiv,map) {
       searchBox.setBounds(map.getBounds());
   });
   var markersSearch = [];
-
+  var infowindow = new google.maps.InfoWindow();
+  var marker; 
   searchBox.addListener('places_changed', function() {
       var places = searchBox.getPlaces();
       if (places.length == 0) {
@@ -53,6 +54,7 @@ function SearchControl(controlDiv,map) {
               console.log("Returned place contains no geometry");
               return;
             }
+            
             var icon = {
               url: place.icon,
               size: new google.maps.Size(71, 71),
@@ -62,12 +64,21 @@ function SearchControl(controlDiv,map) {
             };
 
             // Create a marker for each place.
-            markersSearch.push(new google.maps.Marker({
+            marker = new google.maps.Marker({
               map: map,
               icon: icon,
               title: place.name,
               position: place.geometry.location
-            }));
+            });
+            markersSearch.push(marker);
+
+            google.maps.event.addListener(marker, 'click', function() {
+              console.log(place);
+              infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+                'Place ID: ' + place.place_id + '<br>' +
+                place.formatted_address + '</div>');
+              infowindow.open(map, this);
+            });
 
             if (place.geometry.viewport) {
               // Only geocodes have viewport.

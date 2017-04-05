@@ -92,6 +92,19 @@ return [
             'sslmode' => 'allow',
         ],
 
+        'pgsql_postgis_pandeglang' => [
+            'driver' => 'pgsql',
+            'host' => env('DB_HOST'),
+            'port' => env('DB_PORT', '5432'),
+            'database' => 'jj_pandeglang_postgis',
+            'username' => env('DB_USERNAME'),
+            'password' => env('DB_PASSWORD'),
+            'charset' => 'utf8',
+            'prefix' => '',
+            'schema' => 'pandeg',
+            'sslmode' => 'allow',
+        ],
+
     ],
 
     /*
