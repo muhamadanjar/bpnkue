@@ -108,7 +108,7 @@
 <!-- jQuery UI 1.11.4 -->
 <script src="{{asset('https://code.jquery.com/ui/1.11.4/jquery-ui.min.js')}}"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="{{ asset('adminlte/bootstrap/js/bootstrap.min.js')}}"></script>
+<script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
 <!-- SlimScroll -->
 <script src="{{ asset('adminlte/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
 <!-- FastClick -->

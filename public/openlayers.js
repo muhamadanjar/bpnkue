@@ -1,4 +1,4 @@
-            
+            var map;
             var container = document.getElementById('popup');
             var contentPopup = document.getElementById('popup-content');
             var closer = document.getElementById('popup-closer');
@@ -124,16 +124,16 @@
                 view = new ol.View({
                     //center: ol.proj.transform([-100.1833, 41.3833], 'EPSG:4326', 'EPSG:3857'),
                     zoom: 12,
-                    projection: ol.proj.get('EPSG:4326'),
+                    //projection: ol.proj.get('EPSG:4326'),
+                    projection: 'EPSG:4326',
                     center: [106.81, -6.6],
-                    rotation: 5
                 });
 
                 map = new ol.Map({
                     target: 'map',  // The DOM element that will contains the map
                     renderer: 'canvas', // Force the renderer to be used
                     controls: ol.control.defaults().extend([
-                      new app.RotateNorthControl()
+                      new app.searchOLControl()
                     ]),
                     layers: [PetaDasar],
                     
@@ -428,14 +428,7 @@
 
             
 
-            function getimagelayer() {
-                map.getLayers().forEach(function(lyr) {
-                    if(lyr.get('name') == 'Image'){
-                        console.log(lyr.getExtent())
-                        map.getView().fit(lyr.getExtent(), map.getSize());   
-                    } 
-                });
-            }
+            
 
             function search(){
                 var geocoder = new google.maps.Geocoder();
@@ -453,31 +446,6 @@
             }
 
             
-
-            function loadlayersingleobject(argument) {
-                for (layer in overlays) {
-                    var wmsSource = new ol.source.TileWMS({     
-                        url: '/geoserver/wms',
-                        params: {
-                            'LAYERS': overlays[layer],
-                            'VERSION': '1.1.1',
-                            'FORMAT': 'image/png', 
-                            tiled: true,
-                        },
-                    });
-                    var wmsLayerTile = new ol.layer.Tile({
-                        source: wmsSource,
-                        visible: true,
-                        name: layer,
-                        id: overlays[layer]
-                    });
-                    map.addLayer(wmsLayerTile);
-                    singleAllLayers = wmsLayerTile;
-                };
-            }
-                
-
-
 
 
             function ZoomToLayerManual(extent){
@@ -622,30 +590,6 @@
                     
                 })
                
-            }
-
-            
-
-            function loadlayersingleobject(argument) {
-                for (layer in overlays) {
-                    var wmsSource = new ol.source.TileWMS({     
-                        url: '/geoserver/wms',
-                        params: {
-                            'LAYERS': overlays[layer],
-                            'VERSION': '1.1.1',
-                            'FORMAT': 'image/png', 
-                            tiled: true,
-                        },
-                    });
-                    var wmsLayerTile = new ol.layer.Tile({
-                        source: wmsSource,
-                        visible: true,
-                        name: layer,
-                        id: overlays[layer]
-                    });
-                    map.addLayer(wmsLayerTile);
-                    singleAllLayers = wmsLayerTile;
-                };
             }
 
 
