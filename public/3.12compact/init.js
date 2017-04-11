@@ -12,8 +12,8 @@
 */
 
 //>>built
-var serv_c = window.location.hostname;
-var serv_d = '/';
+var serv_c = window.location.hostname+':'+window.location.port;
+var serv_d = '';
 (function(b,l){var e,p=function(){},n=function(a){for(var c in a)return 0;return 1},q={}.toString,m=function(a){return"[object Function]"==q.call(a)},k=function(a){return"[object String]"==q.call(a)},g=function(a){return"[object Array]"==q.call(a)},a=function(a,c){if(a)for(var b=0;b<a.length;)c(a[b++])},f=function(a,c){for(var b in c)a[b]=c[b];return a},d=function(a,c){return f(Error(a),{src:"dojoLoader",info:c})},c=1,h=function(){return"_"+c++},r=function(a,c,b){return La(a,c,b,0,r)},t=this,v=t.document,
 u=v&&v.createElement("DiV"),s=r.has=function(a){return m(x[a])?x[a]=x[a](t,v,u):x[a]},x=s.cache=l.hasCache;s.add=function(a,c,b,d){(void 0===x[a]||d)&&(x[a]=c);return b&&s(a)};s.add("host-webworker","undefined"!==typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope);s("host-webworker")&&(f(l.hasCache,{"host-browser":0,dom:0,"dojo-dom-ready-api":0,"dojo-sniff":0,"dojo-inject-api":1,"host-webworker":1}),l.loaderPatch={injectUrl:function(a,c){try{importScripts(a),c()}catch(b){console.info("failed to load resource ("+
 a+")"),console.error(b)}}});for(var A in b.has)s.add(A,b.has[A],0,1);var w=0,F=[],y=0,C=p,I=p,O;r.isXdUrl=p;r.initSyncLoader=function(a,c,b){y||(y=a,C=c,I=b);return{sync:"sync",requested:1,arrived:2,nonmodule:3,executing:4,executed:5,syncExecStack:F,modules:z,execQ:Q,getModule:V,injectModule:pa,setArrived:ba,signal:D,finishExec:ga,execModule:ha,dojoRequirePlugin:y,getLegacyMode:function(){return w},guardCheckComplete:ia}};var P=location.protocol,K=location.host;r.isXdUrl=function(a){return/^\./.test(a)?

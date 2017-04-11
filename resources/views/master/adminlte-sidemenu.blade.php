@@ -51,6 +51,7 @@
           <ul class="treeview-menu">
             <li><a href="{{ url('map') }}"><i class="fa fa-circle-o"></i> Esri</a></li>
             <li><a href="{{ url('map/google') }}"><i class="fa fa-circle-o"></i> Google</a></li>
+            <li><a href="{{ url('map/openlayers') }}"><i class="fa fa-circle-o"></i> Openlayers</a></li>
           </ul>
         </li>
         <li class="treeview">

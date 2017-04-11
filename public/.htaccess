@@ -39,3 +39,19 @@ php_value max_input_time 5000
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 </IfModule>
+
+
+<IfModule proxy_module.c>
+<IfModule proxy_http_module.c>
+
+ProxyRequests Off
+
+<Proxy *>
+      Require all granted
+</Proxy>
+
+ProxyPass /geoserver http://localhost:8080/geoserver
+ProxyPassReverse /geoserver http://localhost:8080/geoserver
+
+</IfModule>
+</IfModule>

@@ -63,9 +63,9 @@ Route::get('excel/2007','ExcelCtrl@getImportExcel2007');
 Route::group(array('prefix'=>'map'), function(){
 	Route::get('/','MapCtrl@getIndex');
 	Route::get('google','WebAppsCtrl@showMap');
-	Route::get('/openlayer','MapCtrl@getMapOpenlayer');
-  //Route::get('geocoder','MapCtrl@googlemap_geocoder');
-
+	Route::get('/openlayers','MapCtrl@getMapOpenlayer');
+	Route::get('/openlayers/getlayers','MapCtrl@getMapDataOL');
+	
 });
 Route::group(array('prefix'=>'layers'), function(){
 	Route::get('/','LayerCtrl@getIndex');

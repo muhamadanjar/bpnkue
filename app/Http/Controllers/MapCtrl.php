@@ -132,6 +132,28 @@ class MapCtrl extends Controller {
 		return view('map.openlayers');
 	}
 
+	function getMapDataOL(){
+		$layers = array(
+            array(
+                'namalayer'     => 'Admin Provinsi',
+                'urllayer' => '/geoserver/wms',
+                'tipelayer'    => 'tilewms',
+                'source_layer' => 'studio:Admin_Provinsi',
+                'source_tiled' => 1,
+                'layervisible' => 1,
+                'layeropacity' => 1.0,
+                'x_min' => 106.760223388672,
+                'y_min' => -6.65067720413208,
+                'x_max' => 106.827644348145,
+                'y_max' => -6.53223466873169,
+                'urutan' => 0
+            ),
+            
+        );
+
+        return json_encode($layers);
+	}
+
 
 
 }
