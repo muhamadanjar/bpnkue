@@ -18,6 +18,8 @@
         input.style['text-overflow'] = 'ellipsis';
         input.style['padding'] = '0 11px 0 13px';
         
+        var input2 = document.getElementById('navbar-search-input');
+
         var searchBox = new google.maps.places.SearchBox(input);
         /*map.addListener('bounds_changed', function() {
             searchBox.setBounds(map.getBounds());

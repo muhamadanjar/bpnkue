@@ -27,7 +27,10 @@
             var indonesiaEx = [93.970693781,-18.25167354,139.863065517,13.537752547];
             var bogorEx = [106.604388339,-6.71663787,107.003690281,-6.438022028];
             var rootUrl = 'http://localhost/anjarpro/public/';
-            var overlaysOBJ; 
+            var overlaysOBJ;
+            var coordinate;
+
+            var toolPlugin = {draw:false,identify:true} 
             
 
 
@@ -64,7 +67,7 @@
             
             var PetaDasar = new ol.layer.Group({
 
-                layers: [layerOSM],
+                layers: [layerOSM,EsriTopo],
                 name: 'Peta Dasar',
                 id:'base'
             });
@@ -301,6 +304,36 @@
                 return content; 
             }
 
+            function tablePopupVector(feature){
+
+                if (feature) {
+                    var content = "<div class='panel panel-default'>";
+                    content += "<div class='panel-heading'><h6 class='panel-title'><i class='icon-accessibility'></i><b><u>feature</u></b></h6><a href=\"#\" id=\"popup-closer\" class=\"ol-popup-closer\" onclick=\"close_popup()\">Close</a></div>";
+                    content += "<div class='panel-body'>"
+                    content += "<table class='table table-bordered'>";
+                    for (var name in feature.getProperties()) {
+                        
+                        if (name == 'image_link' || name == 'IMAGE_LINK' || name == 'foto' || name == 'FOTO') {
+                            content += "<tr><td><b>" + name + "</b></td><td><b>:</b> </td><td><image class='img-responsive' src='" + feature.getProperties()[name] + "' width='100'/></td></tr>";
+                        
+                        }else{
+                            content += "<tr><td><b>" + name + "</b></td><td><b>:</b> </td><td>" + feature.getProperties()[name] + "</td></tr>";    
+                        }
+                    };
+                    content += '</table>';
+                    content += '</div>';
+                    content += '</div>';
+                }else{
+
+                    var content = "<table class='table table-bordered'>";
+
+                    content += '<tr><td>Data tidak ada</td></tr>';
+                    content += '</table>';
+                }
+
+                return content; 
+            }
+
             
 
             function updateInteractiveLayers(layer) {
@@ -366,28 +399,7 @@
                 });
             }
 
-            function accordionDisable() {
-                var active = true;
-
-                $('#collapse-init').click(function () {
-                    if (active) {
-                        active = false;
-                        $('.panel-collapse').collapse('show');
-                        $('.panel-title').attr('data-toggle', '');
-                        $(this).text('Enable accordion behavior');
-                    } else {
-                        active = true;
-                        $('.panel-collapse').collapse('hide');
-                        $('.panel-title').attr('data-toggle', 'collapse');
-                        $(this).text('Disable accordion behavior');
-                    }
-                });
-                
-                $('#accordion').on('show.bs.collapse', function () {
-                    if (active) $('#accordion .in').collapse('hide');
-                });
-            }
-
+        
             function updateFilter(){
             
                 var filterType = 'cql';
@@ -427,27 +439,6 @@
             }
 
             
-
-            
-
-            function search(){
-                var geocoder = new google.maps.Geocoder();
-                var address = document.getElementById('address').value;
-                geocoder.geocode({ 'address': address }, function (results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        console.log(results[0].geometry.location.lat());
-                        view.setCenter(results[0].geometry.location.lng(),results[0].geometry.location.lat());                              
-                    }else {
-                        console.log("Geocoding failed: " + status);                            
-                    }
-                    
-                })
-               
-            }
-
-            
-
-
             function ZoomToLayerManual(extent){
                 map.getView().fit(extent, map.getSize());
             }
@@ -472,28 +463,6 @@
                 });
             }
 
-            function accordionDisable() {
-                var active = true;
-
-                $('#collapse-init').click(function () {
-                    if (active) {
-                        active = false;
-                        $('.panel-collapse').collapse('show');
-                        $('.panel-title').attr('data-toggle', '');
-                        $(this).text('Enable accordion behavior');
-                    } else {
-                        active = true;
-                        $('.panel-collapse').collapse('hide');
-                        $('.panel-title').attr('data-toggle', 'collapse');
-                        $(this).text('Disable accordion behavior');
-                    }
-                });
-                
-                $('#accordion').on('show.bs.collapse', function () {
-                    if (active) $('#accordion .in').collapse('hide');
-                });
-            }
-
             function updateFilter(){
             
                 var filterType = 'cql';
@@ -532,8 +501,7 @@
                 updateFilter();
             }
 
-            function getLegend(layers) {
-                
+            function getLegend(layers) {    
 
                 for (var i = 0; i < layers.length; i++) {
                     if (layers[i] instanceof ol.layer.Group) {
@@ -568,97 +536,6 @@
                 //$('#legend').html(legendDiv);
             }
 
-            function getimagelayer() {
-                map.getLayers().forEach(function(lyr) {
-                    if(lyr.get('name') == 'Image'){
-                        console.log(lyr.getExtent())
-                        map.getView().fit(lyr.getExtent(), map.getSize());   
-                    } 
-                });
-            }
-
-            function search(){
-                var geocoder = new google.maps.Geocoder();
-                var address = document.getElementById('address').value;
-                geocoder.geocode({ 'address': address }, function (results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        console.log(results[0].geometry.location.lat());
-                        view.setCenter(results[0].geometry.location.lng(),results[0].geometry.location.lat());                              
-                    }else {
-                        console.log("Geocoding failed: " + status);                            
-                    }
-                    
-                })
-               
-            }
-
-
-            function accordionDisable() {
-                var active = true;
-
-
-                $('#collapse-init').click(function () {
-                    if (active) {
-                        active = false;
-                        $('.panel-collapse').collapse('show');
-                        $('.panel-title').attr('data-toggle', '');
-                        $(this).text('Enable accordion behavior');
-                    } else {
-                        active = true;
-                        $('.panel-collapse').collapse('hide');
-                        $('.panel-title').attr('data-toggle', 'collapse');
-                        $(this).text('Disable accordion behavior');
-                    }
-                });
-                
-                $('#accordion').on('show.bs.collapse', function () {
-                    if (active) $('#accordion .in').collapse('hide');
-                });
-            }
-
-                $('#form-search').submit(function (e) {
-                    console.log(e);
-                    updateFilter();
-                });
-
-
-            function updateFilter(){
-            
-                var filterType = 'cql';
-                var filter = $('.textSearchRaw').val();
-                // by default, reset all filters
-                var filterParams = {
-                  'FILTER': null,
-                  'CQL_FILTER': null,
-                  'FEATUREID': null
-                };
-                if (filter.replace(/^\s\s*/, '').replace(/\s\s*$/, '') != "") {
-                    if (filterType == "cql") {
-                        filterParams["CQL_FILTER"] = filter;
-                    }
-                    if (filterType == "ogc") {
-                        filterParams["FILTER"] = filter;
-                    }
-                    if (filterType == "fid")
-                        filterParams["FEATUREID"] = filter;
-                    }
-                    // merge the new filter definitions
-                    map.getLayers().forEach(function(lyr) {
-                    
-                        if(lyr.get('id') == 'rth:privat'){
-                            lyr.getSource().updateParams(filterParams);
-                            console.log(lyr.getSource());
-                        
-                        //map.getView().fit(extent, map.getSize()); 
-                        }
-                    });
-
-            }
-
-            function resetFilter() {
-                $('.filter').val("");
-                updateFilter();
-            }
 
             function getLegend(layers) {
                 
@@ -679,49 +556,19 @@
                             }
                         }
                     } else {
-                        //if (layers[i].get('showLegend') === true) {
-                            console.log(layers[i]);
-                            /*try {
-                                var url = layers[i].getSource().getUrls()[0];
-                            } catch (err) {
-
-                                var url = layers[i].getSource().getUrl();
-                            }*/
+                        
                             var legendImg = document.createElement('img');
                             legendImg.src = '/geoserver/wms' + '?REQUEST=GetLegendGraphic&sld_version=1.0.0&layer=' + layers[i].source_layer + '&format=image/png';
                             legendDiv.appendChild(legendImg);
-                        //}
+                        
                     }
 
                 }
-                console.log(legendDiv);
+                //console.log(legendDiv);
                 //$('#legend').html(legendDiv);
             }
 
-            function getimagelayer() {
-                map.getLayers().forEach(function(lyr) {
-                    if(lyr.get('name') == 'Image'){
-                        console.log(lyr.getExtent())
-                        map.getView().fit(lyr.getExtent(), map.getSize());   
-                    } 
-                });
-            }
-
-
-            function search(){
-                var geocoder = new google.maps.Geocoder();
-                var address = document.getElementById('address').value;
-                geocoder.geocode({ 'address': address }, function (results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
-                        console.log(results[0].geometry.location.lat());
-                        view.setCenter(results[0].geometry.location.lng(),results[0].geometry.location.lat());                              
-                    }else {
-                        console.log("Geocoding failed: " + status);                            
-                    }
-                    
-                })
-               
-            }
+     
 
 
             function loadlayersingleobject(argument) {
@@ -776,81 +623,89 @@
 
             function identifyLayer(layer = 'all') {
 
-
+                if (toolPlugin.identify === true) {
                 map.on('click', function(evt) {
                     
-                    //popup.hide();
-                    //popup.setOffset([0, 0]);
-
-                    if (selectedLayer == 'all') {
-                        var url = singleAllLayers
-                            .getSource()
-                            .getGetFeatureInfoUrl(
-                                evt.coordinate,
-                                map.getView().getResolution(),
-                                map.getView().getProjection(),
-                                {
-                                    'INFO_FORMAT': 'application/json',
-                                    //'propertyName': '*',
-                                    'LAYERS':intLayersString,
-                                    'QUERY_LAYERS':intLayersString, 
-                                    'FEATURE_COUNT': 50
-                                }
-                            );
-                    }else{
-                        var layer = findBy(map.getLayerGroup(), 'id', selectedLayer);
-                        var url = layer
-                            .getSource()
-                            .getGetFeatureInfoUrl(
-                                evt.coordinate,
-                                map.getView().getResolution(),
-                                map.getView().getProjection(),
-                                {
-                                    'INFO_FORMAT': 'application/json',
-                                    //'propertyName': '*',
-                                    //'LAYERS':intLayersString,
-                                    //'QUERY_LAYERS':intLayersString, 
-                                    'FEATURE_COUNT': 50
-                                }
-                            );
-                    }
-
-                    var url = singleAllLayers
-                    .getSource()
-                    .getGetFeatureInfoUrl(
-                        evt.coordinate,
-                        map.getView().getResolution(),
-                        map.getView().getProjection(),
-                        {
-                            'INFO_FORMAT': 'application/json',
-                            //'propertyName': '*',
-                            'FEATURE_COUNT': 50
-                        }
-                    );
-
-                    $.ajax({
-                        url: url,
-                        dataType : 'json',
-                        error:function (argument) {
-                            console.log(argument)
-                        },
-                        beforeSend: function() {
-                            $('#loading').html("<img src='images/ajax-loader.gif' />");
-                        },
-                    }).then(function (data) {
-                        //console.log(data);
-                        var feature = data.features[0];
-                            $('#loading').hide();
-                            content = tablePopup(feature);
-                            contentPopup.innerHTML = content;
-
-                            popup.setPosition(evt.coordinate);
-                            console.log(content);
-                            //popup.show(evt.coordinate, content);
-                        
+                    coordinate = evt.coordinate;
+                
+                    var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+                        return feature;
                     });
 
+                    if (feature) {
+                        content = tablePopupVector(feature);
+                        contentPopup.innerHTML = content;
+                        popup.setPosition(coordinate);
+                    }else{
+                        if (selectedLayer == 'all') {
+                            var url = singleAllLayers
+                                .getSource()
+                                .getGetFeatureInfoUrl(
+                                    evt.coordinate,
+                                    map.getView().getResolution(),
+                                    map.getView().getProjection(),
+                                    {
+                                        'INFO_FORMAT': 'application/json',
+                                        //'propertyName': '*',
+                                        'LAYERS':intLayersString,
+                                        'QUERY_LAYERS':intLayersString, 
+                                        'FEATURE_COUNT': 50
+                                    }
+                                );
+                        }else{
+                            var layer = findBy(map.getLayerGroup(), 'id', selectedLayer);
+                            var url = layer
+                                .getSource()
+                                .getGetFeatureInfoUrl(
+                                    evt.coordinate,
+                                    map.getView().getResolution(),
+                                    map.getView().getProjection(),
+                                    {
+                                        'INFO_FORMAT': 'application/json',
+                                        //'propertyName': '*',
+                                        //'LAYERS':intLayersString,
+                                        //'QUERY_LAYERS':intLayersString, 
+                                        'FEATURE_COUNT': 50
+                                    }
+                                );
+                        }
+
+                        var url = singleAllLayers
+                        .getSource()
+                        .getGetFeatureInfoUrl(
+                            evt.coordinate,
+                            map.getView().getResolution(),
+                            map.getView().getProjection(),
+                            {
+                                'INFO_FORMAT': 'application/json',
+                                //'propertyName': '*',
+                                'FEATURE_COUNT': 50
+                            }
+                        );
+
+                        $.ajax({
+                            url: url,
+                            dataType : 'json',
+                            error:function (argument) {
+                                console.log(argument)
+                            },
+                            beforeSend: function() {
+                                $('#loading').html("<img src='images/ajax-loader.gif' />");
+                            },
+                        }).then(function (data) {
+                            //console.log(data);
+                            var feature = data.features[0];
+                                $('#loading').hide();
+                                content = tablePopup(feature);
+                                contentPopup.innerHTML = content;
+                                popup.setPosition(evt.coordinate);
+                                //popup.show(evt.coordinate, content);
+                            
+                        });   
+                    }
+
                 });
+                }
             }
 
             function LayerTreeAction() {
@@ -902,6 +757,25 @@
                 return false;
             }
 
+            function change_action(aksi){
+                if (aksi=='info') {
+                    toolPlugin.identify = true;
+                    toolPlugin.draw = false;
+                }else if (aksi=='draw') {
+                    toolPlugin.draw = true;
+                    toolPlugin.identify = false;
+                }else{
+                    toolPlugin.identify = true;
+                    toolPlugin.draw = false;   
+                }
+
+                if(toolPlugin.draw){
+                    InitDraw();
+                }else if(toolPlugin.identify){
+                    identifyLayer();
+                }
+            }
+
             $.extend({
                 getValues: function(url) {
                     var result = null;
@@ -917,40 +791,37 @@
                    return result;
                 }
             });
-                
 
 
-            $(document).ready(function() {
+
+            $(function() {
                 initMap();
-                //QueryVectorLayer();
-                
+
                 overlaysOBJ = $.getValues("/map/openlayers/getlayers");
                 objLayer(overlaysOBJ);
-                //accordionDisable()
                 initializeTree();
+                //change_action('draw');
+                var drawButton = $('#drawButton');
+                drawButton.click(function (e) {
+                    console.log(toolPlugin);
+                    change_action('draw');
 
-                LayerTreeAction();
-
-
-                /*$('#form-search').submit(function (e) {
-                    e.preventDefault();
-                    search_layer();
                 });
-                $('#btn-search').click(search_layer);*/
-
-
-                $('#form-search-raw').submit(function (e) {
-                    console.log(e);
-                    updateFilter();
-                });
-
-                identifyLayer();
-                getSelectInfo();
-
-               
-               
+                change_action('info');
 
                 
+
+                
+                
+                //overlaysOBJ = $.getValues("/map/openlayers/getlayers");
+                //objLayer(overlaysOBJ);
+                //accordionDisable()
+                //initializeTree();
+
+               
+
+                //identifyLayer();
+                //getSelectInfo();
 
 
             });

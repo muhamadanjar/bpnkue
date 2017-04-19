@@ -65,6 +65,14 @@ Route::group(array('prefix'=>'map'), function(){
 	Route::get('google','WebAppsCtrl@showMap');
 	Route::get('/openlayers','MapCtrl@getMapOpenlayer');
 	Route::get('/openlayers/getlayers','MapCtrl@getMapDataOL');
+
+	Route::get('measure',function ($value=''){
+		return view('map.measure');
+	});
+
+	Route::get('esri4',function (){
+		return view('map.map_esri4');
+	});
 	
 });
 Route::group(array('prefix'=>'layers'), function(){

@@ -4,7 +4,7 @@
 @section('css_tambahan')
   <link rel="stylesheet" href="https://openlayers.org/en/v4.0.1/css/ol.css" type="text/css">
   <link rel="stylesheet" href="{{ asset('vendor/jstree/themes/default/style.min.css')}}" />
-   <style>
+    <style>
       .rotate-north {
         top: 65px;
         left: .5em;
@@ -13,9 +13,44 @@
         top: 80px;
       }
     </style>
+    <style>
+      .tooltip {
+        position: relative;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 4px;
+        color: white;
+        padding: 4px 8px;
+        opacity: 0.7;
+        white-space: nowrap;
+      }
+      .tooltip-measure {
+        opacity: 1;
+        font-weight: bold;
+      }
+      .tooltip-static {
+        background-color: #ffcc33;
+        color: black;
+        border: 1px solid white;
+      }
+      .tooltip-measure:before,
+      .tooltip-static:before {
+        border-top: 6px solid rgba(0, 0, 0, 0.5);
+        border-right: 6px solid transparent;
+        border-left: 6px solid transparent;
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        margin-left: -7px;
+        left: 50%;
+      }
+      .tooltip-static:before {
+        border-top-color: #ffcc33;
+      }    </style>
   </head>
 
 
+  
+  <!-- The line below is only needed for old environments like Internet Explorer and Android 4.x -->
   <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL"></script>
   <script src="https://openlayers.org/en/v4.0.1/build/ol.js"></script>
   <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
@@ -73,13 +108,22 @@
                   <div class="box-header with-border">
                     <h4 class="box-title">
                       <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                        Collapsible Group Success
+                        Draw
                       </a>
                     </h4>
                   </div>
                   <div id="collapseThree" class="panel-collapse collapse">
                     <div class="box-body">
-                      
+                      <button id="drawButton">Draw</button>
+                      <form class="form-inline">
+                        <label>Geometry type &nbsp;</label>
+                        <select id="type">
+                          <option value="Point">Point</option>
+                          <option value="LineString">LineString</option>
+                          <option value="Polygon">Polygon</option>
+                          <option value="Circle">Circle</option>
+                        </select>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -98,125 +142,9 @@
 @section('js_tambahan')
 <script type="text/javascript" src="{{ asset('vendor/jstree/jstree.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('searchOLControl.js') }}"></script>
+<script type="text/javascript" src="{{ asset('draw.js') }}"></script>
 <script type="text/javascript" src="{{ asset('openlayers.js') }}"></script>
 
-<script type="text/javascript">
-  $('#legenda').jstree({
-      'core' : {
-        'data' : [
-        {
-          "text" : "Root node",
-          "state" : { "opened" : true },
-          "children" : [
-            {
-              "text" : "Child node 1",
-              "state" : { "selected" : true },
-              "icon" : "jstree-file"
-            },
-            { "text" : "Child node 2", "state" : { "disabled" : true } }
-          ]
-        }
-      ]
 
-      }
-});
-</script>
-<!--<script>
-  var wmsSource = new ol.source.TileWMS({
-    url: 'https://ahocevar.com/geoserver/wms',
-    params: {'LAYERS': 'ne:ne'},
-    serverType: 'geoserver',
-    crossOrigin: 'anonymous'
-  });
 
-  var wmsLayer = new ol.layer.Tile({
-    source: wmsSource
-  });
-  var view = new ol.View({
-      center: ol.proj.fromLonLat([37.40570, 8.81566]),
-      zoom: 4
-  });
-      var map = new ol.Map({
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()
-          }), 
-          new ol.layer.Group({
-            layers: [
-              new ol.layer.Tile({
-                source: new ol.source.TileJSON({
-                  url: 'https://api.tiles.mapbox.com/v3/mapbox.20110804-hoa-foodinsecurity-3month.json?secure',
-                  crossOrigin: 'anonymous'
-                })
-              }),
-              new ol.layer.Tile({
-                source: new ol.source.TileJSON({
-                  url: 'https://api.tiles.mapbox.com/v3/mapbox.world-borders-light.json?secure',
-                  crossOrigin: 'anonymous'
-                })
-              })
-
-            ]
-          }),
-          wmsLayer
-        ],
-        target: 'map',
-        view: view,
-      });
-
-      function bindInputs(layerid, layer) {
-        var visibilityInput = $(layerid + ' input.visible');
-        visibilityInput.on('change', function() {
-          layer.setVisible(this.checked);
-        });
-        visibilityInput.prop('checked', layer.getVisible());
-
-        var opacityInput = $(layerid + ' input.opacity');
-        opacityInput.on('input change', function() {
-          layer.setOpacity(parseFloat(this.value));
-        });
-        opacityInput.val(String(layer.getOpacity()));
-      }
-
-      map.getLayers().forEach(function(layer, i) {
-        bindInputs('#layer' + i, layer);
-        if (layer instanceof ol.layer.Group) {
-          layer.getLayers().forEach(function(sublayer, j) {
-            bindInputs('#layer' + i + j, sublayer);
-          });
-        }
-      });
-
-      /*$('#layertree li > span').click(function() {
-        $(this).siblings('fieldset').toggle();
-      }).siblings('fieldset').hide();*/
-</script>
-
-<script type="text/javascript">
-  
-  
-
-  map.on('singleclick', function(evt) {
-        document.getElementById('info').innerHTML = '';
-        var viewResolution = /** @type {number} */ (view.getResolution());
-        var url = wmsSource.getGetFeatureInfoUrl(
-            evt.coordinate, viewResolution, 'EPSG:3857',
-            {'INFO_FORMAT': 'text/html'});
-        if (url) {
-          document.getElementById('info').innerHTML =
-              '<iframe seamless src="' + url + '"></iframe>';
-        }
-  });
-
-  map.on('pointermove', function(evt) {
-        if (evt.dragging) {
-          return;
-        }
-        var pixel = map.getEventPixel(evt.originalEvent);
-        var hit = map.forEachLayerAtPixel(pixel, function() {
-          return true;
-        });
-        map.getTargetElement().style.cursor = hit ? 'pointer' : '';
-  });
-</script>-->
 @endsection
